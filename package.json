@@ -4,8 +4,10 @@
   "description": "Electron + React + Webpack 2 seed.",
   "main": "main.js",
   "scripts": {
-    "dev": "webpack",
-    "start": "electron ."
+    "dev": "webpack --watch",
+    "start": "electron .",
+    "preonce": "webpack",
+    "once": "npm start"
   },
   "author": "J. Renato Ramos González <renato.etc.etc.etc@gmail.com>",
   "repository": "pastahito/electron-react-webpack",

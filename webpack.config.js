@@ -2,8 +2,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
 
-    watch: true,
-
     target: 'electron',
 
     entry: './app/src/entry.js',
