@@ -10,10 +10,12 @@
 /*
 * Global CSS goes here
 */
-html {
+html, body, #app {
     height: 100%;
+    margin: 0;
+    padding: 0;
 }
-body {
+[data-reactroot] {
     margin: auto;
     background: #999999;
     height: 100%;
