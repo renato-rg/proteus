@@ -3,10 +3,10 @@ Desktop editor for requirements management built on Electron and React.
 
 *The project is still under development.*
 
-## Install
+## Install and run
 *No installers available yet, so you have to run it from source instead.*
 
-First, clone and install dependencies:
+Clone and install dependencies:
 ``` bash
 $ git clone https://github.com/pastahito/remus
 
@@ -14,13 +14,9 @@ $ cd remus
 
 $ npm install
 ```
-Then, run these two commands in separate terminals:
+Execute the app:
 ``` bash
-# Webpack builds once and watches for changes
-$ npm run dev
-
-# Start electron app
-$ npm start
+$ npm run once
 ```
 
 ## License
