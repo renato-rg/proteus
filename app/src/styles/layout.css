@@ -1,0 +1,35 @@
+:local .header {
+    background: var(--color-c);
+    width: 100%;
+    height: 70px;
+    color: hsla(0,0%,100%,.6);
+}
+:local .footer {
+    background: var(--color-d);
+    width: 100%;
+    height: 25px;
+    color: hsla(0,0%,100%,.6);
+}
+:local .main {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    color: rgba(0, 0, 0, .9);
+}
+:local .nav {
+    height: 100%;
+    width:20em;
+    background-color: var(--color-a);
+    resize:horizontal;
+    overflow: hidden;
+    padding: 4
+}
+:local .section {
+    flex: 1;
+    background-color: var(--color-b);
+    height: 100%;
+    overflow: hidden;
+}
+:local .nav:hover, :local .section:hover {
+    overflow: auto;
+}

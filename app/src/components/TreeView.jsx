@@ -9,7 +9,7 @@ class TreeView extends Component {
         return (
             <div className="treeView">
                 <NodeList
-                    children={this.props.documents[this.props.active].children}
+                    children={this.props.document.children}
                     moveNode={this.props.moveNode}
                     indexes={[]}/>
             </div>
@@ -19,8 +19,7 @@ class TreeView extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    active: state.switchDocument.navActiveTab,
-    documents: state.documents
+    document: state.documents[state.switchDocument.navActiveTab]
   }
 }
 
