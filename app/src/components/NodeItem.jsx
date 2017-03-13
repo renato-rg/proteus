@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {render} from 'react-dom'
 import NodeList from './NodeList.jsx'
 import { DragSource, DropTarget } from 'react-dnd'
 
@@ -25,7 +24,7 @@ const dropTarget = {
         if (targetDepth == sourceDepth && sourceIndex != targetIndex) {
             props.moveNode(sourceDepth, targetDepth,
                 sourceIndex, targetIndex,
-                monitor.getItem().indexes, props.indexes)
+                monitor.getItem().indexes, props.indexes, 0)
         }
         return
     }

@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
-import {render} from 'react-dom'
-
+import { connect } from 'react-redux'
 
 class DocView extends Component {
     render() {
@@ -35,4 +34,17 @@ class DocNode extends Component {
 
 }
 
-export default DocView
+const mapStateToProps = (state, ownProps) => {
+  return {
+    document: state.documents[state.switchDocument.navActiveTab]
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {}
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DocView)

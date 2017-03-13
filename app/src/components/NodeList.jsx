@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {render} from 'react-dom'
 import NodeItem from './NodeItem.jsx'
 import update from 'immutability-helper'
 
