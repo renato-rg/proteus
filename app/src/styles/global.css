@@ -2,9 +2,9 @@
 * Global constants goes here
 */
 :root {
-    --color-a: rgba(243, 243, 243, 1);
+    --color-a: rgba(255, 255, 255, 1);
     --color-b: rgba(252, 252, 252, 1);
-    --color-c: #36393e;
+    --color-c: #36393e; /*#404040*/
     --color-d: #1d2120;
 }
 
@@ -12,22 +12,32 @@
 * Global CSS goes here
 */
 html, body, #app {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
     height: 100%;
     margin: 0;
     padding: 0;
 }
 [data-reactroot] {
+    position: relative;
+    height: 100%;
+}
+
+.editor {
+    position: absolute;
+    z-index: 1;
     margin: auto;
-    background: #999999;
+    background: white;
     height: 100%;
     display: flex;
     flex-direction: column;
     text-align: center;
+    width: 100%;
 }
 
 /* TABS */
 .tabs {
-    font-size: 1.3em;
+    font-size: 1.2em;
     display: flex;
     flex:1;
     cursor: pointer;
@@ -37,17 +47,6 @@ html, body, #app {
 }
 .tabs > div {
     flex:1
-}
-
-/* TREE VIEW */
-.treeView {
-    text-align: left;
-    cursor: pointer;
-}
-.treeView li, .treeView ul {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 /* DOC VIEW */

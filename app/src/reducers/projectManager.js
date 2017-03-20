@@ -1,21 +1,16 @@
-import { OPEN_PROJECT } from '../actions'
+import { } from '../actions'
 
 const initialState = {
-    projectOpened: false,
+    projectOpened: true,
     projectPath: '',
     previousProjects: []
 }
 
-function switchDocument(state = initialState, action) {
+function projectManager(state = initialState, action) {
     switch (action.type) {
-        case OPEN_PROJECT:
-            return Object.assign({}, state, {
-                projectOpened: action.projectOpened,
-                projectPath: action.projectPath
-            })
         default:
             return state
     }
 }
 
-export default switchDocument
+export default projectManager

@@ -2,9 +2,9 @@ import { MOVE_NODE } from '../actions'
 import update from 'immutability-helper'
 
 // Mockup data
-const uc1 = require('../../build/obj1.json')
-const uc2 = require('../../build/obj2.json')
-const uc3 = require('../../build/obj3.json')
+const uc1 = require('../assets/obj1.json')
+const uc2 = require('../assets/obj2.json')
+const uc3 = require('../assets/obj3.json')
 
 // Mockup data
 const documents = [

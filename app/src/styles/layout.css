@@ -17,12 +17,9 @@
     color: rgba(0, 0, 0, .9);
 }
 :local .nav {
-    height: 100%;
     width:20em;
     background-color: var(--color-a);
-    resize:horizontal;
     overflow: hidden;
-    padding: 4
 }
 :local .section {
     flex: 1;
@@ -32,4 +29,26 @@
 }
 :local .nav:hover, :local .section:hover {
     overflow: auto;
+}
+
+/* Scrollbar */
+:local .nav::-webkit-scrollbar {
+    width: 0.3em;
+}
+:local .nav::-webkit-scrollbar-track {
+    background-color: rgba(0,0,0,0.05);
+    border-radius: 5px;
+}
+:local .nav::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.15);
+}
+
+/* Resizer */
+:local .main > span {
+    width: 2px;
+    height: 100%;
+    background: gray;
+    cursor: e-resize;
+    margin: 0px 0px 0px 1px;
 }
