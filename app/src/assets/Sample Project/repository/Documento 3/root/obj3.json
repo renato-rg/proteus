@@ -1,5 +1,6 @@
 {
-    "title": "Registrar pedido",
+    "index" : 0,
+    "title": "Pago online",
     "type": "caso-de-uso",
     "modifiers": ["requisito-producto"],
     "acceptedChildren": ["paso-caso-de-uso"],
@@ -23,21 +24,7 @@
             }
         },
         {
-            "title": "El actor (@ACT-0017) cambia datos en algún lugar.",
-            "type": "paso-caso-de-uso",
-            "properties": {
-                "comments": "Comentarios markdown..."
-            }
-        },
-        {
-            "title": "El sistema devuelve la tarjeta.",
-            "type": "paso-caso-de-uso",
-            "properties": {
-                "comments": "Comentarios markdown..."
-            }
-        },
-        {
-            "title": "El sistema guarda información de algo importante",
+            "title": "El sistema guarda información de...",
             "type": "paso-caso-de-uso",
             "properties": {
                 "comments": "Comentarios markdown..."

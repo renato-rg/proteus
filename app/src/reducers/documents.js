@@ -1,28 +1,11 @@
-import { MOVE_NODE } from '../actions'
+import { MOVE_NODE, OPEN_PROJECT } from '../actions'
 import update from 'immutability-helper'
+import { readProject } from '../io'
 
-// Mockup data
-const uc1 = require('../assets/obj1.json')
-const uc2 = require('../assets/obj2.json')
-const uc3 = require('../assets/obj3.json')
+// const projectPath = 'C:/Users/pasta/Desktop/Example'
+// const documents = readProject(projectPath)
 
-// Mockup data
-const documents = [
-    {
-        title: 'Doc 1',
-        children: [uc1, uc2]
-    },
-    {
-        title: 'Doc 2',
-        children: [uc3]
-    },
-    {
-        title: 'Doc 3',
-        children: []
-    }
-]
-
-function moveNode(state = documents, action) {
+function moveNode(state = {}, action) {
     switch (action.type) {
         case MOVE_NODE:
             let {sourceDepth, targetDepth, sourceIndex, targetIndex, sourceIndexes, targetIndexes, active} = action
@@ -53,6 +36,8 @@ function moveNode(state = documents, action) {
             let insert = query(0, targetIndexes, [targetIndex, 0, draggedItem])
             return update( update(state, remove), insert)
 
+        case OPEN_PROJECT:
+            return readProject(action.projectPath)
         default:
             return state
     }

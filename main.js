@@ -1,6 +1,6 @@
 // Basic init
 const electron = require('electron')
-const {app, Menu, BrowserWindow} = electron
+const {app, Menu, BrowserWindow, dialog, ipcMain} = electron
 // Let electron reloads by itself when webpack watches changes in ./app/
 require('electron-reload')(__dirname)
 
@@ -37,13 +37,18 @@ const template = [{
         label: 'New Project',
         accelerator: process.platform === 'darwin'?'Command+N':'Ctrl+N',
         click (item, focusedWindow) {
-            focusedWindow.webContents.send('new-project')
+            focusedWindow.webContents.send('new-project-form')
         }
     },{
         label: 'Open Project',
         accelerator: process.platform === 'darwin'?'Command+O':'Ctrl+O',
         click (item, focusedWindow) {
-            focusedWindow.webContents.send('open-project', 'Open Project clicked')
+            let projectPath = dialog.showOpenDialog({
+                properties: [ 'openDirectory' ]
+            })
+            if (projectPath != undefined ) {
+                focusedWindow.webContents.send('open-project', projectPath[0])
+            }
         }
     },{
         label: 'Toggle Developer Tools',
@@ -58,6 +63,7 @@ const template = [{
     }]
 }]
 
+
 app.on('ready', () => {
 
     // Set app's menu
@@ -66,5 +72,14 @@ app.on('ready', () => {
     // Opens the app
     mainWindow = newWindow()
     mainWindow.once('ready-to-show', () => mainWindow.show() )
+
+    // Creates new window for newproject and loads it
+    ipcMain.on('create-new-project', (event, projectPath) => {
+        let newProject = newWindow()
+        newProject.once('ready-to-show', () => {
+            newProject.show()
+            newProject.webContents.send('open-project', projectPath)
+        })
+    })
 
 })

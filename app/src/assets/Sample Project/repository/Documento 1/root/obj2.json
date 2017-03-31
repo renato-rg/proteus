@@ -1,5 +1,6 @@
 {
-    "title": "Pago online",
+    "index" : 0,
+    "title": "Hacer una compra y tramitarla",
     "type": "caso-de-uso",
     "modifiers": ["requisito-producto"],
     "acceptedChildren": ["paso-caso-de-uso"],

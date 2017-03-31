@@ -1,17 +1,19 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { moveNode } from '../actions'
-import NodeItem from './NodeItem.jsx'
 import NodeList from './NodeList.jsx'
+
+import {treeView} from '../styles/treeView.css'
 
 class TreeView extends Component {
     render() {
         return (
-            <div className="treeView">
-                <NodeList
+            <div className={treeView}>
+                { this.props.document && <NodeList
                     children={this.props.document.children}
                     moveNode={this.props.moveNode}
                     indexes={[]}/>
+                }
             </div>
         )
     }

@@ -71,20 +71,31 @@
     flex-direction: column;
     justify-content: space-around;
     padding: 25px 60px 0px 0px;
+    max-width: 62%;
 }
 
-:local .fields > input {
+:local .fields > input, :local .fields > select, :local .selectPath {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
     line-height: 29px;
+    height: 29px;
     padding: 0px 9px;
     border-radius: 2px;
     border: 1px solid rgba(0, 0, 0, 0.18);
 }
 
-:local .fields > input:hover {
+:local .fields > input:hover, :local .fields > select:hover, :local .selectPath:hover{
     border: 1px solid rgba(0, 0, 0, 0.34);
 }
 
-:local .fields > input:focus, :local .fields > input:active{
+:local .fields > input:focus, :local .fields > input:active,
+:local .fields > select:focus, :local .fields > select:active{
     border-color: #00d1b2;
     outline: none;
+}
+
+:local .selectPath {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

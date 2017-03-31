@@ -5,9 +5,10 @@ class DocView extends Component {
     render() {
         return (
             <div className="docView">
-                <DocNode
+                { this.props.document && <DocNode
                     children={this.props.document.children}
                     indexes={[]}/>
+                }
             </div>
         )
     }

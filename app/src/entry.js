@@ -64,6 +64,6 @@ ipcRenderer.on('open-project', (event, arg) => {
     store.dispatch(openProject(arg))
 })
 
-ipcRenderer.on('new-project', _ => {
+ipcRenderer.on('new-project-form', _ => {
     store.dispatch(openModal('NEW_PROJECT'))
 });

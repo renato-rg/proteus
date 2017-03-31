@@ -2,6 +2,9 @@ import React, {Component} from 'react'
 import NodeList from './NodeList.jsx'
 import { DragSource, DropTarget } from 'react-dnd'
 
+
+import {hoverTarget} from '../styles/treeView.css'
+
 const dragSource = {
     beginDrag(props) {
         return {
@@ -32,17 +35,23 @@ const dropTarget = {
 
 //TODO: So far, it's the only class I modified to have react-dnd, was it worthy?
 //should I try sortable-hoc? or synthetic events? or html5?
-class NodeItem extends Component {
+class NodeItem2 extends Component {
     render() {
-        const {item, isDragging, connectDragSource, connectDropTarget} = this.props
+        const {item, isDragging, connectDragSource, connectDropTarget, moveNode, indexes} = this.props
+        const styles = {
+            opacity: isDragging ? 0.5 : 1,
+            paddingLeft: (0.6+2*(indexes.length-1))+'em'
+        }
         return connectDragSource(connectDropTarget(
-            <li style={{opacity: isDragging ? 0.5 : 1}}>
-                {item.title}
-                {item.children && <NodeList
-                    children={item.children}
-                    moveNode={this.props.moveNode}
-                    indexes={this.props.indexes}/>}
+            <div>
+            <li className={hoverTarget}>
+                <div style={styles}>{item.title}</div>
             </li>
+            {item.children && <NodeList
+                children={item.children}
+                moveNode={moveNode}
+                indexes={indexes}/>}
+                </div>
         ))
     }
 }
@@ -52,4 +61,4 @@ export default DropTarget('item', dropTarget, connect => ({
 }))(DragSource('item', dragSource, (connect, monitor) => ({
     connectDragSource: connect.dragSource(),
     isDragging: monitor.isDragging(),
-}))(NodeItem))
+}))(NodeItem2))

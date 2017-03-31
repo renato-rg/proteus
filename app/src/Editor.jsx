@@ -8,7 +8,6 @@ import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 
 // Transformers
-import TreeView from './components/TreeView.jsx'
 import TreeView2 from './components/TreeView2.jsx'
 import DocView from './components/DocView.jsx'
 
