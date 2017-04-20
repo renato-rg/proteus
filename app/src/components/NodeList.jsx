@@ -9,7 +9,7 @@ class NodeList extends Component {
                 {this.props.children.map((item, index) =>{
                     const indexes = this.props.indexes.slice()
                     indexes.push(index)
-                    return <NodeItem item={item} key={index} indexes={indexes} moveNode={this.props.moveNode}/>
+                    return <NodeItem item={item} key={index} indexes={indexes}/>
                 })}
             </ul>
         )

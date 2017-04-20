@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Tabs = ({ tabs, active, handler }) => {
-    console.log('Tab render');
     return (
         <div className='tabs'>
             {tabs.map( (title, index) =>

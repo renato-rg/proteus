@@ -2,9 +2,6 @@ import { MOVE_NODE, OPEN_PROJECT } from '../actions'
 import update from 'immutability-helper'
 import { readProject } from '../io'
 
-// const projectPath = 'C:/Users/pasta/Desktop/Example'
-// const documents = readProject(projectPath)
-
 function moveNode(state = {}, action) {
     switch (action.type) {
         case MOVE_NODE:

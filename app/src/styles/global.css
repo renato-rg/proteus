@@ -2,9 +2,9 @@
 * Global constants goes here
 */
 :root {
-    --color-a: rgba(255, 255, 255, 1);
-    --color-b: rgba(252, 252, 252, 1);
-    --color-c: #36393e; /*#404040*/
+    --color-a: #f5f5f5;
+    --color-b: #fafafa;
+    --color-c: #36393e;
     --color-d: #1d2120;
 }
 
@@ -47,9 +47,4 @@ html, body, #app {
 }
 .tabs > div {
     flex:1
-}
-
-/* DOC VIEW */
-.docView {
-    text-align: left;
 }

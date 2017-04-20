@@ -15,26 +15,34 @@ import reducers from './reducers'
 import App from './App.jsx'
 import './styles/global.css'
 
-// AntD
-// import { LocaleProvider } from 'antd'
-// import enUS from 'antd/lib/locale-provider/en_US'
-
 
 let store = createStore(reducers)
 
 render(
-    // <LocaleProvider locale={enUS}>
-        <Provider store={store}>
-            <App />
-        </Provider>
-    // </LocaleProvider>
-    ,
+    <Provider store={store}>
+        <App />
+    </Provider>,
     document.getElementById('app')
 )
 
-/* This chunk will be executed after the react app is rendered */
-console.log("Workarounds go here :'D")
+//////////////////////////////
+/// IPC with main process ////
+//////////////////////////////
 
+ipcRenderer.on('open-project', (event, arg) => {
+    store.dispatch(openProject(arg))
+})
+
+ipcRenderer.on('new-project-form', _ => {
+    store.dispatch(openModal('NEW_PROJECT'))
+});
+
+
+///////////////////
+/// Workarounds ///
+///////////////////
+
+/* The below chunk will be executed after the react app is rendered */
 let nav = document.querySelector('nav')
 let main = document.querySelector('main')
 let node = document.createElement("SPAN")
@@ -54,16 +62,3 @@ const stopDrag = (e) => {
 }
 node.addEventListener('mousedown', initDrag, false)
 main.insertBefore(node, main.children[1])
-
-
-/////////////////////////
-// IPC with main process
-////////////////////////
-
-ipcRenderer.on('open-project', (event, arg) => {
-    store.dispatch(openProject(arg))
-})
-
-ipcRenderer.on('new-project-form', _ => {
-    store.dispatch(openModal('NEW_PROJECT'))
-});

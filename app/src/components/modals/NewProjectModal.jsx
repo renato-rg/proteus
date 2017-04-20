@@ -1,10 +1,10 @@
-import fs from 'fs'
-
 import { remote, ipcRenderer } from 'electron'
 import React from 'react'
 import { openModal } from '../../actions'
 import { connect } from 'react-redux'
 import {modal, labels, fields, title, form, controls, selectPath} from './styles.css'
+
+import { createProject } from '../../io'
 
 class NewProjectModal extends React.Component {
     constructor(props) {
@@ -21,20 +21,15 @@ class NewProjectModal extends React.Component {
     }
 
     handleSubmit(event) {
-
-        // TODO:
-        // This should be imported from file containing all the Node I/O operations
-        const str = JSON.stringify({
-            name: this.state.projectName,
-            template: this.state.template
-        }, null, '\t')
-        const file = fs.createWriteStream(this.state.projectPath+'/rem.json')
-        file.write(str)
-        file.end()
-        fs.mkdirSync(this.state.projectPath+'/repository')
-        ipcRenderer.send('create-new-project', this.state.projectPath)
-        this.props.closeModal()
-        console.log(this.state)
+        createProject(this.state, (status) => {
+            if (status.error) {
+                // Show error either in the form itself or in a fancy notification
+                console.log(status.message);
+            }
+            ipcRenderer.send('open-just-created-project', this.state.projectPath)
+            this.props.closeModal()
+            // dispatch some notification no? both here and inside the new window
+        })
     }
 
     handlePath() {

@@ -74,7 +74,7 @@ app.on('ready', () => {
     mainWindow.once('ready-to-show', () => mainWindow.show() )
 
     // Creates new window for newproject and loads it
-    ipcMain.on('create-new-project', (event, projectPath) => {
+    ipcMain.on('open-just-created-project', (event, projectPath) => {
         let newProject = newWindow()
         newProject.once('ready-to-show', () => {
             newProject.show()

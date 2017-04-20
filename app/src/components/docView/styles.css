@@ -1,0 +1,21 @@
+:local .background {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+:local .page {
+    background: white;
+    box-shadow: 0 0 14px rgba(0,0,0,0.13);
+    min-width: 21cm;
+    min-height: 29.7cm;
+    height: 100%;
+    margin: 2em 0em 4em 0em;
+    display: flex;
+    flex-direction: column;
+}
+
+:local .doc {
+    margin: 1in;
+}

@@ -17,38 +17,44 @@
     color: rgba(0, 0, 0, .9);
 }
 :local .nav {
-    width:20em;
+    width:25em;
     background-color: var(--color-a);
     overflow: hidden;
+    padding-right: 3px;
 }
 :local .section {
     flex: 1;
     background-color: var(--color-b);
     height: 100%;
     overflow: hidden;
+    padding-right: 0.6em;
 }
-:local .nav:hover, :local .section:hover {
-    overflow: auto;
-}
-
 /* Scrollbar */
 :local .nav::-webkit-scrollbar {
     width: 0.3em;
 }
-:local .nav::-webkit-scrollbar-track {
-    background-color: rgba(0,0,0,0.05);
-    border-radius: 5px;
-}
-:local .nav::-webkit-scrollbar-thumb {
-    border-radius: 5px;
+:local .nav::-webkit-scrollbar-thumb, :local .section::-webkit-scrollbar-thumb {
     background-color: rgba(0,0,0,0.15);
+}
+:local .nav::-webkit-scrollbar-track, :local .section::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+:local .section::-webkit-scrollbar {
+    width: 0.6em;
+}
+/* Scrollbar display */
+:local .nav:hover {
+    overflow: auto;
+}
+:local .section:hover{
+    overflow: auto;
+    padding-right: 0em;
 }
 
 /* Resizer */
 :local .main > span {
-    width: 2px;
-    height: 100%;
-    background: gray;
+    background: linear-gradient(to left, #dadada, #f5f5f5);
     cursor: e-resize;
-    margin: 0px 0px 0px 1px;
+    padding-right: 5px;
 }

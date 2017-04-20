@@ -22,6 +22,9 @@ export function setDocViewTab(index) {
 export function moveNode(sourceDepth, targetDepth, sourceIndex, targetIndex, sourceIndexes, targetIndexes) {
   return { type: MOVE_NODE, sourceDepth, targetDepth, sourceIndex, targetIndex, sourceIndexes, targetIndexes }
 }
+export function toggleNode(sourceDepth, targetDepth, sourceIndex, targetIndex, sourceIndexes, targetIndexes) {
+  return { type: NONE, sourceDepth, targetDepth, sourceIndex, targetIndex, sourceIndexes, targetIndexes }
+}
 export function openProject(projectPath) {
   return { type: OPEN_PROJECT, projectPath }
 }

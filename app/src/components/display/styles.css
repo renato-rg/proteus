@@ -1,0 +1,58 @@
+:local .node:hover {
+    box-shadow: -4px 0 0 0 #4daf7c;
+}
+
+/************
+*** TITLE ***
+************/
+:local .title {
+    font-family: Century Gothic;
+    font-size: 22px;
+}
+
+/*************
+*** FOLDER ***
+*************/
+:local .folder {
+    composes: node;
+    text-align: justify;
+    font-family: Century Gothic;
+    font-size: 15px;
+}
+
+/****************
+*** PARAGRAPH ***
+****************/
+:local .paragraph {
+    composes: node;
+    text-align: justify;
+}
+
+/***************
+*** USE CASE ***
+***************/
+:local .useCase {
+    composes: node;
+    text-align: justify;
+    margin-bottom: 10px;
+}
+:local .useCase > table {
+    text-align: justify;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Muli', sans-serif;
+    font-family: Helvetica;
+    font-size: 13px;
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 12.5px;
+}
+
+/**************
+*** DEFAULT ***
+**************/
+:local .default {
+    text-align: justify;
+}
