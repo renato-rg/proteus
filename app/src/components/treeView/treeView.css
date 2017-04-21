@@ -4,12 +4,12 @@
     font-size: 12px;
     font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
     line-height: 25px;
+    list-style: none;
 }
 
 :local .treeView ul {
     box-shadow: none;
     outline: none;
-    list-style: none;
     margin: 0;
     padding: 0;
 }

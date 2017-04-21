@@ -4,13 +4,13 @@ import styles from './styles.css'
 import Tag from '../display/Tag.jsx'
 
 const DocView = (props) => {
-    const {document} = props
+    const {documentID} = props
     return (
         <div className={styles.background}>
             <div className={styles.page}>
                 <div className={styles.doc}>
-                { document ?
-                    <DocNode node={document}/>
+                { documentID ?
+                    <DocNode nodeID={documentID}/>
                     :
                     <span>Select a document...</span>
                 }
@@ -20,30 +20,49 @@ const DocView = (props) => {
     )
 }
 
-const DocNode = (props) => {
-    const { node } = props
-    const childrenShouldBerendered = node.children!=undefined && (node.type=='document'||node.type=='folder')
+let DocNode = (props) => {
+    const { node, nodeID } = props
+    const childrenShouldBerendered = node.childrenIDs.length>0 && (node.type=='document'||node.type=='folder')
     return (
         <div>
             <Tag node={node}/>
-            {childrenShouldBerendered && node.children.map((item, index) =>
-                <DocNode key={index} node={item}/>
+            {childrenShouldBerendered && node.childrenIDs.map((nodeID, index) =>
+                <DocNode key={index} nodeID={nodeID}/>
             )}
         </div>
     )
 }
 
+const mapStateToProps1 = (state, ownProps) => {
+    const node = state.project[ownProps.nodeID]
+    return {
+        node: node
+    }
+}
+const mapDispatchToProps1 = (dispatch, ownProps) => {
+    return {}
+}
+DocNode = connect(
+    mapStateToProps1,
+    mapDispatchToProps1
+)(DocNode)
+
+//////////////////////////////////////////////////////
+
 const mapStateToProps = (state, ownProps) => {
-  return {
-    document: state.documents[state.switchDocument.navActiveTab]
-  }
+    const proj = state.project['PROJECT']
+    const documentID = proj==undefined ? undefined :
+        state.project['PROJECT'].childrenIDs[state.switchDocument.navActiveTab]
+    return {
+        documentID
+    }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return {}
+    return {}
 }
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(DocView)

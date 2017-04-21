@@ -1,14 +1,14 @@
 import React, {Component} from 'react'
 import {header, main, nav, section, footer, A4} from './styles/layout.css'
-import TreeViewTabs from './containers/TreeViewTabs.jsx'
-import DocViewTabs from './containers/DocViewTabs.jsx'
+import TreeViewTabs from './components/tabs/TreeViewTabs.jsx'
+import DocViewTabs from './components/tabs/DocViewTabs.jsx'
 
 // React-dnd context
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 
 // Transformers
-import TreeView from './components/TreeView.jsx'
+import TreeView from './components/treeView/TreeView.jsx'
 import DocView from './components/docView/DocView.jsx'
 
 
@@ -23,7 +23,7 @@ class Editor extends Component {
 
                 <main className={main}>
                     <nav className={nav}>
-                        <TreeViewTabs tabs={['Doc 1', 'Doc 2', 'Doc 3']}/>
+                        <TreeViewTabs/>
                         <TreeView/>
                     </nav>
 

@@ -1,14 +1,15 @@
 const fs = require('fs')
 
-// Try to use destructuring
-const createEmptyProject = (state) => {
-    const file = fs.createWriteStream(state.projectPath+'/rem.json')
+// Creates an empty REM project
+const createEmptyProject = ({projectName, template, projectPath}) => {
+    const file = fs.createWriteStream(projectPath+'/rem.json')
     file.write(JSON.stringify({
-        name: state.projectName,
-        template: state.template
+        name: projectName,
+        template: template
     }, null, '\t'))
     file.end()
-    fs.mkdirSync(state.projectPath+'/repository')
+    fs.mkdirSync(projectPath+'/assets')
+    fs.mkdirSync(projectPath+'/objects')
 }
 
 const createDirs = (path, arr, root = false) => {
@@ -39,23 +40,9 @@ const createDirs = (path, arr, root = false) => {
 
 const createMadejaProject = ({projectName, template, projectPath}) => {
     // Project's file definition
-    // TODO: add more fields so it can look like REM project's xml files
-    const file = fs.createWriteStream(projectPath+'/rem.json')
-    file.write(JSON.stringify({
-        name: projectName,
-        template: template
-    }, null, '\t'))
-    file.end()
-
-    // Folder where the whole tree will be
-    fs.mkdirSync(projectPath+'/repository')
-    fs.mkdirSync(projectPath+'/repository/assets')
-
-    projectPath += '/repository'
-
-    // TODO: First level should be Docs, the others, folder.
-    // Like this, we get rid of an explicit "type" property
-    const project = [{
+    createEmptyProject({projectName, template, projectPath})
+    // TODO: First level is for Docs, this way we get rid of an "type" property
+    const templateStructure = [{
         name: 'Documento 1',
         children: [{
             name: 'Introducción',
@@ -163,49 +150,65 @@ const createMadejaProject = ({projectName, template, projectPath}) => {
             name: 'Glosario de acrónimos y abreviaturas'
         }]
     }]
-    createDirs(projectPath, project, true)
+    createDirs(projectPath+'/objects', templateStructure, true)
 }
 
 export function readProject (projectPath) {
-    const repoPath = projectPath + '/repository'
-
+    let currentID = 0
+    const nextID = () => {
+        currentID+=1
+        return currentID
+    }
     const isDirectory = (path) => {
         return fs.statSync(path).isDirectory()
     }
-
     // Here you can add aditional fields
     const getJSON = (path) => {
         const res = JSON.parse(fs.readFileSync(path))
-        res.showChildren = true
+        res.showChildren = res.type=="document" ? true: false
         return res
     }
 
-    const getChildren = (dir) => {
-        const children = fs.readdirSync(dir).filter( name => name != 'rem.json').map( node => {
+    const project = {}
+    const getChildrenIDs = (dir) => {
+        const childrenIDs = []
+        fs.readdirSync(dir).filter( name => name != 'rem.json').map( node => {
             const nodePath = dir + '/' + node
 
             if ( isDirectory(nodePath) ) {
                 const innerDirectory = getJSON(nodePath + '/rem.json')
-                innerDirectory.children = getChildren(nodePath)
+                innerDirectory.childrenIDs = getChildrenIDs(nodePath)
                 return innerDirectory
             } else {
-                return getJSON(nodePath)
+                const res = getJSON(nodePath)
+                // If it has nested objects, normalize them
+                if(res.children!=undefined){
+                    const nestedChildrenIDs = []
+                    res.children.forEach( nestedNode => {
+                        nestedNode.nodeID = nextID()
+                        nestedNode.childrenIDs = []
+                        project[currentID] = nestedNode
+                        nestedChildrenIDs.push(currentID)
+                    })
+                    delete res.children
+                    res.childrenIDs = nestedChildrenIDs
+                }
+                return res
             }
+        }).sort((a,b) => a.index - b.index).forEach(node => {
+            delete node.index
+            node.nodeID = nextID()
+            project[currentID] = node
+            childrenIDs.push(currentID)
         })
-        return children.sort((a,b) => a.index - b.index)
+        return childrenIDs
     }
-
-    const documents = fs.readdirSync(repoPath)
-                        .filter( name => name != 'assets')
-                        .map( dir =>  {
-                                dir = repoPath + '/' + dir
-                                const doc = getJSON(dir + '/rem.json')
-                                doc.children = getChildren(dir)
-                                return doc
-                            })
-                        .sort((a,b) => a.index - b.index)
-    console.log(JSON.stringify(documents));
-    return documents
+    //Load Project Object
+    const projectObj = getJSON(projectPath + '/rem.json')
+    projectObj.childrenIDs = getChildrenIDs(projectPath + '/objects')
+    project['PROJECT'] = projectObj
+    //console.log(JSON.stringify(project,null,2));
+    return project
 }
 
 const handleCreationErrors = (func, state) => {

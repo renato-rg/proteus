@@ -6,10 +6,10 @@ class NodeList extends Component {
     render() {
         return (
             <ul>
-                {this.props.children.map((item, index) =>{
+                {this.props.childrenIDs.map((nodeID, index) =>{
                     const indexes = this.props.indexes.slice()
                     indexes.push(index)
-                    return <NodeItem item={item} key={index} indexes={indexes}/>
+                    return <NodeItem nodeID={nodeID} key={index} indexes={indexes} parentID={this.props.parentID} />
                 })}
             </ul>
         )
