@@ -16,6 +16,27 @@ import App from './App.jsx'
 import './styles/global.css'
 import { readProject } from './io'
 
+
+/////////////////////
+/// Dynamic Menu ////
+/////////////////////
+const {remote} = require('electron')
+const {Menu, MenuItem} = remote
+
+const menu = new Menu()
+menu.append(new MenuItem({label: 'MenuItem1', click() { console.log('item 1 clicked') }}))
+menu.append(new MenuItem({type: 'separator'}))
+menu.append(new MenuItem({label: 'MenuItem2', type: 'checkbox', checked: true}))
+
+window.addEventListener('contextmenu', (e) => {
+  e.preventDefault()
+  menu.popup(remote.getCurrentWindow())
+}, false)
+
+//Menu.getApplicationMenu(null).items[0].submenu.items[0].enabled = false
+
+
+
 //////////////////////////
 /// React Application ////
 //////////////////////////
@@ -44,7 +65,17 @@ ipcRenderer.on('open-project', (event, path) => {
 
 ipcRenderer.on('new-project-form', _ => {
     store.dispatch(openModal('NEW_PROJECT'))
-});
+})
+
+ipcRenderer.on('menu-save', _ => {
+    console.log('menu-save triggered')
+    //store.dispatch()
+})
+
+ipcRenderer.on('menu-save-as', _ => {
+    console.log('menu-save-as triggered')
+    //store.dispatch()
+})
 
 
 ///////////////////

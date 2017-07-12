@@ -1,20 +1,16 @@
-// Basic init
+// Electron's modules
 const electron = require('electron')
 const {app, Menu, BrowserWindow, dialog, ipcMain} = electron
-// Let electron reloads by itself when webpack watches changes in ./app/
+
+// App's constants
+const menuTemplate = require('./menu.js')
+const webAppPath = `file://${__dirname}/app/index.html`
+
+// Allow electron reloads by itself when webpack detects changes in ./app/
 require('electron-reload')(__dirname)
 
 // To avoid being garbage collected
 let mainWindow
-
-// Creates a new window
-const newWindow = () => {
-    let win = new BrowserWindow({width: 1280, height: 680, show: false})
-    win.loadURL(`file://${__dirname}/app/index.html`)
-    win.on('closed', () => mainWindow = null )
-    return win
-}
-
 
 // Shuts down any intent to open another instance of the app
 const shouldQuit = app.makeSingleInstance((commandLine, workingDirectory) => {
@@ -22,60 +18,25 @@ const shouldQuit = app.makeSingleInstance((commandLine, workingDirectory) => {
 })
 if (shouldQuit) app.quit()
 
-// Construct app's menu
-//const template = require('./menu.js')(newWindow, process.platform)
-const template = [{
-    label: 'File',
-    submenu: [{
-        label: 'New Window',
-        accelerator: process.platform === 'darwin'?'Alt+Command+N':'Ctrl+Shift+N',
-        click (item, focusedWindow) {
-            let win = newWindow()
-            win.once('ready-to-show', () => win.show() )
-        }
-    },{
-        label: 'New Project',
-        accelerator: process.platform === 'darwin'?'Command+N':'Ctrl+N',
-        click (item, focusedWindow) {
-            focusedWindow.webContents.send('new-project-form')
-        }
-    },{
-        label: 'Open Project',
-        accelerator: process.platform === 'darwin'?'Command+O':'Ctrl+O',
-        click (item, focusedWindow) {
-            let projectPath = dialog.showOpenDialog({
-                properties: [ 'openDirectory' ]
-            })
-            if (projectPath != undefined ) {
-                focusedWindow.webContents.send('open-project', projectPath[0])
-            }
-        }
-    },{
-        label: 'Toggle Developer Tools',
-        accelerator: process.platform === 'darwin'?'Alt+Command+I':'Ctrl+Shift+I',
-        click (item, focusedWindow) {
-            if (focusedWindow) focusedWindow.toggleDevTools()
-        }
-    },{
-        label: 'Close',
-        accelerator: 'CmdOrCtrl+Z',
-        role: 'close'
-    }]
-}]
-
-
 app.on('ready', () => {
 
     // Set app's menu
-    Menu.setApplicationMenu(Menu.buildFromTemplate(template))
+    Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate))
 
     // Opens the app
-    mainWindow = newWindow()
-    mainWindow.once('ready-to-show', () => mainWindow.show() )
+    mainWindow = new BrowserWindow({width: 1280, height: 680, show: false})
+    mainWindow.loadURL(webAppPath)
+    mainWindow.on('closed', () => mainWindow = null )
+    mainWindow.once('ready-to-show', () => {
+        mainWindow.show()
+        mainWindow.maximize()
+    })
 
     // Creates new window for newproject and loads it
     ipcMain.on('open-just-created-project', (event, projectPath) => {
-        let newProject = newWindow()
+        let newProject = new BrowserWindow({width: 1280, height: 680, show: false})
+        newProject.loadURL(webAppPath)
+        newProject.on('closed', () => mainWindow = null )
         newProject.once('ready-to-show', () => {
             newProject.show()
             newProject.webContents.send('open-project', projectPath)
