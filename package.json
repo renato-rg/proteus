@@ -4,7 +4,7 @@
   "description": "Electron + React + Webpack 2 seed.",
   "main": "main.js",
   "scripts": {
-    "dev": "webpack --watch",
+    "dev": "concurrently --kill-others \"webpack --watch\" \"electron .\"",
     "start": "electron .",
     "preonce": "webpack",
     "once": "npm start"
@@ -24,6 +24,7 @@
     "webpack": "^2.2.1"
   },
   "dependencies": {
+    "concurrently": "^3.5.0",
     "immutability-helper": "^2.1.2",
     "react": "^15.4.2",
     "react-dnd": "^2.2.4",

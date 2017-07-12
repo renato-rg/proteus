@@ -4,6 +4,7 @@ import NodeItem from './NodeItem.jsx'
 
 import {treeView} from './treeView.css'
 
+// TODO: combinar con TreeViewTabs.jsx porque usan los mismos recursos de Redux
 class TreeView extends Component {
     render() {
         return (

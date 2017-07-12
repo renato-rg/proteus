@@ -153,15 +153,10 @@ const createMadejaProject = ({projectName, template, projectPath}) => {
     createDirs(projectPath+'/objects', templateStructure, true)
 }
 
-export function readProject (projectPath) {
+export function readProjectSync (projectPath) {
     let currentID = 0
-    const nextID = () => {
-        currentID+=1
-        return currentID
-    }
-    const isDirectory = (path) => {
-        return fs.statSync(path).isDirectory()
-    }
+    const nextID = () => ++currentID
+    const isDirectory = (path) => fs.statSync(path).isDirectory()
     // Here you can add aditional fields
     const getJSON = (path) => {
         const res = JSON.parse(fs.readFileSync(path))
@@ -209,6 +204,13 @@ export function readProject (projectPath) {
     project['PROJECT'] = projectObj
     //console.log(JSON.stringify(project,null,2));
     return project
+}
+
+export function readProject (proyectPath) {
+    return new Promise( (resolve, reject) => {
+        const project = readProjectSync(proyectPath)
+        resolve(project)
+    })
 }
 
 const handleCreationErrors = (func, state) => {

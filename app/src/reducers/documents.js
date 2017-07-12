@@ -1,15 +1,24 @@
-import { MOVE_NODE, TOGGLE_NODE, OPEN_PROJECT } from '../actions'
+import { MOVE_NODE, TOGGLE_NODE, LOAD_PROJECT, UPDATE_EDITABLE_FIELD } from '../actions'
 import update from 'immutability-helper'
-import { readProject } from '../io'
 
 function projectReducer(state = {}, action) {
     switch (action.type) {
+
+        case UPDATE_EDITABLE_FIELD:
+            const query = action.fieldPath.reduceRight( (last, current) => {
+            	return { [current] : last }
+            }, {$set: action.newValue})
+
+            return update(state, {
+                [action.nodeID]: query
+            })
+
         case TOGGLE_NODE:
             const currentBool = state[action.nodeID].showChildren
             return update(state, {
                 [action.nodeID]: {showChildren: {$set: !currentBool}}
             })
-        // TODO : Rewrite
+
         case MOVE_NODE:
             const {sourceNodeID, sourceParentID, targetNodeID, targetParentID} = action
             console.log(sourceNodeID, sourceParentID, targetNodeID, targetParentID)
@@ -27,8 +36,10 @@ function projectReducer(state = {}, action) {
 
             return new_state_2
 
-        case OPEN_PROJECT:
-            return readProject(action.projectPath)
+        // Load project state
+        case LOAD_PROJECT:
+            return action.payload
+
         default:
             return state
     }

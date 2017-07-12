@@ -1,6 +1,6 @@
 // Electron comunication
 var {ipcRenderer} = require('electron')
-import { openProject, openModal } from './actions'
+import { loadProject, openModal } from './actions'
 
 // React
 import React from 'react'
@@ -14,8 +14,11 @@ import reducers from './reducers'
 // My app
 import App from './App.jsx'
 import './styles/global.css'
+import { readProject } from './io'
 
-
+//////////////////////////
+/// React Application ////
+//////////////////////////
 let store = createStore(reducers)
 
 render(
@@ -28,9 +31,15 @@ render(
 //////////////////////////////
 /// IPC with main process ////
 //////////////////////////////
-
-ipcRenderer.on('open-project', (event, arg) => {
-    store.dispatch(openProject(arg))
+ipcRenderer.on('open-project', (event, path) => {
+    store.dispatch(loadProject({isLoading: true}))
+    readProject(path)
+    .then( project => {
+        store.dispatch( loadProject( project ) )
+    } )
+    .catch( error => {
+        store.dispatch( loadProject( { error: true } ) )
+    } )
 })
 
 ipcRenderer.on('new-project-form', _ => {

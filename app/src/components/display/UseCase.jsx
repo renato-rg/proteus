@@ -1,21 +1,36 @@
 import React from 'react'
+import { updateEditableField } from '../../actions'
 import { connect } from 'react-redux'
+import Editable from '../editable/Editable.jsx'
 import styles from './styles.css'
 
 const UseCase = (props) => {
-    const { node, childrenNodes } = props
+    const { node, childrenNodes, update } = props
+
+    const updateFieldIn = fieldPath => event => {
+        update(node.nodeID, fieldPath, event.target.innerText)
+    }
+
+    const updateInnerFieldIn = (nodeID, fieldPath) => event => {
+        update(nodeID, fieldPath, event.target.innerText)
+    }
+
     return <div className={styles.useCase}>
         <table>
             <thead>
                 <tr>
                     <th>UC</th>
-                    <td>{node.title}</td>
+                    <Editable type={'td'} callback={updateFieldIn(['title'])}>
+                        {node.title}
+                    </Editable>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <th>Description</th>
-                    <td>Uhhh nice descp man!</td>
+                    <Editable type={'td'} callback={updateFieldIn(['properties', 'details', 'description'])}>
+                        {node.properties.details.description}
+                    </Editable>
                 </tr>
                 <tr>
                     <th>Secuencia</th>
@@ -31,7 +46,9 @@ const UseCase = (props) => {
                             {childrenNodes.map((step, index) =>
                                 <tr key={index}>
                                     <td>{index+1}</td>
-                                    <td>{step.title}</td>
+                                    <Editable type={'td'} callback={updateInnerFieldIn(step.nodeID, ['title'])}>
+                                        {step.title}
+                                    </Editable>
                                 </tr>
                             )}
                             </tbody>
@@ -48,7 +65,11 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
-    return {}
+    return {
+        update: (nodeID, fieldPath, newValue) => {
+            dispatch(updateEditableField(nodeID, fieldPath, newValue))
+        }
+    }
 }
 
 export default connect(
