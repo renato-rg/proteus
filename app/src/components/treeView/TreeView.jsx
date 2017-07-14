@@ -18,13 +18,12 @@ class TreeView extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const index = state.switchDocument.navActiveTab
-    const proj = state.project['PROJECT']
-    const node = proj!=undefined ? proj.childrenIDs[index] : undefined
+    const docIndex = state.switchDocument.navActiveTab
+    const proj = state.appState.projectInfo
+    const nodeID = proj!=undefined ? proj.childrenIDs[docIndex] : undefined
     return {
-        docIndex: index,
-        project: proj,
-        nodeID: node
+        docIndex,
+        nodeID
     }
 }
 

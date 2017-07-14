@@ -26,7 +26,8 @@ module.exports = [{
             label: 'Open Project',
             accelerator: process.platform === 'darwin'?'Command+O':'Ctrl+O',
             click (item, focusedWindow) {
-                let projectPath = dialog.showOpenDialog({
+                const projectPath = dialog.showOpenDialog({
+                    title: 'Open Project',
                     properties: [ 'openDirectory' ]
                 })
                 if (projectPath != undefined ) {
@@ -42,16 +43,24 @@ module.exports = [{
         },{
             type: 'separator'
         },{
-            label: 'Save',
+            label: 'Save Project',
             accelerator: 'CmdOrCtrl+S',
+            enabled: false,
             click (item, focusedWindow) {
                 focusedWindow.webContents.send('menu-save')
             }
         },{
-            label: 'Save As...',
+            label: 'Save Project As...',
             accelerator: process.platform === 'darwin'?'Alt+Command+S':'Ctrl+Shift+S',
+            enabled: false,
             click (item, focusedWindow) {
-                focusedWindow.webContents.send('menu-save-as')
+                const filename = dialog.showOpenDialog({
+                    title: 'Save Project As...',
+                    properties: [ 'openDirectory' ]
+                })
+                if (filename != undefined ) {
+                    focusedWindow.webContents.send('menu-save-as', filename[0])
+                }
             }
         },{
             type: 'separator'

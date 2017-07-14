@@ -1,6 +1,9 @@
 // Electron comunication
-var {ipcRenderer} = require('electron')
-import { loadProject, openModal } from './actions'
+const {ipcRenderer, remote} = require('electron')
+const {Menu} = remote
+
+import { loadProject, openModal, saveProjectRedux, setAppStateTo, showNotification, setProjectPath, setProjectInfo } from './actions'
+import { saveProjectIO, saveProjectAsIO, openProjectIO } from './io'
 
 // React
 import React from 'react'
@@ -15,27 +18,6 @@ import reducers from './reducers'
 import App from './App.jsx'
 import './styles/global.css'
 import { readProject } from './io'
-
-
-/////////////////////
-/// Dynamic Menu ////
-/////////////////////
-const {remote} = require('electron')
-const {Menu, MenuItem} = remote
-
-const menu = new Menu()
-menu.append(new MenuItem({label: 'MenuItem1', click() { console.log('item 1 clicked') }}))
-menu.append(new MenuItem({type: 'separator'}))
-menu.append(new MenuItem({label: 'MenuItem2', type: 'checkbox', checked: true}))
-
-window.addEventListener('contextmenu', (e) => {
-  e.preventDefault()
-  menu.popup(remote.getCurrentWindow())
-}, false)
-
-//Menu.getApplicationMenu(null).items[0].submenu.items[0].enabled = false
-
-
 
 //////////////////////////
 /// React Application ////
@@ -52,15 +34,24 @@ render(
 //////////////////////////////
 /// IPC with main process ////
 //////////////////////////////
+// TODO: put all this in a separate file and use constants as events' names: 'OPEN_PROJECT'
 ipcRenderer.on('open-project', (event, path) => {
-    store.dispatch(loadProject({isLoading: true}))
-    readProject(path)
-    .then( project => {
-        store.dispatch( loadProject( project ) )
-    } )
+
+    store.dispatch( setAppStateTo( 'LOADING_PROJECT' ) )
+    openProjectIO(path)
+    .then( result => {
+        store.dispatch( setProjectPath( path ) )
+        store.dispatch( loadProject( result.entities ) )
+        store.dispatch( setProjectInfo( result.project ) )
+        Menu.getApplicationMenu(null).items[0].submenu.items[5].enabled = true
+        Menu.getApplicationMenu(null).items[0].submenu.items[6].enabled = true
+        store.dispatch( setAppStateTo( 'DEFAULT' ) )
+    })
     .catch( error => {
-        store.dispatch( loadProject( { error: true } ) )
+        store.dispatch( setAppStateTo( 'DEFAULT' ) )
+        store.dispatch( showNotification( { type: 'ERROR', title: '', subtitle: '' } ) )
     } )
+
 })
 
 ipcRenderer.on('new-project-form', _ => {
@@ -68,13 +59,30 @@ ipcRenderer.on('new-project-form', _ => {
 })
 
 ipcRenderer.on('menu-save', _ => {
-    console.log('menu-save triggered')
-    //store.dispatch()
+    // TODO: use the constants from its reducer
+    store.dispatch( setAppStateTo( 'SAVING_PROJECT' ) )
+    saveProjectIO( store.getState() )
+    .then( _ => {
+        store.dispatch( setAppStateTo( 'DEFAULT' ) )
+    } )
+    .catch( error => {
+        store.dispatch( setAppStateTo( 'DEFAULT' ) )
+        store.dispatch( showNotification( { type: 'ERROR', title: '', subtitle: '' } ) )
+    } )
 })
 
-ipcRenderer.on('menu-save-as', _ => {
-    console.log('menu-save-as triggered')
-    //store.dispatch()
+ipcRenderer.on('menu-save-as', (event, newPath) => {
+    // TODO: use the constants from its reducer
+    store.dispatch( setAppStateTo( 'SAVING_PROJECT' ) )
+    saveProjectAsIO( store.getState(), newPath )
+    .then( _ => {
+        ipcRenderer.send('load-project-in-new-window', newPath)
+        store.dispatch( setAppStateTo( 'DEFAULT' ) )
+    } )
+    .catch( error => {
+        store.dispatch( setAppStateTo( 'DEFAULT' ) )
+        store.dispatch( showNotification( { type: 'ERROR', title: '', subtitle: '' } ) )
+    } )
 })
 
 

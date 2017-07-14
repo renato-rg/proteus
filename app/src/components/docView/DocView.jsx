@@ -34,9 +34,8 @@ let DocNode = (props) => {
 }
 
 const mapStateToProps1 = (state, ownProps) => {
-    const node = state.project[ownProps.nodeID]
     return {
-        node: node
+        node : state.entities[ownProps.nodeID]
     }
 }
 const mapDispatchToProps1 = (dispatch, ownProps) => {
@@ -50,11 +49,13 @@ DocNode = connect(
 //////////////////////////////////////////////////////
 
 const mapStateToProps = (state, ownProps) => {
-    const proj = state.project['PROJECT']
-    const documentID = proj==undefined ? undefined :
-        state.project['PROJECT'].childrenIDs[state.switchDocument.navActiveTab]
-    return {
-        documentID
+    const globalState = state.appState.globalState
+    const projectPath = state.appState.projectPath
+    if ( globalState == 'DEFAULT' && projectPath != '' ) {
+        const documentID = state.appState.projectInfo.childrenIDs[state.switchDocument.navActiveTab]
+        return { documentID }
+    } else {
+        return { documentID : undefined }
     }
 }
 

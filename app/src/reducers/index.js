@@ -1,15 +1,14 @@
 import { combineReducers } from 'redux'
-import { SET_TREE_VIEW_TAB, SET_DOC_VIEW_TAB } from '../actions'
 import switchDocument from './switchDocument.js'
-import project from './documents.js'
-import projectManager from './projectManager.js'
+import entities from './entities.js'
 import currentModal from './currentModal.js'
+import appState from './appState.js'
 
 const reducers = combineReducers({
+    entities,
     switchDocument,
-    project,
-    projectManager,
-    currentModal
+    currentModal,
+    appState
 })
 
 export default reducers

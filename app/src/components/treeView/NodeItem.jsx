@@ -78,7 +78,7 @@ class NodeItem extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        node: state.project[ownProps.nodeID]
+        node: state.entities[ownProps.nodeID]
     }
 }
 

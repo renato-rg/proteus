@@ -5,20 +5,19 @@ import Tabs from './Tabs.jsx'
 
 const mapStateToProps = (state, ownProps) => {
     const active = state.switchDocument.navActiveTab
-    const proj = state.project['PROJECT']
+    const proj = state.appState.projectInfo
     const tabs = proj==undefined ? [] : proj.childrenIDs.map( nodeID => {
-        return state.project[nodeID].title
+        return state.entities[nodeID].title
     })
     return {
-        active: active,
-        tabs: tabs
+        active,
+        tabs
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         handler: (index) => {
-            console.log(index);
             dispatch(setTreeViewTab(index))
         }
     }

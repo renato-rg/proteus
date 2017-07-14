@@ -32,14 +32,14 @@ app.on('ready', () => {
         mainWindow.maximize()
     })
 
-    // Creates new window for newproject and loads it
-    ipcMain.on('open-just-created-project', (event, projectPath) => {
-        let newProject = new BrowserWindow({width: 1280, height: 680, show: false})
-        newProject.loadURL(webAppPath)
-        newProject.on('closed', () => mainWindow = null )
-        newProject.once('ready-to-show', () => {
-            newProject.show()
-            newProject.webContents.send('open-project', projectPath)
+    // Creates new window for project and loads a project
+    ipcMain.on('load-project-in-new-window', (event, projectPath) => {
+        let newWindow = new BrowserWindow({width: 1280, height: 680, show: false})
+        newWindow.loadURL(webAppPath)
+        newWindow.on('closed', () => newWindow = null )
+        newWindow.once('ready-to-show', () => {
+            newWindow.show()
+            newWindow.webContents.send('open-project', projectPath)
         })
     })
 

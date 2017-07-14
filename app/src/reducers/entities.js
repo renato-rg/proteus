@@ -1,7 +1,7 @@
 import { MOVE_NODE, TOGGLE_NODE, LOAD_PROJECT, UPDATE_EDITABLE_FIELD } from '../actions'
 import update from 'immutability-helper'
 
-function projectReducer(state = {}, action) {
+function entitiesReducer(state = {}, action) {
     switch (action.type) {
 
         case UPDATE_EDITABLE_FIELD:
@@ -38,6 +38,7 @@ function projectReducer(state = {}, action) {
 
         // Load project state
         case LOAD_PROJECT:
+            console.log(JSON.stringify(action.payload, null, 2))
             return action.payload
 
         default:
@@ -45,4 +46,4 @@ function projectReducer(state = {}, action) {
     }
 }
 
-export default projectReducer
+export default entitiesReducer

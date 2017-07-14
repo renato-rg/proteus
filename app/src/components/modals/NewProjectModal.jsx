@@ -26,7 +26,7 @@ class NewProjectModal extends React.Component {
                 // Show error either in the form itself or in a fancy notification
                 console.log(status.message);
             }
-            ipcRenderer.send('open-just-created-project', this.state.projectPath)
+            ipcRenderer.send('load-project-in-new-window', this.state.projectPath)
             this.props.closeModal()
             // dispatch some notification no? both here and inside the new window
         })

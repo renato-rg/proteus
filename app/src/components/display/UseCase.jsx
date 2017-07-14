@@ -61,7 +61,7 @@ const UseCase = (props) => {
 }
 const mapStateToProps = (state, ownProps) => {
     return {
-        childrenNodes: ownProps.node.childrenIDs.map( n => state.project[n] )
+        childrenNodes: ownProps.node.childrenIDs.map( n => state.entities[n] )
     }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
