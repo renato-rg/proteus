@@ -2,7 +2,7 @@
 const {ipcRenderer, remote} = require('electron')
 const {Menu} = remote
 
-import { loadProject, openModal, saveProjectRedux, setAppStateTo, showNotification, setProjectPath, setProjectInfo } from './actions'
+import { loadProject, openModal, saveProjectRedux, setAppStateTo, showNotification, setProjectPath, setProjectInfo, setLocale } from './actions'
 import { saveProjectIO, saveProjectAsIO, openProjectIO } from './io'
 
 // React
@@ -49,7 +49,7 @@ ipcRenderer.on('open-project', (event, path) => {
     })
     .catch( error => {
         store.dispatch( setAppStateTo( 'DEFAULT' ) )
-        store.dispatch( showNotification( { type: 'ERROR', title: '', subtitle: '' } ) )
+        store.dispatch( showNotification( { type: 'ERROR', title: '', subtitle: error.stack} ) )
     } )
 
 })
@@ -83,6 +83,19 @@ ipcRenderer.on('menu-save-as', (event, newPath) => {
         store.dispatch( setAppStateTo( 'DEFAULT' ) )
         store.dispatch( showNotification( { type: 'ERROR', title: '', subtitle: '' } ) )
     } )
+})
+
+ipcRenderer.on('menu-language', (event, label, payload)  => {
+    // Unchecks the other items
+    for (var item of Menu.getApplicationMenu(null).items[0].submenu.items[8].submenu.items) {
+        if (item.label != label) {
+            item.checked = false
+            item.enabled = true
+        } else {
+            item.enabled = false
+        }
+    }
+    store.dispatch(setLocale(payload))
 })
 
 

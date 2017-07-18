@@ -21,7 +21,6 @@ function entitiesReducer(state = {}, action) {
 
         case MOVE_NODE:
             const {sourceNodeID, sourceParentID, targetNodeID, targetParentID} = action
-            console.log(sourceNodeID, sourceParentID, targetNodeID, targetParentID)
 
             // Query to remove the dragged node from its parent
             const sourceNodeIndex = state[sourceParentID].childrenIDs.indexOf(sourceNodeID)
@@ -38,7 +37,7 @@ function entitiesReducer(state = {}, action) {
 
         // Load project state
         case LOAD_PROJECT:
-            console.log(JSON.stringify(action.payload, null, 2))
+            //console.log(JSON.stringify(action.payload, null, 2))
             return action.payload
 
         default:

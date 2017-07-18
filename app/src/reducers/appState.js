@@ -23,7 +23,7 @@ function appState(state = initialState, action) {
         case SET_PROJECT_PATH:
             return update(state, {
                 projectPath: { $set: action.payload }
-                })
+            })
 
         case SET_PROJECT_INFO:
             return update(state, {
@@ -37,7 +37,9 @@ function appState(state = initialState, action) {
 
         //TODO: create action related
         case SET_LOCALE:
-            return state
+            return update(state, {
+                locale: { $set: action.payload }
+            })
 
         default:
             return state

@@ -14,10 +14,10 @@ class NewProjectModal extends React.Component {
             template: 'empty',
             projectPath: 'Select a directory'
         }
-        this.handleBackgroundClick = this.handleBackgroundClick.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handlePath = this.handlePath.bind(this);
+        this.handleBackgroundClick = this.handleBackgroundClick.bind(this)
+        this.handleInputChange = this.handleInputChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handlePath = this.handlePath.bind(this)
     }
 
     handleSubmit(event) {

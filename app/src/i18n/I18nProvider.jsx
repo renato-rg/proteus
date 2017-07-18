@@ -1,27 +1,23 @@
 import React, {Component} from 'react'
 import Editor from './Editor.jsx'
 import Modals from './Modals.jsx'
-import en from './i18n/en.json';
-import es from './i18n/es.json';
+import { connect } from 'react-redux'
+import en from './en.json';
 
 class App extends Component {
 
     constructor(props) {
         super(props)
-        this.state = { en, es }
-        this.handleTranslation = this.handleTranslation.bind(this)
+        this.state = { en }
+        this.translate = this.translate.bind(this)
     }
 
-    handleTranslation(locale) {
-        return key => {
-            return this.state[locale][key] || key
-        }
+    translate(key) {
+        return this.state[this.props.locale][key] || key
     }
 
     getChildContext() {
-        return {
-            translate : this.handleTranslation
-        }
+        return { translate : this.translate }
     }
 
     render() {
@@ -38,4 +34,9 @@ App.childContextTypes = {
     translate: React.PropTypes.func
 }
 
-export default App
+function mapStateToProps(state, props) {
+    return {
+        locale: state.appState.locale
+    }
+}
+export default connect(mapStateToProps)(App)

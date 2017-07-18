@@ -1,26 +1,23 @@
 import React, {Component} from 'react'
-import en from './en.json';
-
-// TODO: it should load the languages .json on demand and garbage collect the unused ones
-const languages = {
-    en
-}
-
-const translate = locale => key => {
-    return languages[locale][key] || key
-}
+import { connect } from 'react-redux'
 
 export default function i18n(ComponentToTranslate) {
-    
+
     class ComponentWithTranslations extends Component {
         render() {
-            return <ComponentToTranslate {...this.props} {...this.state} __={translate(this.context.locale)}/>;
+            return <ComponentToTranslate {...this.props} {...this.state} __={this.context.translate(this.props.locale)}/>
         }
     }
 
     ComponentWithTranslations.contextTypes = {
-        locale: React.PropTypes.string
+        translate: React.PropTypes.func
     }
 
-    return ComponentWithTranslations
+    function mapStateToProps(state, props) {
+        return {
+            locale : state.appState.locale
+        }
+    }
+
+    return connect(mapStateToProps)(ComponentWithTranslations)
 }

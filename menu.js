@@ -65,6 +65,28 @@ module.exports = [{
         },{
             type: 'separator'
         },{
+            label: 'Language...',
+            submenu: [
+                {
+                    label: 'English',
+                    type: 'checkbox',
+                    checked: true,
+                    enabled: false,
+                    click (item, focusedWindow) {
+                        focusedWindow.webContents.send('menu-language', 'English', 'en')
+                    }
+                }, {
+                    label: 'Español',
+                    type: 'checkbox',
+                    checked: false,
+                    click (item, focusedWindow) {
+                        focusedWindow.webContents.send('menu-language', 'Español', 'es')
+                    }
+                }
+            ]
+        },{
+            type: 'separator'
+        },{
             label: 'Close',
             accelerator: 'CmdOrCtrl+Z',
             role: 'close'

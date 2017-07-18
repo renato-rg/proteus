@@ -203,7 +203,6 @@ export function readProjectSync (projectPath) {
     const projectObj = getJSON(projectPath + '/rem.json')
     projectObj.childrenIDs = getChildrenIDs(projectPath + '/objects')
     project['PROJECT'] = projectObj
-    //console.log(JSON.stringify(project,null,2));
     return project
 }
 
