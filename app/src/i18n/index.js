@@ -1,16 +1,20 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
+import en from './en';
+import es from './es';
+
+const languages = { en, es }
+
+const translate = locale => key => {
+    return languages[locale][key] || key
+}
 
 export default function i18n(ComponentToTranslate) {
 
     class ComponentWithTranslations extends Component {
         render() {
-            return <ComponentToTranslate {...this.props} {...this.state} __={this.context.translate(this.props.locale)}/>
+            return <ComponentToTranslate {...this.props} {...this.state} __={translate(this.props.locale)}/>
         }
-    }
-
-    ComponentWithTranslations.contextTypes = {
-        translate: React.PropTypes.func
     }
 
     function mapStateToProps(state, props) {

@@ -35,7 +35,6 @@ function appState(state = initialState, action) {
                 globalState: { $set: action.payload }
             })
 
-        //TODO: create action related
         case SET_LOCALE:
             return update(state, {
                 locale: { $set: action.payload }
