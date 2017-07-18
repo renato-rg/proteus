@@ -1,6 +1,7 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes } from 'react'
 import NodeList from './NodeList.jsx'
 import Icon from '../icons/Icon.jsx'
+import i18n from '../../i18n'
 import { DragSource, DropTarget } from 'react-dnd'
 import {hoverTarget} from './treeView.css'
 
@@ -40,7 +41,7 @@ const dropTarget = {
 //should I try sortable-hoc? or synthetic events? or html5?
 class NodeItem extends Component {
     render() {
-        const {node, nodeID, parentID, isDragging, connectDragSource, connectDropTarget, indexes} = this.props
+        const {node, nodeID, parentID, isDragging, connectDragSource, connectDropTarget, indexes, __} = this.props
 
         // Opacity for dragging
         const styles = {
@@ -65,7 +66,7 @@ class NodeItem extends Component {
                     <div style={styles}>
                         {toggleArrow}
                         <Icon type={node.type}/>
-                        <div>{node.title}</div>
+                        <div>{__("testString")}-{node.title}</div>
                     </div>
                 </li>
                 {childrenShouldBeRendered &&
@@ -74,6 +75,10 @@ class NodeItem extends Component {
             </div>
         ))
     }
+}
+
+NodeItem.propTypes = {
+    strings: PropTypes.object
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -99,5 +104,5 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }))(DragSource('item', dragSource, (connect, monitor) => ({
         connectDragSource: connect.dragSource(),
         isDragging: monitor.isDragging(),
-    }))(NodeItem))
+    }))(i18n(NodeItem)))
 )

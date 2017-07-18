@@ -1,4 +1,4 @@
-import { SHOW_NOTIFICATION, APP_STATE, SET_PROJECT_PATH, SET_PROJECT_INFO } from '../actions'
+import { SHOW_NOTIFICATION, APP_STATE, SET_PROJECT_PATH, SET_PROJECT_INFO, SET_LOCALE } from '../actions'
 import update from 'immutability-helper'
 
 const DEFAULT = 'DEFAULT'
@@ -8,7 +8,8 @@ const SAVING_PROJECT = 'SAVING_PROJECT'
 const initialState = {
     globalState: 'DEFAULT',
     projectPath: '',
-    projectInfo: undefined
+    projectInfo: undefined,
+    locale: 'en'
 }
 
 function appState(state = initialState, action) {
@@ -22,7 +23,7 @@ function appState(state = initialState, action) {
         case SET_PROJECT_PATH:
             return update(state, {
                 projectPath: { $set: action.payload }
-            })
+                })
 
         case SET_PROJECT_INFO:
             return update(state, {
@@ -33,6 +34,10 @@ function appState(state = initialState, action) {
             return update(state, {
                 globalState: { $set: action.payload }
             })
+
+        //TODO: create action related
+        case SET_LOCALE:
+            return state
 
         default:
             return state
