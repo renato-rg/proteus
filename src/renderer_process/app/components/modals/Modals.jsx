@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import NewProjectModal from './components/modals/NewProjectModal.jsx'
+import NewProjectModal from './NewProjectModal.jsx'
 
 const Modals = (props) => {
     switch (props.currentModal) {

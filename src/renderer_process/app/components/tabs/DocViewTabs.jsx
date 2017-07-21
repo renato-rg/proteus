@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { setDocViewTab } from '../../actions'
+import { setDocViewTab } from '../../state_manager/actions'
 import Tabs from './Tabs.jsx'
 
 const mapStateToProps = (state, ownProps) => {

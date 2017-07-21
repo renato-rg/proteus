@@ -1,37 +1,37 @@
 {
-  "name": "electron-react-webpack",
-  "version": "1.0.0",
-  "description": "Electron + React + Webpack 2 seed.",
-  "main": "main.js",
-  "scripts": {
-    "dev": "concurrently --kill-others \"webpack --watch\" \"electron .\"",
-    "start": "electron .",
-    "preonce": "webpack",
-    "once": "npm start"
-  },
-  "author": "J. Renato Ramos González <renato.etc.etc.etc@gmail.com>",
-  "repository": "pastahito/electron-react-webpack",
-  "license": "WTFPL",
-  "devDependencies": {
-    "babel-core": "^6.23.1",
-    "babel-loader": "^6.3.2",
-    "babel-preset-react": "^6.23.0",
-    "css-loader": "^0.26.4",
-    "electron": "^1.4.15",
-    "electron-reload": "^1.1.0",
-    "extract-text-webpack-plugin": "^2.1.2",
-    "file-loader": "^0.9.0",
-    "webpack": "^2.7.0"
-  },
-  "dependencies": {
-    "concurrently": "^3.5.0",
-    "immutability-helper": "^2.1.2",
-    "react": "^15.4.2",
-    "react-dnd": "^2.2.4",
-    "react-dnd-html5-backend": "^2.2.4",
-    "react-dom": "^15.4.2",
-    "react-icons": "^2.2.3",
-    "react-redux": "^5.0.3",
-    "redux": "^3.6.0"
-  }
+    "name": "remus",
+    "version": "1.0.0",
+    "description": "Desktop editor for requirements management built on Electron and React.",
+    "main": "index.js",
+    "scripts": {
+        "dev": "concurrently --kill-others \"webpack --watch\" \"electron ./src/main_process\"",
+        "start": "electron ./src/main_process",
+        "preonce": "webpack",
+        "once": "npm start"
+    },
+    "author": "J. Renato Ramos González <renato.etc.etc.etc@gmail.com>",
+    "repository": "pastahito/remus",
+    "license": "MIT",
+    "devDependencies": {
+        "babel-core": "^6.23.1",
+        "babel-loader": "^6.3.2",
+        "babel-preset-react": "^6.23.0",
+        "css-loader": "^0.26.4",
+        "electron": "^1.4.15",
+        "electron-reload": "^1.1.0",
+        "extract-text-webpack-plugin": "^2.1.2",
+        "file-loader": "^0.9.0",
+        "webpack": "^2.7.0"
+    },
+    "dependencies": {
+        "concurrently": "^3.5.0",
+        "immutability-helper": "^2.1.2",
+        "react": "^15.4.2",
+        "react-dnd": "^2.2.4",
+        "react-dnd-html5-backend": "^2.2.4",
+        "react-dom": "^15.4.2",
+        "react-icons": "^2.2.3",
+        "react-redux": "^5.0.3",
+        "redux": "^3.6.0"
+    }
 }

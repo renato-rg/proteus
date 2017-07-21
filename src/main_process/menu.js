@@ -1,9 +1,12 @@
 // Electron's modules
 const electron = require('electron')
-const {BrowserWindow, dialog} = electron
-const webAppPath = `file://${__dirname}/app/index.html`
+const {dialog} = electron
+
+// Utils to create chromium windows
+const {newBrowserWindow} = require('./utils')
 
 // Menu definition
+// TODO: reacts to state
 module.exports = [{
     label: 'File',
     submenu: [
@@ -11,10 +14,7 @@ module.exports = [{
             label: 'New Window',
             accelerator: process.platform === 'darwin'?'Alt+Command+N':'Ctrl+Shift+N',
             click (item, focusedWindow) {
-                let win = new BrowserWindow({width: 1280, height: 680, show: false})
-                win.loadURL(webAppPath)
-                win.on('closed', () => mainWindow = null )
-                win.once('ready-to-show', () => win.show() )
+                newBrowserWindow()
             }
         },{
             label: 'New Project',
@@ -70,17 +70,16 @@ module.exports = [{
                 {
                     label: 'English',
                     type: 'checkbox',
-                    checked: true,
-                    enabled: false,
                     click (item, focusedWindow) {
-                        focusedWindow.webContents.send('menu-language', 'English', 'en')
+                        focusedWindow.webContents.send('menu-language',
+                        { language: 'English', code: 'en' })
                     }
                 }, {
                     label: 'Español',
                     type: 'checkbox',
-                    checked: false,
                     click (item, focusedWindow) {
-                        focusedWindow.webContents.send('menu-language', 'Español', 'es')
+                        focusedWindow.webContents.send('menu-language',
+                        { language: 'Español', code: 'es' })
                     }
                 }
             ]

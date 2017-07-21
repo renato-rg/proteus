@@ -1,6 +1,6 @@
 import { remote, ipcRenderer } from 'electron'
 import React from 'react'
-import { openModal } from '../../actions'
+import { openModal } from '../../state_manager/actions'
 import { connect } from 'react-redux'
 import {modal, labels, fields, title, form, controls, selectPath} from './styles.css'
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { updateEditableField } from '../../actions'
+import { updateEditableField } from '../../state_manager/actions'
 import { connect } from 'react-redux'
 import Editable from '../editable/Editable.jsx'
 import styles from './styles.css'

@@ -14,7 +14,7 @@ $ cd remus
 
 $ npm install
 ```
-Execute the app:
+Run the app:
 ``` bash
 $ npm run once
 ```

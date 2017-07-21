@@ -6,7 +6,7 @@ import { DragSource, DropTarget } from 'react-dnd'
 import {hoverTarget} from './treeView.css'
 
 //Redux
-import { toggleNode, moveNode } from '../../actions'
+import { toggleNode, moveNode } from '../../state_manager/actions'
 import { connect } from 'react-redux'
 
 const dragSource = {

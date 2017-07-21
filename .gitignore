@@ -1,5 +1,5 @@
 # Webpack
-app/build
+src/renderer_process/build
 
 # Logs
 logs

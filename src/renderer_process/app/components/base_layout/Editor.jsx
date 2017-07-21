@@ -1,15 +1,15 @@
 import React, {Component} from 'react'
-import {header, main, nav, section, footer, A4} from './styles/layout.css'
-import TreeViewTabs from './components/tabs/TreeViewTabs.jsx'
-import DocViewTabs from './components/tabs/DocViewTabs.jsx'
+import {header, main, nav, section, footer} from './layout.css'
+import TreeViewTabs from '../tabs/TreeViewTabs.jsx'
+import DocViewTabs from '../tabs/DocViewTabs.jsx'
 
 // React-dnd context
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 
 // Transformers
-import TreeView from './components/treeView/TreeView.jsx'
-import DocView from './components/docView/DocView.jsx'
+import TreeView from '../treeView/TreeView.jsx'
+import DocView from '../docView/DocView.jsx'
 
 
 class Editor extends Component {
