@@ -3,9 +3,10 @@ import { updateEditableField } from '../../state_manager/actions'
 import { connect } from 'react-redux'
 import Editable from '../editable/Editable.jsx'
 import styles from './styles.css'
+import i18n from '../../i18n'
 
 const UseCase = (props) => {
-    const { node, childrenNodes, update } = props
+    const { node, childrenNodes, update, __ } = props
 
     const updateFieldIn = fieldPath => event => {
         update(node.nodeID, fieldPath, event.target.innerText)
@@ -19,7 +20,7 @@ const UseCase = (props) => {
         <table>
             <thead>
                 <tr>
-                    <th>UC</th>
+                    <th>{__('UC')}</th>
                     <Editable type={'td'} callback={updateFieldIn(['title'])}>
                         {node.title}
                     </Editable>
@@ -27,19 +28,19 @@ const UseCase = (props) => {
             </thead>
             <tbody>
                 <tr>
-                    <th>Description</th>
+                    <th>{__('Description')}</th>
                     <Editable type={'td'} callback={updateFieldIn(['properties', 'details', 'description'])}>
                         {node.properties.details.description}
                     </Editable>
                 </tr>
                 <tr>
-                    <th>Secuencia</th>
+                    <th>{__('Secuence')}</th>
                     <td>
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Step</th>
-                                    <th>Action</th>
+                                    <th>{__('Step')}</th>
+                                    <th>{__('Action')}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -75,4 +76,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(UseCase)
+)(i18n(UseCase))

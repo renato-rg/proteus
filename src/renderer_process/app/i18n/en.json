@@ -1,3 +1,16 @@
 {
-    "testString": "Sample text"
+    "UC" : "UC",
+    "Description" : "Description",
+    "Secuence" : "Secuence",
+    "Step" : "Step",
+    "Action" : "Action",
+    "File" : "File",
+    "New Window": "New Window",
+    "New Project": "New Project",
+    "Open Project": "Open Project",
+    "Toggle Developer Tools": "Toggle Developer Tools",
+    "Save Project": "Save Project",
+    "Save Project As...": "Save Project As...",
+    "Language...": "Language...",
+    "Close": "Close"
 }

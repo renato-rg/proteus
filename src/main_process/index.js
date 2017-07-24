@@ -1,13 +1,13 @@
 // Electron's modules
 const electron = require('electron')
-const {app, Menu, BrowserWindow, dialog, ipcMain} = electron
+const {app, ipcMain, BrowserWindow} = electron
 
 // App's constants
 const path = require('path')
 const webAppPath = path.resolve(__dirname, '../renderer_process/index.html')
 
 // Native Menu
-const menuTemplate = require('./menu')
+const rebuildMenuFromTemplate = require('./menu')
 
 // Utils to create chromium windows, and manage app's configuration file
 const {newBrowserWindow, saveAppLocale} = require('./utils')
@@ -25,9 +25,9 @@ const shouldQuit = app.makeSingleInstance((commandLine, workingDirectory) => {
 if (shouldQuit) app.quit()
 
 app.on('ready', () => {
-
+    
     // Set app's native menu
-    Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate))
+    rebuildMenuFromTemplate()
 
     // Launches a new chromium window and loads the web app
     mainWindow = newBrowserWindow({restoreWindowState: true})
@@ -41,6 +41,7 @@ app.on('ready', () => {
     // When a user changes the language from the menu, in the web app context,
     // this event is emmited
     ipcMain.on('menu-language-updated', (event, {language, code}) => {
+        rebuildMenuFromTemplate({language, code})
         saveAppLocale({language, code})
     })
 

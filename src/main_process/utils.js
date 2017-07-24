@@ -51,11 +51,10 @@ module.exports = {
         newWindow.once('ready-to-show', _ => {
             newWindow.webContents.send('menu-language', getAppLocale())
             newWindow.show()
-            if (projectPath) {
+            if (projectPath)
                 newWindow.webContents.send('open-project', projectPath)
-            } else if (restoreWindowState && isMaximized) {
+            else if (restoreWindowState && isMaximized)
                 newWindow.maximize()
-            }
         })
 
         return newWindow
@@ -64,6 +63,8 @@ module.exports = {
     // Save app's locale in app's configuration files
     saveAppLocale: languageAndCode => {
         set('appLocale', languageAndCode)
-    }
+    },
+
+    getAppLocale
 
 }

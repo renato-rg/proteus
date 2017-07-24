@@ -7,7 +7,8 @@
         "dev": "concurrently --kill-others \"webpack --watch\" \"electron ./src/main_process\"",
         "start": "electron ./src/main_process",
         "preonce": "webpack",
-        "once": "npm start"
+        "once": "npm start",
+        "bundle" : "webpack --watch"
     },
     "author": "J. Renato Ramos González <renato.etc.etc.etc@gmail.com>",
     "repository": "pastahito/remus",
