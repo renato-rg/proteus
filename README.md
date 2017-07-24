@@ -1,4 +1,7 @@
 # remus
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/21046c2115364e18be6c7489e50572e9)](https://www.codacy.com/app/pastahito/remus?utm_source=github.com&utm_medium=referral&utm_content=pastahito/remus&utm_campaign=badger)
+
 Desktop editor for requirements management built on Electron and React.
 
 *The project is still under development.*
