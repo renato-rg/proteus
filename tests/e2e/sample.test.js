@@ -10,8 +10,6 @@ const app = new Application({
     args: [appPath]
 })
 
-console.log(process.env.CI_BUILD)
-
 chai.should()
 chai.use(chaiAsPromised)
 chaiAsPromised.transferPromiseness = app.transferPromiseness // Allows chai promises

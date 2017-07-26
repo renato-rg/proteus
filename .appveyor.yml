@@ -16,11 +16,8 @@ install:
 build_script:
   - npm run bundle:prod
   - set "CI_BUILD=1"
-  - echo %CI_BUILD%
   - npm start
-  - set "CI_BUILD="
-  - echo %CI_BUILD%
+  - set "CI_BUILD=0"
 
 test_script:
-  - echo %CI_BUILD%
   - npm test
