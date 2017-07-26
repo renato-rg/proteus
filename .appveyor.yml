@@ -6,6 +6,9 @@ platform:
   - x64
   - x86
 
+matrix:
+  fast_finish: true
+
 install:
   - ps: Install-Product node Stable x64
   - npm install
@@ -13,8 +16,11 @@ install:
 build_script:
   - npm run bundle:prod
   - set "CI_BUILD=1"
+  - echo %CI_BUILD%
   - npm start
   - set "CI_BUILD="
+  - echo %CI_BUILD%
 
 test_script:
+  - echo %CI_BUILD%
   - npm test
