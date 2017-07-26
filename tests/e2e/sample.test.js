@@ -18,12 +18,10 @@ describe('application launch', function () {
     this.timeout(9000)
 
     beforeEach(function () {
-        console.log("BEFORE HERE")
         return app.start()
     })
 
     afterEach(function () {
-        console.log("AFTER HERE")
         if (app && app.isRunning()) {
             return app.stop()
         }

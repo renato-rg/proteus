@@ -12,7 +12,9 @@ install:
 
 build_script:
   - npm run bundle:prod
+  - set "CI_BUILD=1"
   - npm start
+  - set "CI_BUILD="
 
 test_script:
   - npm test

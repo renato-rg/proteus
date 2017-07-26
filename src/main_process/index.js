@@ -50,4 +50,4 @@ app.on('ready', () => {
 })
 
 // Allows AppVeyor close the app right after it is opened
-if (process.env.CI) app.on('browser-window-focus', () => app.exit())
+if (process.env.CI_BUILD) app.on('browser-window-focus', () => app.exit())
