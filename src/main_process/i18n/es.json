@@ -1,0 +1,16 @@
+{
+    "UC" : "CU",
+    "Description" : "Descripción",
+    "Secuence" : "Secuencia",
+    "Step" : "Paso",
+    "Action" : "Acción",
+    "File" : "Archivo",
+    "New Window": "Nueva Ventana",
+    "New Project": "Nuevo Projecto",
+    "Open Project": "Abrir Projecto",
+    "Toggle Developer Tools": "Herramientas para Desarrolladores",
+    "Save Project": "Guardar Projecto",
+    "Save Project As...": "Guardar Projecto Como...",
+    "Language...": "Idioma...",
+    "Close": "Cerrar"
+}

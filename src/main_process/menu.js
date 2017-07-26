@@ -6,8 +6,8 @@ const {Menu, dialog} = electron
 const {newBrowserWindow, getAppLocale} = require('./utils')
 
 // Dictionary
-const en = require('../renderer_process/app/i18n/en')
-const es = require('../renderer_process/app/i18n/es')
+const en = require('./i18n/en')
+const es = require('./i18n/es')
 const dictionary = { en, es }
 
 // Returns a translated native menu

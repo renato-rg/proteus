@@ -1,31 +1,43 @@
 {
     "name": "remus",
-    "version": "1.0.0",
+    "version": "0.5.0",
     "description": "Desktop editor for requirements management built on Electron and React.",
-    "main": "index.js",
+    "main": "./src/main_process/index.js",
     "scripts": {
-        "dev": "concurrently --kill-others \"webpack --watch\" \"electron ./src/main_process\"",
         "start": "electron ./src/main_process",
+        "dev:win": "SET ELECTRON_ENV=dev&& electron ./src/main_process",
+        "dev:mac": "ELECTRON_ENV=true electron ./src/main_process",
+        "bundle": "webpack --watch",
+        "bundle:dist": "webpack -p",
         "preonce": "webpack",
         "once": "npm start",
-        "bundle" : "webpack --watch"
+        "test": "npm run test:unit && npm run test:e2e",
+        "test:unit": "jest",
+        "test:e2e": "mocha ./tests/e2e/*.test.js",
+        "dist": "build"
     },
     "author": "J. Renato Ramos González <renato.etc.etc.etc@gmail.com>",
     "repository": "pastahito/remus",
     "license": "MIT",
     "devDependencies": {
-        "babel-core": "^6.23.1",
-        "babel-loader": "^6.3.2",
-        "babel-preset-react": "^6.23.0",
-        "css-loader": "^0.26.4",
-        "electron": "^1.4.15",
-        "electron-reload": "^1.1.0",
-        "extract-text-webpack-plugin": "^2.1.2",
-        "file-loader": "^0.9.0",
-        "webpack": "^2.7.0"
+        "babel-core": "^6.25.0",
+        "babel-loader": "^7.1.1",
+        "babel-preset-es2015": "^6.24.1",
+        "babel-preset-react": "^6.24.1",
+        "chai": "^4.1.0",
+        "chai-as-promised": "^7.1.1",
+        "css-loader": "^0.28.4",
+        "electron": "^1.6.11",
+        "electron-builder": "^19.16.2",
+        "electron-reload": "^1.2.1",
+        "extract-text-webpack-plugin": "^3.0.0",
+        "file-loader": "^0.11.2",
+        "jest": "^20.0.4",
+        "mocha": "^3.4.2",
+        "spectron": "^3.7.2",
+        "webpack": "^3.4.1"
     },
     "dependencies": {
-        "concurrently": "^3.5.0",
         "immutability-helper": "^2.1.2",
         "react": "^15.4.2",
         "react-dnd": "^2.2.4",
@@ -34,5 +46,33 @@
         "react-icons": "^2.2.3",
         "react-redux": "^5.0.3",
         "redux": "^3.6.0"
+    },
+    "jest": {
+        "testMatch": [
+            "**/tests/unit/*.(spec|test).js?(x)"
+        ]
+    },
+    "build": {
+        "productName": "REM",
+        "appId": "pastahito.rem",
+        "asar": true,
+        "files": [
+            "**/*",
+            "!docs${/*}",
+            "!dist${/*}",
+            "!tests${/*}",
+            "!src/renderer_process${/*}",
+            "src/renderer_process/build/bundle.js",
+            "src/renderer_process/build/bundle.css",
+            "src/renderer_process/index.html"
+        ],
+        "win": {
+            "target": "nsis",
+            "icon": "src/main_process/assets/icon.ico"
+        },
+        "nsis": {
+            "oneClick": false,
+            "allowElevation": false
+        }
     }
 }

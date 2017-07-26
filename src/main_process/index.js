@@ -13,7 +13,9 @@ const rebuildMenuFromTemplate = require('./menu')
 const {newBrowserWindow, saveAppLocale} = require('./utils')
 
 // Allow electron reloads by itself when webpack detects changes in ./app/
-require('electron-reload')(__dirname)
+if (process.env.ELECTRON_ENV === 'dev') require('electron-reload')(__dirname, {
+    electron: path.join(__dirname, '..', '..', 'node_modules', '.bin', 'electron')
+})
 
 // Prevents default window to be garbage collected
 let mainWindow
@@ -25,7 +27,7 @@ const shouldQuit = app.makeSingleInstance((commandLine, workingDirectory) => {
 if (shouldQuit) app.quit()
 
 app.on('ready', () => {
-    
+
     // Set app's native menu
     rebuildMenuFromTemplate()
 

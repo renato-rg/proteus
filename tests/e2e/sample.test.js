@@ -1,0 +1,42 @@
+const Application = require('spectron').Application
+const chai = require('chai')
+const chaiAsPromised = require('chai-as-promised')
+const path = require('path')
+
+const appPath = path.join(__dirname, '..', '..', 'src', 'main_process', 'index.js')
+
+const app = new Application({
+    path: require('electron'),
+    args: [appPath]
+})
+
+chai.should()
+chai.use(chaiAsPromised)
+chaiAsPromised.transferPromiseness = app.transferPromiseness // Allows chai promises
+
+describe('application launch', function () {
+    this.timeout(9000)
+
+    beforeEach(function () {
+        console.log("BEFORE HERE")
+        return app.start()
+    })
+
+    afterEach(function () {
+        console.log("AFTER HERE")
+        if (app && app.isRunning()) {
+            return app.stop()
+        }
+    })
+
+    it('opens a window', function () {
+        return app.client.waitUntilWindowLoaded()
+        .getWindowCount().should.eventually.equal(2)  // 1 for prod, 2 for dev
+        .browserWindow.isMinimized().should.eventually.be.false
+        .browserWindow.isDevToolsOpened().should.eventually.be.false
+        .browserWindow.isVisible().should.eventually.be.true
+        .browserWindow.isFocused().should.eventually.be.true
+        .browserWindow.getBounds().should.eventually.have.property('width').and.be.above(0)
+        .browserWindow.getBounds().should.eventually.have.property('height').and.be.above(0)
+    })
+})

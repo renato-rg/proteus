@@ -18,7 +18,7 @@ module.exports = {
                 test: /\.jsx?$/,
                 loader: 'babel-loader',
                 options: {
-                    presets: ['react']
+                    presets: ['react', 'es2015']
                 }
             },
             {
@@ -39,11 +39,8 @@ module.exports = {
 
     plugins: [
         new ExtractTextPlugin({
-            filename: 'bundle.css',
-            disable: false,
-            allChunks: true
-        }
-    )
-]
+            filename: 'bundle.css'
+        })
+    ]
 
 }
