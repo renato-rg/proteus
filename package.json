@@ -8,7 +8,7 @@
         "dev:win": "SET ELECTRON_ENV=dev&& electron ./src/main_process",
         "dev:mac": "ELECTRON_ENV=true electron ./src/main_process",
         "bundle": "webpack --watch",
-        "bundle:dist": "webpack -p",
+        "bundle:prod": "webpack -p",
         "preonce": "webpack",
         "once": "npm start",
         "test": "npm run test:unit && npm run test:e2e",

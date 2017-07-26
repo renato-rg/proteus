@@ -1,0 +1,18 @@
+version: build{build}
+
+image: Visual Studio 2017
+
+platform:
+  - x64
+  - x86
+
+install:
+  - ps: Install-Product node Stable x64
+  - npm install
+
+build_script:
+  - npm run bundle:prod
+  - npm start
+
+test_script:
+  - npm test
