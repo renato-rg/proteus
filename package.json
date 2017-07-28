@@ -6,7 +6,7 @@
     "scripts": {
         "start": "electron ./src/main_process",
         "dev:win": "SET ELECTRON_ENV=dev&& electron ./src/main_process",
-        "dev:mac": "ELECTRON_ENV=true electron ./src/main_process",
+        "dev:mac": "ELECTRON_ENV=dev electron ./src/main_process",
         "bundle": "webpack --watch",
         "bundle:prod": "webpack -p",
         "preonce": "webpack",
@@ -14,6 +14,10 @@
         "test": "npm run test:unit && npm run test:e2e",
         "test:unit": "jest",
         "test:e2e": "mocha ./tests/e2e/*.test.js",
+        "test:e2e:coverage": "nyc mocha ./tests/e2e/*.test.js",
+        "lint": "eslint --ext .jsx,.js --ignore-path .gitignore src/",
+        "coverage": "jest --coverage",
+        "coverage:upload": "SET CODACY_PROJECT_TOKEN=%CODACY%&&minicat coverage/lcov.info | codacy-coverage",
         "dist": "build"
     },
     "author": "J. Renato Ramos González <renato.etc.etc.etc@gmail.com>",
@@ -26,26 +30,33 @@
         "babel-preset-react": "^6.24.1",
         "chai": "^4.1.0",
         "chai-as-promised": "^7.1.1",
+        "codacy-coverage": "^2.0.2",
         "css-loader": "^0.28.4",
         "electron": "^1.6.11",
         "electron-builder": "^19.16.2",
         "electron-reload": "^1.2.1",
+        "enzyme": "^2.9.1",
+        "eslint": "^4.3.0",
+        "eslint-plugin-react": "^7.1.0",
         "extract-text-webpack-plugin": "^3.0.0",
         "file-loader": "^0.11.2",
         "jest": "^20.0.4",
+        "minicat": "^1.0.0",
         "mocha": "^3.4.2",
+        "nyc": "^11.0.3",
+        "react-test-renderer": "^15.6.1",
         "spectron": "^3.7.2",
         "webpack": "^3.4.1"
     },
     "dependencies": {
         "immutability-helper": "^2.1.2",
-        "react": "^15.4.2",
+        "react": "^15.6.1",
         "react-dnd": "^2.2.4",
         "react-dnd-html5-backend": "^2.2.4",
-        "react-dom": "^15.4.2",
+        "react-dom": "^15.6.1",
         "react-icons": "^2.2.3",
         "react-redux": "^5.0.3",
-        "redux": "^3.6.0"
+        "redux": "^3.7.2"
     },
     "jest": {
         "testMatch": [

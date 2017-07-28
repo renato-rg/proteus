@@ -1,9 +1,9 @@
 import { SHOW_NOTIFICATION, APP_STATE, SET_PROJECT_PATH, SET_PROJECT_INFO, SET_LOCALE } from '../actions'
 import update from 'immutability-helper'
 
-const DEFAULT = 'DEFAULT'
-const LOADING_PROJECT = 'LOADING_PROJECT'
-const SAVING_PROJECT = 'SAVING_PROJECT'
+// const DEFAULT = 'DEFAULT'
+// const LOADING_PROJECT = 'LOADING_PROJECT'
+// const SAVING_PROJECT = 'SAVING_PROJECT'
 
 const initialState = {
     globalState: 'DEFAULT',

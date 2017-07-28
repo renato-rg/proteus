@@ -1,10 +1,9 @@
 // Electron's modules
 const electron = require('electron')
-const {app, ipcMain, BrowserWindow} = electron
+const {app, ipcMain} = electron
 
 // App's constants
 const path = require('path')
-const webAppPath = path.resolve(__dirname, '../renderer_process/index.html')
 
 // Native Menu
 const rebuildMenuFromTemplate = require('./menu')
@@ -13,15 +12,17 @@ const rebuildMenuFromTemplate = require('./menu')
 const {newBrowserWindow, saveAppLocale} = require('./utils')
 
 // Allow electron reloads by itself when webpack detects changes in ./app/
-if (process.env.ELECTRON_ENV === 'dev') require('electron-reload')(__dirname, {
-    electron: path.join(__dirname, '..', '..', 'node_modules', '.bin', 'electron')
-})
+if (process.env.ELECTRON_ENV === 'dev') {
+    require('electron-reload')(__dirname, {
+        electron: path.join(__dirname, '..', '..', 'node_modules', '.bin', 'electron')
+    })
+}
 
 // Prevents default window to be garbage collected
 let mainWindow
 
 // Shuts down any attempt to open another instance of the app
-const shouldQuit = app.makeSingleInstance((commandLine, workingDirectory) => {
+const shouldQuit = app.makeSingleInstance( _ => {
     if (mainWindow) return true
 })
 if (shouldQuit) app.quit()

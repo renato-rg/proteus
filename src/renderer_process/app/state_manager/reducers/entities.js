@@ -6,7 +6,7 @@ function entitiesReducer(state = {}, action) {
 
         case UPDATE_EDITABLE_FIELD:
             const query = action.fieldPath.reduceRight( (last, current) => {
-            	return { [current] : last }
+                return { [current] : last }
             }, {$set: action.newValue})
 
             return update(state, {

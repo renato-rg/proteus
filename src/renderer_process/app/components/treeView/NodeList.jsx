@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import NodeItem from './NodeItem.jsx'
-import update from 'immutability-helper'
 
 class NodeList extends Component {
     render() {

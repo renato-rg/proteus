@@ -8,7 +8,7 @@ import { createProject } from '../../io'
 
 class NewProjectModal extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             projectName: '',
             template: 'empty',
@@ -21,10 +21,10 @@ class NewProjectModal extends React.Component {
     }
 
     handleSubmit(event) {
-        createProject(this.state, (status) => {
+        createProject(this.state, status => {
             if (status.error) {
                 // Show error either in the form itself or in a fancy notification
-                console.log(status.message);
+                console.log(status.message)
             }
             ipcRenderer.send('load-project-in-new-window', this.state.projectPath)
             this.props.closeModal()
@@ -36,9 +36,8 @@ class NewProjectModal extends React.Component {
         let filename = remote.dialog.showOpenDialog({
             properties: [ 'openDirectory' ]
         })
-        if (filename != undefined ) {
+        if (filename != undefined )
             this.setState({ projectPath: filename[0] })
-        }
     }
 
     handleInputChange(event) {
@@ -65,10 +64,10 @@ class NewProjectModal extends React.Component {
                         <div>Project Folder</div>
                     </div>
                     <div className={fields}>
-                        <input name="projectName" onChange={this.handleInputChange} />
-                        <select name="template" value={this.state.value} onChange={this.handleInputChange}>
-                            <option value="empty">Empty Project</option>
-                            <option value="madeja">Madeja Template</option>
+                        <input name='projectName' onChange={this.handleInputChange} />
+                        <select name='template' value={this.state.value} onChange={this.handleInputChange}>
+                            <option value='empty'>Empty Project</option>
+                            <option value='madeja'>Madeja Template</option>
                         </select>
                         <div onClick={this.handlePath} className={selectPath}>
                             {this.state.projectPath}

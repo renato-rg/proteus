@@ -25,16 +25,15 @@ const createDirs = (path, arr, root = false) => {
         const content = JSON.stringify({
             title: el.name,
             index: i,
-            type: root ? "document" : "folder"
+            type: root ? 'document' : 'folder'
         }, null, '\t')
         // Save file inside directory
         const file = fs.createWriteStream(`${path}/${el.name}/rem.json`)
         file.write(content)
         file.end()
         // If it has children, do the same
-        if(el.hasOwnProperty('children')) {
+        if (el.hasOwnProperty('children'))
             createDirs(`${path}/${el.name}`, el.children)
-        }
         i+=1
     })
 }
@@ -42,7 +41,7 @@ const createDirs = (path, arr, root = false) => {
 const createMadejaProject = ({projectName, template, projectPath}) => {
     // Project's file definition
     createEmptyProject({projectName, template, projectPath})
-    // TODO: First level is for Docs, this way we get rid of an "type" property
+    // TODO: First level is for Docs, this way we get rid of an 'type' property
     const templateStructure = [{
         name: 'Documento 1',
         children: [{
@@ -157,16 +156,16 @@ const createMadejaProject = ({projectName, template, projectPath}) => {
 export function readProjectSync (projectPath) {
     let currentID = 0
     const nextID = () => ++currentID
-    const isDirectory = (path) => fs.statSync(path).isDirectory()
+    const isDirectory = path => fs.statSync(path).isDirectory()
     // Here you can add aditional fields
-    const getJSON = (path) => {
+    const getJSON = path => {
         const res = JSON.parse(fs.readFileSync(path))
-        res.showChildren = res.type=="document" ? true: false
+        res.showChildren = res.type=='document' ? true: false
         return res
     }
 
     const project = {}
-    const getChildrenIDs = (dir) => {
+    const getChildrenIDs = dir => {
         const childrenIDs = []
         fs.readdirSync(dir).filter( name => name != 'rem.json').map( node => {
             const nodePath = dir + '/' + node
@@ -228,13 +227,13 @@ export function createProject (state, callback) {
     switch (state.template) {
         case 'empty':
             status = handleCreationErrors(createEmptyProject, state)
-            break;
+            break
         case 'madeja':
             status = handleCreationErrors(createMadejaProject, state)
-            break;
+            break
         default:
             status = { error: true, message: `Template "${state.template}" not supported.`}
-            break;
+            break
     }
     callback(status)
 }

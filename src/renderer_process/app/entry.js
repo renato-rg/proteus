@@ -33,18 +33,18 @@ ipcRendererEvents(store)
 /* The below chunk will be executed after the react app is rendered */
 let nav = document.querySelector('nav')
 let main = document.querySelector('main')
-let node = document.createElement("SPAN")
+let node = document.createElement('SPAN')
 let startX, startWidth
-const initDrag = (e) => {
+const initDrag = e => {
    startX = e.clientX
    startWidth = parseInt(window.getComputedStyle(nav).width)
    window.addEventListener('mousemove', doDrag, false)
    window.addEventListener('mouseup', stopDrag, false)
 }
-const doDrag = (e) => {
+const doDrag = e => {
    nav.style.width = (startWidth + e.clientX - startX) + 'px'
 }
-const stopDrag = (e) => {
+const stopDrag = e => {
     window.removeEventListener('mousemove', doDrag, false)
     window.removeEventListener('mouseup', stopDrag, false)
 }

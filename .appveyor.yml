@@ -20,4 +20,5 @@ build_script:
   - set "CI_BUILD=0"
 
 test_script:
+  - npm run lint
   - npm test

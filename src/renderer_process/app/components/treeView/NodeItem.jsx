@@ -1,4 +1,4 @@
-import React, {Component, PropTypes } from 'react'
+import React, {Component} from 'react'
 import NodeList from './NodeList.jsx'
 import Icon from '../icons/Icon.jsx'
 import { DragSource, DropTarget } from 'react-dnd'
@@ -20,7 +20,7 @@ const dropTarget = {
     drop(props, monitor, component) {
         // If a nested element has already handled the drop
         // This is true for when drop() is called twice or more
-        if (monitor.didDrop()) { return }
+        if (monitor.didDrop()) return
 
         const {sourceNodeID, sourceParentID} = monitor.getItem()
         const targetNodeID = props.nodeID
@@ -29,9 +29,9 @@ const dropTarget = {
         // TODO: more elaborated restrictions
         const draggingRestrictions = sourceNodeID != targetParentID
 
-        if (draggingRestrictions) {
+        if (draggingRestrictions)
             props.moveNode(sourceNodeID, sourceParentID, targetNodeID, targetParentID)
-        }
+
         return
     }
 }
@@ -40,7 +40,7 @@ const dropTarget = {
 //should I try sortable-hoc? or synthetic events? or html5?
 class NodeItem extends Component {
     render() {
-        const {node, nodeID, parentID, isDragging, connectDragSource, connectDropTarget, indexes} = this.props
+        const {node, nodeID, isDragging, connectDragSource, connectDropTarget, indexes} = this.props
 
         // Opacity for dragging
         const styles = {
@@ -53,11 +53,10 @@ class NodeItem extends Component {
 
         // Opened/Closed arrow
         let toggleArrow
-        if(node.type!='useCaseStep'){
+        if(node.type!='useCaseStep')
             toggleArrow = <Icon type={node.showChildren ? 'OPENED' : 'CLOSED'}/>
-        } else {
-            toggleArrow = <Icon type={''} color={'transparent'}/>
-        }
+        else
+            toggleArrow = <Icon type='' color='transparent'/>
 
         return connectDragSource(connectDropTarget(
             <div>
@@ -76,10 +75,6 @@ class NodeItem extends Component {
     }
 }
 
-NodeItem.propTypes = {
-    strings: PropTypes.object
-}
-
 const mapStateToProps = (state, ownProps) => {
     return {
         node: state.entities[ownProps.nodeID]
@@ -88,7 +83,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        handleToggle: (id) => {
+        handleToggle: id => {
             dispatch(toggleNode(id))
         },
         moveNode: (sourceNodeID, sourceParentID, targetNodeID, targetParentID) => {
