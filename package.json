@@ -15,7 +15,7 @@
         "test:unit": "jest",
         "test:e2e": "mocha ./tests/e2e/*.test.js",
         "test:e2e:coverage": "nyc mocha ./tests/e2e/*.test.js",
-        "lint": "eslint --ext .jsx,.js --ignore-path .gitignore src/",
+        "lint": "eslint --ext .jsx,.js --ignore-path .gitignore src/ tests/",
         "coverage": "jest --coverage",
         "coverage:upload": "SET CODACY_PROJECT_TOKEN=%CODACY%&&minicat coverage/lcov.info | codacy-coverage",
         "dist": "build"
