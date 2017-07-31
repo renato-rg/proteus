@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-
 import Editor from './Editor.jsx'
 import Modals from '../modals/Modals.jsx'
 

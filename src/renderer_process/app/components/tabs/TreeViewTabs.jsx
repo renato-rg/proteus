@@ -1,4 +1,3 @@
-import React from 'react'
 import { connect } from 'react-redux'
 import { setTreeViewTab } from '../../state_manager/actions'
 import Tabs from './Tabs.jsx'
@@ -17,7 +16,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        handler: (index) => {
+        handler: index => {
             dispatch(setTreeViewTab(index))
         }
     }

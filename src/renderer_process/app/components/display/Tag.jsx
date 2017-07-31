@@ -6,7 +6,7 @@ import UseCase from './UseCase.jsx'
 
 import Editable from '../editable/Editable.jsx'
 
-const Tag = (props) => {
+const Tag = props => {
     const { node, update } = props
     const updateFieldIn = fieldPath => event => {
         update(node.nodeID, fieldPath, event.target.innerText)

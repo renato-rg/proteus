@@ -5,7 +5,7 @@ import Editable from '../editable/Editable.jsx'
 import styles from './styles.css'
 import i18n from '../../i18n'
 
-const UseCase = (props) => {
+const UseCase = props => {
     const { node, childrenNodes, update, __ } = props
 
     const updateFieldIn = fieldPath => event => {
@@ -21,7 +21,7 @@ const UseCase = (props) => {
             <thead>
                 <tr>
                     <th>{__('UC')}</th>
-                    <Editable type={'td'} callback={updateFieldIn(['title'])}>
+                    <Editable type='td' callback={updateFieldIn(['title'])}>
                         {node.title}
                     </Editable>
                 </tr>
@@ -29,7 +29,7 @@ const UseCase = (props) => {
             <tbody>
                 <tr>
                     <th>{__('Description')}</th>
-                    <Editable type={'td'} callback={updateFieldIn(['properties', 'details', 'description'])}>
+                    <Editable type='td' callback={updateFieldIn(['properties', 'details', 'description'])}>
                         {node.properties.details.description}
                     </Editable>
                 </tr>
@@ -47,7 +47,7 @@ const UseCase = (props) => {
                             {childrenNodes.map((step, index) =>
                                 <tr key={index}>
                                     <td>{index+1}</td>
-                                    <Editable type={'td'} callback={updateInnerFieldIn(step.nodeID, ['title'])}>
+                                    <Editable type='td' callback={updateInnerFieldIn(step.nodeID, ['title'])}>
                                         {step.title}
                                     </Editable>
                                 </tr>

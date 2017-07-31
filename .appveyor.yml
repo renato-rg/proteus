@@ -1,0 +1,24 @@
+version: 0.5.{build}
+
+image: Visual Studio 2017
+
+platform:
+  - x64
+  - x86
+
+matrix:
+  fast_finish: true
+
+install:
+  - ps: Install-Product node Stable x64
+  - npm install
+
+build_script:
+  - npm run bundle:prod
+  - set "CI_BUILD=1"
+  - npm start
+  - set "CI_BUILD=0"
+
+test_script:
+  - npm run lint
+  - npm test

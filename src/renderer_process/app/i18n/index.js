@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import en from './en';
-import es from './es';
+import en from './en'
+import es from './es'
 
 const languages = { en, es }
 

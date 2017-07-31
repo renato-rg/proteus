@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import styles from './styles.css'
 import Tag from '../display/Tag.jsx'
 
-const DocView = (props) => {
+const DocView = props => {
     const {documentID} = props
     return (
         <div className={styles.background}>
@@ -20,8 +20,8 @@ const DocView = (props) => {
     )
 }
 
-let DocNode = (props) => {
-    const { node, nodeID } = props
+let DocNode = props => {
+    const { node } = props
     const childrenShouldBerendered = node.childrenIDs.length>0 && (node.type=='document'||node.type=='folder')
     return (
         <div>
@@ -54,9 +54,8 @@ const mapStateToProps = (state, ownProps) => {
     if ( globalState == 'DEFAULT' && projectPath != '' ) {
         const documentID = state.appState.projectInfo.childrenIDs[state.switchDocument.navActiveTab]
         return { documentID }
-    } else {
+    } else
         return { documentID : undefined }
-    }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {

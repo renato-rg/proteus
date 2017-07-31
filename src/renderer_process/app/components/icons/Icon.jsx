@@ -25,7 +25,7 @@ const resolveIcon = (type = '') => {
 }
 
 
-const Icon = (props) => {
+const Icon = props => {
     const {type, size, color} = props
     const Resolved = resolveIcon(type)
     return <Resolved size={size} style={{marginRight: '9px', color}}/>

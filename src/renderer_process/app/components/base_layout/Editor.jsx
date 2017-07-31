@@ -15,7 +15,7 @@ import DocView from '../docView/DocView.jsx'
 class Editor extends Component {
     render() {
         return (
-            <div className="editor">
+            <div className='editor'>
                 <header className={header}>
                     <div>Tabs</div>
                     <div>Icons</div>
@@ -28,7 +28,7 @@ class Editor extends Component {
                     </nav>
 
                     <section className={section}>
-                        <DocViewTabs tabs={[`View 1`, `View 2`]}/>
+                        <DocViewTabs tabs={['View 1', 'View 2']}/>
                         <DocView/>
                         <div/>
                     </section>

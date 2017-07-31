@@ -1,0 +1,39 @@
+env:
+  browser: true
+  node: true
+  es6: true
+  mocha: true
+  jest: true
+extends:
+  - 'eslint:recommended'
+  - 'plugin:react/recommended'
+parserOptions:
+  ecmaFeatures:
+    experimentalObjectRestSpread: true
+    jsx: true
+  sourceType: module
+plugins:
+  - react
+rules:
+  quotes:
+    - warn
+    - single
+  jsx-quotes:
+    - warn
+    - prefer-single
+  semi:
+    - warn
+    - never
+  curly:
+    - warn
+    - multi-or-nest
+  arrow-parens:
+    - warn
+    - as-needed
+  no-unused-vars:
+    - warn
+    - args: none
+  no-console: off
+  linebreak-style: off
+  react/prop-types: off
+  no-case-declarations: off
