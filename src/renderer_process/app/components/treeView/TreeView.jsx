@@ -1,37 +1,22 @@
 import React, {Component} from 'react'
-import { connect } from 'react-redux'
-import NodeItem from './NodeItem.jsx'
+import NodeList from './NodeList.jsx'
 
 import {treeView} from './treeView.css'
 
-// TODO: combinar con TreeViewTabs.jsx porque usan los mismos recursos de Redux
 class TreeView extends Component {
     render() {
+        const  {docNode} = this.props
         return (
             <div className={treeView}>
-                { this.props.nodeID &&
-                    <NodeItem nodeID={this.props.nodeID} indexes={[this.props.docIndex]}/>
+                { docNode &&
+                    <div>
+                        <NodeList childrenIDs={docNode.childrenIDs} parentID={docNode.nodeID}
+                            parentAcceptedChildren={docNode.acceptedChildren} depth={1}/>
+                    </div>
                 }
             </div>
         )
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    const docIndex = state.switchDocument.navActiveTab
-    const proj = state.appState.projectInfo
-    const nodeID = proj!=undefined ? proj.childrenIDs[docIndex] : undefined
-    return {
-        docIndex,
-        nodeID
-    }
-}
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {}
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TreeView)
+export default TreeView

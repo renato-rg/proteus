@@ -3,7 +3,6 @@
     text-align: left;
     font-size: 12px;
     font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-    line-height: 25px;
     list-style: none;
 }
 
@@ -14,32 +13,62 @@
     padding: 0;
 }
 
-:local .treeView li > div{
+:local .label{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 0.4em 0em 0.4em 0.4em;
+    display: flex;
+    align-items: center;
+    align-content: center;
 }
 
-.selected {
-    border-right-color: #4DAF7C;
+:local .hoverTarget {
+    display: flex;
+    border-left: 0.3em solid transparent;
 }
-.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+:local .hoverTarget > div {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+:local .hoverTarget:hover {
+    color: black;
+    border-left: 0.3em solid #4DAF7C;
     background-color: rgba(77, 175, 124, 0.1);
-}
-.ant-menu-item-selected {
-    color: rgba(77, 175, 124, 0.8);
 }
 
 :local .hoverTarget > div > svg, :local .hoverTarget > div > div {
     pointer-events: none;
     display: inline-block;
 }
-:local .hoverTarget > div {
-    border-left: 0.3em solid transparent;
+
+
+/* Document Selector */
+:local .dropdown::before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    margin-top: -11px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 11px solid white;
+    background: transparent;
 }
-:local .hoverTarget :hover {
-    color: black;
-    border-left: 0.3em solid #4DAF7C;
-    background-color: rgba(77, 175, 124, 0.1);
+:local .dropdown {
+    position: absolute;
+    right: 0px;
+    left: 28px;
+    margin-top: 14px;
+    background: white;
+    box-shadow: rgba(0, 0, 0, 0.16) -4px 4px 15px 1px;
+    cursor: pointer;
+    user-select: none;
+}
+:local .dropdown > div {
+    display: flex;
+    align-items: center;
+}
+:local .dropdown > div:hover {
+    background: #eff3f9;
 }

@@ -1,5 +1,7 @@
-import { MOVE_NODE, TOGGLE_NODE, LOAD_PROJECT, UPDATE_EDITABLE_FIELD } from '../actions'
+import { MOVE_NODE, TOGGLE_NODE, LOAD_PROJECT, UPDATE_EDITABLE_FIELD, CREATE_NODE } from '../actions'
 import update from 'immutability-helper'
+import uuid from 'uuid/v1'
+import objects from './defaultObjects'
 
 function entitiesReducer(state = {}, action) {
     switch (action.type) {
@@ -19,21 +21,50 @@ function entitiesReducer(state = {}, action) {
                 [action.nodeID]: {showChildren: {$set: !currentBool}}
             })
 
+        case CREATE_NODE: {
+            const {nodeType, direction, nodeID, parentID} = action
+            const sourceNodeID = uuid()
+            let nodeToInsert = Object.assign(objects[nodeType] || objects['folder'], {nodeID: sourceNodeID, title: sourceNodeID})
+            let targetID, operation
+            if (direction === 'MID') {
+                targetID = nodeID
+                operation = {$push: [sourceNodeID]}
+            } else {
+                const index = state[parentID].childrenIDs.indexOf(nodeID)
+                targetID = parentID
+                operation = {$splice: [[index+(direction==='TOP'?0:1), 0, sourceNodeID]]}
+            }
+            return update(state, {
+                $merge: { [sourceNodeID]: nodeToInsert },
+                [targetID]: {childrenIDs: operation}
+            })
+        }
         case MOVE_NODE:
-            const {sourceNodeID, sourceParentID, targetNodeID, targetParentID} = action
+            const {direction, sourceNodeID, sourceParentID, targetNodeID, targetParentID} = action
 
-            // Query to remove the dragged node from its parent
+            // Removes draggingNode from its parent
             const sourceNodeIndex = state[sourceParentID].childrenIDs.indexOf(sourceNodeID)
-            let new_state_1 = update(state, {
+            let transitionState = update(state, {
                 [sourceParentID]: {childrenIDs: {$splice: [[sourceNodeIndex, 1]]}}
             })
 
-            const targetNodeIndex = state[targetParentID].childrenIDs.indexOf(targetNodeID)
-            let new_state_2 = update(new_state_1, {
-                [targetParentID]: {childrenIDs: {$splice: [[targetNodeIndex, 0, sourceNodeID]]}}
+            // Whether it goes up, down of is inserted into the node
+            let target, operation
+            if (direction === 'MID') {
+                target = targetNodeID
+                operation = {$push: [sourceNodeID]}
+            } else {
+                const targetNodeIndex = transitionState[targetParentID].childrenIDs.indexOf(targetNodeID)
+                target = targetParentID
+                operation = {$splice: [[targetNodeIndex+(direction==='TOP'?0:1), 0, sourceNodeID]]}
+            }
+
+            // Perfoms insertion in new parent
+            let newState = update(transitionState, {
+                [target]: {childrenIDs: operation}
             })
 
-            return new_state_2
+            return newState
 
         // Load project state
         case LOAD_PROJECT:

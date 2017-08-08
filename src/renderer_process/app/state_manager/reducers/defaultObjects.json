@@ -1,0 +1,47 @@
+{
+    "useCaseStep" : {
+        "title": "",
+        "type": "useCaseStep",
+        "acceptedChildren": [],
+        "innerType" : true,
+        "properties": {
+            "comments": ""
+        },
+        "childrenIDs": []
+    },
+    "useCase" : {
+        "title": "",
+        "type": "useCase",
+        "acceptedChildren": [
+            "useCaseStep"
+        ],
+        "properties": {
+            "general": {
+                "version": "",
+                "createdBy": "",
+                "created": ""
+            },
+            "details": {
+                "description": ""
+            },
+            "comments": ""
+        },
+        "traces": [],
+        "showChildren": false,
+        "childrenIDs": []
+    },
+    "folder" : {
+        "title": "",
+        "type": "folder",
+        "acceptedChildren": "all",
+        "showChildren": false,
+        "childrenIDs": []
+    },
+    "document" : {
+        "title": "",
+        "type": "document",
+        "acceptedChildren": "all",
+        "showChildren": true,
+        "childrenIDs": []
+    }
+}

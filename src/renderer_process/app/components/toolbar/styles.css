@@ -1,0 +1,7 @@
+:local .toolGroup {
+    display: flex;
+    flex-direction: row;
+}
+:local .toolGroup > img {
+    margin: 5px;
+}

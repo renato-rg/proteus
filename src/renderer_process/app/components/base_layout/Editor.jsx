@@ -1,44 +1,56 @@
 import React, {Component} from 'react'
-import {header, main, nav, section, footer} from './layout.css'
-import TreeViewTabs from '../tabs/TreeViewTabs.jsx'
+import { connect } from 'react-redux'
+import styles from './layout.css'
+
+// Components
+import TreeViewTabs from '../treeView/TreeViewTabs.jsx'
 import DocViewTabs from '../tabs/DocViewTabs.jsx'
-
-// React-dnd context
-import { DragDropContext } from 'react-dnd'
-import HTML5Backend from 'react-dnd-html5-backend'
-
-// Transformers
+import ToolGroup from '../toolbar/ToolGroup.jsx'
 import TreeView from '../treeView/TreeView.jsx'
 import DocView from '../docView/DocView.jsx'
 
-
 class Editor extends Component {
     render() {
+        const {documents, activeIndex, docNode} = this.props
         return (
-            <div className='editor'>
-                <header className={header}>
-                    <div>Tabs</div>
-                    <div>Icons</div>
+            <div className={styles.editor}>
+                <header className={styles.header}>
+                    <ToolGroup/>
                 </header>
 
-                <main className={main}>
-                    <nav className={nav}>
-                        <TreeViewTabs/>
-                        <TreeView/>
+                <main className={styles.main}>
+                    <nav className={styles.nav}>
+                        <TreeViewTabs {...{documents, activeIndex, docNode}}/>
+                        <TreeView {...{docNode}}/>
                     </nav>
 
-                    <section className={section}>
+                    <section className={styles.section}>
                         <DocViewTabs tabs={['View 1', 'View 2']}/>
-                        <DocView/>
+                        <DocView {...{docNode}}/>
                         <div/>
                     </section>
                 </main>
 
-                <footer className={footer}/>
+                <footer className={styles.footer}/>
             </div>
         )
     }
 }
 
+const mapStateToProps = (state, ownProps) => {
+    const activeIndex = state.switchDocument.navActiveTab
+    const proj = state.appState.projectInfo
+    let docNode = undefined
+    let documents = []
+    if (state.appState.globalState === 'DEFAULT' && proj) {
+        documents = proj.childrenIDs.map(i => state.entities[i])
+        docNode = documents[activeIndex]
+    }
+    return {
+        documents,
+        activeIndex,
+        docNode
+    }
+}
 
-export default DragDropContext(HTML5Backend)(Editor)
+export default connect(mapStateToProps, null)(Editor)

@@ -1,8 +1,14 @@
 import React, {Component} from 'react'
+import './global.css'
+
+// Two main parts
 import Editor from './Editor.jsx'
 import Modals from '../modals/Modals.jsx'
 
-import './global.css'
+// React-dnd context
+import { DragDropContext } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
+
 
 class App extends Component {
     render() {
@@ -15,4 +21,4 @@ class App extends Component {
     }
 }
 
-export default App
+export default DragDropContext(HTML5Backend)(App)

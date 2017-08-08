@@ -11,6 +11,7 @@ import { saveProjectIO, saveProjectAsIO, openProjectIO } from '../io'
 //////////////////////////////
 // TODO: Use constants as events' names: 'OPEN_PROJECT'
 export default function ipcRendererEvents(store) {
+
     ipcRenderer.on('open-project', (event, path) => {
         store.dispatch( setAppStateTo( 'LOADING_PROJECT' ) )
         openProjectIO(path)
@@ -23,6 +24,11 @@ export default function ipcRendererEvents(store) {
             store.dispatch( setAppStateTo( 'DEFAULT' ) )
         })
         .catch( error => {
+            store.dispatch( setAppStateTo( 'UNLOADING_PROJECT' ) )
+            store.dispatch( loadProject( {} ) )
+            store.dispatch( setProjectInfo( undefined ) )
+            Menu.getApplicationMenu(null).items[0].submenu.items[5].enabled = false
+            Menu.getApplicationMenu(null).items[0].submenu.items[6].enabled = false
             store.dispatch( setAppStateTo( 'DEFAULT' ) )
             store.dispatch( showNotification( { type: 'ERROR', title: '', subtitle: error.stack} ) )
         } )
