@@ -4,5 +4,13 @@
     "Secuence" : "Secuencia",
     "Step" : "Paso",
     "Action" : "Acción",
-    "New Document" : "Nuevo Documento"
+    "New Document" : "Nuevo Documento",
+    "No Documents" : "Sin Documentos",
+    "New use case's step" : "Nuevo paso de caso de uso",
+    "New use case": "Nuevo caso de uso",
+    "New folder": "Nueva carpeta",
+    "New document" : "Nuevo documento",
+    "New paragraph" : "Nuevo párrafo",
+    "Delete" : "Eliminar",
+    "Properties..." : "Propiedades..."
 }

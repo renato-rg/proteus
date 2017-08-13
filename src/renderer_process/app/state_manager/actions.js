@@ -29,6 +29,16 @@ export function createNode(nodeType, direction, nodeID, parentID) {
     return { type: CREATE_NODE, nodeType, direction, nodeID, parentID }
 }
 
+export const DELETE_NODE = 'DELETE_NODE'
+export function deleteNode(nodeID, parentID) {
+    return { type: DELETE_NODE, nodeID, parentID }
+}
+
+export const CREATE_DOCUMENT = 'CREATE_DOCUMENT'
+export function createDocument(docID) {
+    return { type: CREATE_DOCUMENT, docID }
+}
+
 
 /***********************
 ** Project Management **
@@ -46,6 +56,16 @@ export function setProjectPath(payload) {
 export const SET_PROJECT_INFO = 'SET_PROJECT_INFO'
 export function setProjectInfo(payload) {
     return { type: SET_PROJECT_INFO, payload }
+}
+
+export const DELETE_DOCUMENT = 'DELETE_DOCUMENT'
+export function deleteDocument(docIndex) {
+    return { type: DELETE_DOCUMENT, docIndex }
+}
+
+export const INSERT_DOCUMENT = 'INSERT_DOCUMENT'
+export function insertDocument(docID) {
+    return { type: INSERT_DOCUMENT, docID }
 }
 
 /************************

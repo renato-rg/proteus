@@ -8,6 +8,7 @@ import DocViewTabs from '../tabs/DocViewTabs.jsx'
 import ToolGroup from '../toolbar/ToolGroup.jsx'
 import TreeView from '../treeView/TreeView.jsx'
 import DocView from '../docView/DocView.jsx'
+import DockSide from '../toolbar/DockSide.jsx'
 
 class Editor extends Component {
     render() {
@@ -16,22 +17,23 @@ class Editor extends Component {
             <div className={styles.editor}>
                 <header className={styles.header}>
                     <ToolGroup/>
+                    <DockSide/>
                 </header>
 
                 <main className={styles.main}>
-                    <nav className={styles.nav}>
-                        <TreeViewTabs {...{documents, activeIndex, docNode}}/>
-                        <TreeView {...{docNode}}/>
-                    </nav>
-
+                    <div style={{display: 'flex'}}>
+                        <nav className={styles.nav}>
+                            <TreeViewTabs {...{documents, activeIndex, docNode}}/>
+                            <TreeView {...{docNode}}/>
+                        </nav>
+                        <span className={styles.resizer}></span>
+                    </div>
                     <section className={styles.section}>
-                        <DocViewTabs tabs={['View 1', 'View 2']}/>
+                        <DocViewTabs tabs={['Log State']}/>
                         <DocView {...{docNode}}/>
                         <div/>
                     </section>
                 </main>
-
-                <footer className={styles.footer}/>
             </div>
         )
     }

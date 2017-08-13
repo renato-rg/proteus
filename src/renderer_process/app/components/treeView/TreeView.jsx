@@ -11,7 +11,7 @@ class TreeView extends Component {
                 { docNode &&
                     <div>
                         <NodeList childrenIDs={docNode.childrenIDs} parentID={docNode.nodeID}
-                            parentAcceptedChildren={docNode.acceptedChildren} depth={1}/>
+                            parentAcceptedChildren={docNode.acceptedChildren} depth={0}/>
                     </div>
                 }
             </div>

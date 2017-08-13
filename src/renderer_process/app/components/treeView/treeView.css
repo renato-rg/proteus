@@ -1,9 +1,10 @@
 :local .treeView{
-    color: rgba(56, 58, 66, 0.8);
+    list-style: none;
+    color: #424243;
     text-align: left;
     font-size: 12px;
-    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-    list-style: none;
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    font-weight: normal;
 }
 
 :local .treeView ul {

@@ -10,7 +10,7 @@
     width: 100%;
 }
 :local .header {
-    background-color: #13a790;
+    background-color: #5d5d5d;
     color: rgba(#ffffff, 0.6);
     display: flex;
 }
@@ -63,8 +63,9 @@
 }
 
 /* Resizer */
-:local .main > span {
-    background: linear-gradient(to left, #dadada, #f5f5f5);
+:local .resizer {
     cursor: e-resize;
     padding-right: 5px;
+    background: #f5f5f5;
+    border-right: 1px solid #e0e0e0;
 }

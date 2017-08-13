@@ -12,6 +12,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         handler: index => {
             dispatch(setDocViewTab(index))
+            dispatch({type: 'LOG_ENTITIES'})
         }
     }
 }

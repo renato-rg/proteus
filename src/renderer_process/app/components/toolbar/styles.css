@@ -1,7 +1,17 @@
 :local .toolGroup {
+    flex: 1;
     display: flex;
     flex-direction: row;
 }
 :local .toolGroup > img {
     margin: 5px;
+}
+
+:local .dockSide {
+    align-self: flex-end;
+    display: flex;
+    flex-direction: row;
+    background-color: var(--color-a);
+    padding: 0px 5px;
+    border: 1px solid rgb(218, 218, 218);
 }

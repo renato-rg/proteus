@@ -33,17 +33,11 @@ let DocNode = props => {
     )
 }
 
-const mapStateToProps1 = (state, ownProps) => {
+const mapStateToProps = (state, ownProps) => {
     return {
         node : state.entities[ownProps.nodeID]
     }
 }
-const mapDispatchToProps1 = (dispatch, ownProps) => {
-    return {}
-}
-DocNode = connect(
-    mapStateToProps1,
-    mapDispatchToProps1
-)(DocNode)
+DocNode = connect(mapStateToProps, null)(DocNode)
 
 export default DocView

@@ -1,6 +1,9 @@
 import React, {Component} from 'react'
 import Icon from '../icons/Icon.jsx'
 import {hoverTarget} from './treeView.css'
+import i18n from '../../i18n'
+
+const defaultProps = require('../display/defaultProps.json')
 
 //Redux
 import { toggleNode, moveNode, createNode } from '../../state_manager/actions'
@@ -9,6 +12,7 @@ import { connect } from 'react-redux'
 //Drag and Drop
 import makeItDroppable from './makeItDroppable'
 import makeItDraggable from './makeItDraggable'
+import addContextMenu from './addContextMenu'
 
 class NodeLabel extends Component {
 
@@ -40,7 +44,7 @@ class NodeLabel extends Component {
     }
 
     render() {
-        const {node, depth, toggleNode, isDragging, isOver,
+        const {__, node, depth, toggleNode, isDragging, isOver,
                 connectDragSource, connectDropTarget} = this.props
 
         // Opacity for dragging
@@ -61,13 +65,15 @@ class NodeLabel extends Component {
 
         // Opened/Closed arrow
         const arrowType = node.type==='useCaseStep' ? '' : node.showChildren ? 'OPENED' : 'CLOSED'
+        const placeholder = '<'+__(defaultProps[node.type].placeholder)+'>'
 
         return connectDragSource(connectDropTarget(
-            <li className={hoverTarget} style={styles} ref={nodeRef => this.nodeRef = nodeRef}>
+            <li className={hoverTarget} style={styles} ref={nodeRef => this.nodeRef = nodeRef}
+                onContextMenu={this.props.contextMenuHandler}>
                 <div style={padding} onClick={toggleNode}>
                     <Icon type={arrowType} containerSize='25px'/>
                     <Icon type={node.type} containerSize='25px'/>
-                    <div style={label}>{node.title}</div>
+                    <div style={label}>{ node.title ? node.title : placeholder }</div>
                 </div>
             </li>
         ), {dropEffect: this.state.dropEffect})
@@ -89,4 +95,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(makeItDraggable(makeItDroppable(NodeLabel)))
+export default connect(null, mapDispatchToProps)(i18n(addContextMenu(makeItDraggable(makeItDroppable(NodeLabel)))))

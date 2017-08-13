@@ -30,10 +30,17 @@ ipcRendererEvents(store)
 ///////////////////
 /// Workarounds ///
 ///////////////////
+console.error = (function() {
+    var error = console.error
+    return function(exception) {
+        if ((exception + '').indexOf('Warning: A component is `contentEditable`') != 0)
+            error.apply(console, arguments)
+    }
+})()
 /* The below chunk will be executed after the react app is rendered */
+import {resizer} from './components/base_layout/layout.css'
 let nav = document.querySelector('nav')
-let main = document.querySelector('main')
-let node = document.createElement('SPAN')
+let node = document.querySelector('.'+resizer)
 let startX, startWidth
 const initDrag = e => {
    startX = e.clientX
@@ -49,4 +56,3 @@ const stopDrag = e => {
     window.removeEventListener('mouseup', stopDrag, false)
 }
 node.addEventListener('mousedown', initDrag, false)
-main.insertBefore(node, main.children[1])

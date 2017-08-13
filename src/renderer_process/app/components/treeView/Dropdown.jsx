@@ -1,14 +1,29 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import uuid from 'uuid/v1'
 import Icon from '../icons/Icon.jsx'
 import i18n from '../../i18n'
-import { setTreeViewTab } from '../../state_manager/actions'
+import { setTreeViewTab, deleteDocument, createDocument, insertDocument } from '../../state_manager/actions'
 import { dropdown } from './treeView.css'
 
-const HoverItem = ({style, icon, label, onClick}) => (
+const styles = {
+    width: '100%',
+    textAlign: 'left'
+}
+const HoverItem = ({placeholder, style, icon, label, onClick, deleteAction, index, activeIndex, setTreeViewTab}) => (
     <div style={style} onClick={onClick}>
         <Icon type={icon} containerSize='35px'/>
-        <div>{label}</div>
+        <div style={styles}>{label ? label : placeholder}</div>
+        {deleteAction &&
+            <Icon type={'TRASHCAN'} containerSize='35px' onClick={e => {
+                e.stopPropagation()
+                deleteAction(index)
+                if (index===activeIndex)
+                    setTreeViewTab(0)
+                else
+                    setTreeViewTab(activeIndex + (index<=activeIndex ? -1 : 0))
+            }}/>
+        }
     </div>
 )
 
@@ -47,15 +62,23 @@ class Dropdown extends React.Component {
     }
 
     render () {
-        const {__, documents, activeIndex} = this.props
+        const {__, documents, activeIndex, createDocument} = this.props
         return (
             <div className={dropdown} ref={el => this.dropdownEl = el}>
                 {documents.map((doc, index) =>
                     <HoverItem key={doc.nodeID} icon={'DOCUMENT'} label={doc.title}
+                        activeIndex={activeIndex}
+                        index={index}
                         style={{color: index===activeIndex?'black':'inherit'}}
-                        onClick={() => this.changeDocument(index)}/>)
+                        onClick={() => this.changeDocument(index)}
+                        deleteAction={this.props.deleteDocument}
+                        setTreeViewTab={this.props.setTreeViewTab}
+                        placeholder={'<'+__('New document')+'>'}/>)
                 }
-                <HoverItem icon={'PLUS'} label={__('New Document')}/>
+                <HoverItem icon={'PLUS'} label={__('New Document')} onClick={e => {
+                    e.stopPropagation()
+                    createDocument()
+                }}/>
             </div>
         )
     }
@@ -64,8 +87,16 @@ class Dropdown extends React.Component {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        setTreeViewTab: index => {
-            dispatch(setTreeViewTab(index))
+        setTreeViewTab: docIndex => {
+            dispatch(setTreeViewTab(docIndex))
+        },
+        deleteDocument: docIndex => {
+            dispatch(deleteDocument(docIndex))
+        },
+        createDocument: () => {
+            const docID = uuid()
+            dispatch(createDocument(docID))
+            dispatch(insertDocument(docID))
         }
     }
 }

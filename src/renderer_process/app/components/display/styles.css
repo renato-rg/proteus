@@ -8,6 +8,7 @@
 :local .title {
     font-family: Century Gothic;
     font-size: 22px;
+    text-align: center;
 }
 
 /*************
@@ -26,6 +27,7 @@
 :local .paragraph {
     composes: node;
     text-align: justify;
+    font-family: inherit;
 }
 
 /***************

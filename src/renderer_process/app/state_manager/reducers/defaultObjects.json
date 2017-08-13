@@ -37,6 +37,13 @@
         "showChildren": false,
         "childrenIDs": []
     },
+    "paragraph" : {
+        "title": "",
+        "type": "paragraph",
+        "acceptedChildren": [],
+        "showChildren": false,
+        "childrenIDs": []
+    },
     "document" : {
         "title": "",
         "type": "document",

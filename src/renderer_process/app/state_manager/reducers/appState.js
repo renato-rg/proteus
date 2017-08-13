@@ -1,4 +1,5 @@
-import { SHOW_NOTIFICATION, APP_STATE, SET_PROJECT_PATH, SET_PROJECT_INFO, SET_LOCALE } from '../actions'
+import { SHOW_NOTIFICATION, APP_STATE, SET_PROJECT_PATH, SET_PROJECT_INFO,
+        SET_LOCALE, DELETE_DOCUMENT, INSERT_DOCUMENT } from '../actions'
 import update from 'immutability-helper'
 
 // const DEFAULT = 'DEFAULT'
@@ -15,6 +16,16 @@ const initialState = {
 function appState(state = initialState, action) {
     switch (action.type) {
 
+        case SET_LOCALE:
+            return update(state, {
+                locale: { $set: action.payload }
+            })
+
+        case APP_STATE:
+            return update(state, {
+                globalState: { $set: action.payload }
+            })
+
         //TODO: make a notification-only reducer
         case SHOW_NOTIFICATION:
             console.log(JSON.stringify(action.payload, null, 2))
@@ -30,14 +41,14 @@ function appState(state = initialState, action) {
                 projectInfo: { $set: action.payload }
             })
 
-        case APP_STATE:
+        case DELETE_DOCUMENT:
             return update(state, {
-                globalState: { $set: action.payload }
+                projectInfo: {childrenIDs: {$splice: [[action.docIndex, 1]]}}
             })
 
-        case SET_LOCALE:
+        case INSERT_DOCUMENT:
             return update(state, {
-                locale: { $set: action.payload }
+                projectInfo: {childrenIDs: {$push: [action.docID]}}
             })
 
         default:
