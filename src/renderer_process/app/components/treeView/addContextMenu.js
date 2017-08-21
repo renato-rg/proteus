@@ -2,7 +2,7 @@ import { remote } from 'electron'
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 
-import { deleteNode } from '../../state_manager/actions'
+import { deleteNode, openNodeProperties, setDetailedNodeID } from '../../state_manager/actions'
 
 export default function addContextMenu(ComponentToModify) {
 
@@ -14,22 +14,21 @@ export default function addContextMenu(ComponentToModify) {
 
     class ComponentWithContextMenu extends Component {
         render() {
-            const { __, deleteNode, parentID } = this.props
+            const { __, deleteNode, showPropertiesPanel } = this.props
             const contextMenuHandler = e => {
                 e.preventDefault()
-                const nodeID = this.props.node.nodeID
                 const template = [
                     {
                         label: __('Delete'),
                         click () {
-                            deleteNode(nodeID, parentID)
+                            deleteNode()
                         }
                     },
                     { type: 'separator' },
                     {
                         label: __('Properties...'),
                         click () {
-                            console.log('Attempt to edit properties in node with ID:'+nodeID)
+                            showPropertiesPanel()
                         }
                     }
                 ]
@@ -40,8 +39,12 @@ export default function addContextMenu(ComponentToModify) {
     }
     const mapDispatchToProps = (dispatch, ownProps) => {
         return {
-            deleteNode: (nodeID, parentID) => {
-                dispatch(deleteNode(nodeID, parentID))
+            deleteNode: () => {
+                dispatch(deleteNode(this.props.node.nodeID, this.props.parentID))
+            },
+            showPropertiesPanel: () => {
+                dispatch(setDetailedNodeID(ownProps.node.nodeID))
+                dispatch(openNodeProperties())
             }
         }
     }

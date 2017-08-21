@@ -29,10 +29,6 @@ class TreeViewTabs extends React.Component {
     }
 
     render () {
-        const burgerEffect = {
-            transition: 'all 0.2s',
-            transform: this.state.clicked ? 'rotate(90deg)' : 'inherit'
-        }
         const bgdEffect = {
             transition: 'all 0.2s',
             color: this.state.clicked ? 'white' : 'inherit',
@@ -49,10 +45,9 @@ class TreeViewTabs extends React.Component {
         return (
             <div style={{position: 'relative'}}>
                 <div style={bgdEffect} onClick={this.toggleDropdown}>
-                    <Icon styles={{color: this.state.clicked ? 'white' : 'inherit'}}
-                        containerStyle={burgerEffect}
-                        containerSize='35px'
-                        type='DOC_CONFIG'/>
+                    <Icon styles={{color: this.state.clicked ? 'white' : 'inherit', padding: '0px 1px 0px 12px'}}
+                        type='DOC_CONFIG'
+                        size='16px'/>
                     { docNode ?
                         <HoverItem style={padding} icon={'DOCUMENT'} label={docNode.title}/> :
                         <div style={{width: '100%'}}>{__('No Documents')}</div>

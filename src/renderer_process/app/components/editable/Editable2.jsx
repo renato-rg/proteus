@@ -34,15 +34,16 @@ class Editable2 extends React.Component {
         if (this.props.introForbidden) e.preventDefault()
     }
     render () {
-        const { __, value, type, callback, className } = this.props
-        const placeholder = '<'+__(defaultProps[type].placeholder)+'>'
+        const { __, value, type, callback, className, style } = this.props
+        const ph = defaultProps[type] ? defaultProps[type].placeholder : 'Write something'
+        const placeholder = type ? '<'+__(ph)+'>' : ''
         return (
             <textarea ref={el => this.el = el}
                 placeholder={placeholder}
                 onKeyDown={this.onKeyDown}
                 onPaste={this.onPaste}
                 onChange={callback}
-                style={styles}
+                style={Object.assign({}, styles, style)}
                 className={className}
                 value={value}
                 rows={1}

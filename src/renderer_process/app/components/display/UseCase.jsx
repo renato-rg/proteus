@@ -1,19 +1,18 @@
 import React from 'react'
 import { updateEditableField } from '../../state_manager/actions'
 import { connect } from 'react-redux'
-import Editable from '../editable/Editable.jsx'
+import Editable2 from '../editable/Editable2.jsx'
 import styles from './styles.css'
 import i18n from '../../i18n'
+
+import entity from '../../constants/entity'
+const sections = entity('useCase')
 
 const UseCase = props => {
     const { node, childrenNodes, update, __ } = props
 
-    const updateFieldIn = fieldPath => event => {
-        update(node.nodeID, fieldPath, event.target.innerText)
-    }
-
-    const updateInnerFieldIn = (nodeID, fieldPath) => event => {
-        update(nodeID, fieldPath, event.target.innerText)
+    const updateIn = fieldPath => event => {
+        update(node.nodeID, fieldPath, event.target.value)
     }
 
     return <div className={styles.useCase}>
@@ -21,18 +20,33 @@ const UseCase = props => {
             <thead>
                 <tr>
                     <th>{__('UC')}</th>
-                    <Editable type='td' callback={updateFieldIn(['title'])}>
-                        {node.title}
-                    </Editable>
+                    <td>
+                        <Editable2 className={styles.paragraph}
+                                    value={node.title}
+                                    introForbidden
+                                    callback={updateIn(['title'])}/>
+                    </td>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th>{__('Description')}</th>
-                    <Editable type='td' callback={updateFieldIn(['properties', 'details', 'description'])}>
-                        {node.properties.details.description}
-                    </Editable>
-                </tr>
+                {Object.keys(sections)
+                .filter(s => s !== 'traces')
+                .map( section =>
+                    Object.keys(sections[section])
+                    .filter(p => node[section][p] && node[section][p] !== '')
+                    .map( property =>
+                        <tr key={property}>
+                            <th>{__(property)}</th>
+                            <td>
+                                <Editable2 className={styles.paragraph}
+                                            value={node[section][property]}
+                                            introForbidden={sections[section][property]==='oneline'}
+                                            callback={updateIn([section, property])}/>
+                            </td>
+                        </tr>
+                    )
+                )
+                }
                 <tr>
                     <th>{__('Secuence')}</th>
                     <td>
@@ -46,10 +60,12 @@ const UseCase = props => {
                             <tbody>
                             {childrenNodes.map((step, index) =>
                                 <tr key={index}>
-                                    <td>{index+1}</td>
-                                    <Editable type='td' callback={updateInnerFieldIn(step.nodeID, ['title'])}>
-                                        {step.title}
-                                    </Editable>
+                                    <th>{index+1}</th>
+                                    <td>
+                                        <Editable2 className={styles.paragraph}
+                                                    value={step.title}
+                                                    callback={updateIn(step.nodeID, ['title'])}/>
+                                    </td>
                                 </tr>
                             )}
                             </tbody>

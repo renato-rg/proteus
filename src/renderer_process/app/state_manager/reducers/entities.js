@@ -12,6 +12,8 @@ function entitiesReducer(state = {}, action) {
                 return { [current] : last }
             }, {$set: action.newValue})
 
+            console.log(action)
+            console.log(query)
             return update(state, {
                 [action.nodeID]: query
             })

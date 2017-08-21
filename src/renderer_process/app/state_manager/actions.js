@@ -1,5 +1,5 @@
 /****************
-** Tabs Clicks **
+** UI State **
 ****************/
 export const SET_TREE_VIEW_TAB = 'SET_TREE_VIEW_TAB'
 export function setTreeViewTab(index) {
@@ -9,6 +9,23 @@ export function setTreeViewTab(index) {
 export const SET_DOC_VIEW_TAB = 'SET_DOC_VIEW_TAB'
 export function setDocViewTab(index) {
     return { type: SET_DOC_VIEW_TAB, index }
+}
+
+export const TOGGLE_LEFT_PANEL = 'TOGGLE_LEFT_PANEL'
+export function toggleLeftPanel() {
+    return { type: TOGGLE_LEFT_PANEL }
+}
+
+export const SLIDE_NODE_PROPERTIES = 'SLIDE_NODE_PROPERTIES'
+export function openNodeProperties() {
+    return { type: SLIDE_NODE_PROPERTIES, payload: true }
+}
+export function closeNodeProperties() {
+    return { type: SLIDE_NODE_PROPERTIES, payload: false }
+}
+export const SET_DETAILS_NODE_ID = 'SET_DETAILS_NODE_ID'
+export function setDetailedNodeID(id) {
+    return { type: SET_DETAILS_NODE_ID, id }
 }
 
 /***************************

@@ -1,10 +1,27 @@
 :local .treeView{
+    flex: 1;
+    background-color: var(--color-a);
+    overflow: hidden;
+    padding-right: 3px;
     list-style: none;
     color: #424243;
     text-align: left;
     font-size: 12px;
     font-family: 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
     font-weight: normal;
+}
+/* Scrollbar */
+:local .treeView::-webkit-scrollbar {
+    width: 0.3em;
+}
+:local .treeView::-webkit-scrollbar-thumb {
+    background-color: rgba(64, 128, 128, 0.4);
+}
+:local .treeView::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+:local .treeView:hover {
+    overflow: auto;
 }
 
 :local .treeView ul {

@@ -10,9 +10,9 @@ const styles = {
     width: '100%',
     textAlign: 'left'
 }
-const HoverItem = ({placeholder, style, icon, label, onClick, deleteAction, index, activeIndex, setTreeViewTab}) => (
+const HoverItem = ({placeholder, size, style, icon, label, onClick, deleteAction, index, activeIndex, setTreeViewTab}) => (
     <div style={style} onClick={onClick}>
-        <Icon type={icon} containerSize='35px'/>
+        <Icon type={icon} containerSize='35px' size={size}/>
         <div style={styles}>{label ? label : placeholder}</div>
         {deleteAction &&
             <Icon type={'TRASHCAN'} containerSize='35px' onClick={e => {
@@ -75,7 +75,7 @@ class Dropdown extends React.Component {
                         setTreeViewTab={this.props.setTreeViewTab}
                         placeholder={'<'+__('New document')+'>'}/>)
                 }
-                <HoverItem icon={'PLUS'} label={__('New Document')} onClick={e => {
+                <HoverItem icon={'PLUS'} size='19px' label={__('New Document')} onClick={e => {
                     e.stopPropagation()
                     createDocument()
                 }}/>

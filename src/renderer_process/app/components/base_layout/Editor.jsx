@@ -3,16 +3,15 @@ import { connect } from 'react-redux'
 import styles from './layout.css'
 
 // Components
-import TreeViewTabs from '../treeView/TreeViewTabs.jsx'
 import DocViewTabs from '../tabs/DocViewTabs.jsx'
 import ToolGroup from '../toolbar/ToolGroup.jsx'
-import TreeView from '../treeView/TreeView.jsx'
+import LeftPanel from './LeftPanel.jsx'
 import DocView from '../docView/DocView.jsx'
 import DockSide from '../toolbar/DockSide.jsx'
 
 class Editor extends Component {
     render() {
-        const {documents, activeIndex, docNode} = this.props
+        const {documents, activeIndex, docNode, showLeftPanel} = this.props
         return (
             <div className={styles.editor}>
                 <header className={styles.header}>
@@ -21,17 +20,13 @@ class Editor extends Component {
                 </header>
 
                 <main className={styles.main}>
-                    <div style={{display: 'flex'}}>
-                        <nav className={styles.nav}>
-                            <TreeViewTabs {...{documents, activeIndex, docNode}}/>
-                            <TreeView {...{docNode}}/>
-                        </nav>
-                        <span className={styles.resizer}></span>
-                    </div>
+                    { showLeftPanel &&
+                        <LeftPanel {...{documents, activeIndex, docNode}}/>
+                    }
+                    <span className={styles.resizer}></span>
                     <section className={styles.section}>
                         <DocViewTabs tabs={['Log State']}/>
                         <DocView {...{docNode}}/>
-                        <div/>
                     </section>
                 </main>
             </div>
@@ -51,7 +46,8 @@ const mapStateToProps = (state, ownProps) => {
     return {
         documents,
         activeIndex,
-        docNode
+        docNode,
+        showLeftPanel: state.switchDocument.showLeftPanel
     }
 }
 

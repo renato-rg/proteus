@@ -52,7 +52,7 @@ class NodeLabel extends Component {
             opacity: isDragging ? 0.5 : 1
         }, isOver ? this.state.styles : {})
         const padding = {
-            paddingLeft: (0.6+2*(depth-1)) + 'em',
+            paddingLeft: 2*(depth-1) + 'em',
             height: '28px'
         }
 
@@ -69,9 +69,11 @@ class NodeLabel extends Component {
 
         return connectDragSource(connectDropTarget(
             <li className={hoverTarget} style={styles} ref={nodeRef => this.nodeRef = nodeRef}
-                onContextMenu={this.props.contextMenuHandler}>
-                <div style={padding} onClick={toggleNode}>
-                    <Icon type={arrowType} containerSize='25px'/>
+                onContextMenu={this.props.contextMenuHandler}
+                onDoubleClick={this.props.showPropertiesPanel}
+                onClick={toggleNode}>
+                <div style={padding}>
+                    <Icon type={arrowType} containerSize='25px' size='13px'/>
                     <Icon type={node.type} containerSize='25px'/>
                     <div style={label}>{ node.title ? node.title : placeholder }</div>
                 </div>

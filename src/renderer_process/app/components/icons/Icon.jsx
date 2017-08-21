@@ -2,14 +2,19 @@ import React from 'react'
 
 import DockRight from './DockRight.jsx'
 import DockLeft from './DockLeft.jsx'
-const Document = require('react-icons/lib/go/repo')
+const Document = require('react-icons/lib/md/content-paste')
 const Doc_Config = require('react-icons/lib/go/three-bars')
 const Paragraph = require('react-icons/lib/go/file-text')
 const Folder = require('react-icons/lib/go/file-directory')
 const Opened = require('react-icons/lib/go/chevron-down')
 const Closed = require('react-icons/lib/go/chevron-right')
-const Plus = require('react-icons/lib/go/plus')
+const Plus = require('react-icons/lib/md/add')
 const TrashCan = require('react-icons/lib/go/trashcan')
+const ArrowLeft = require('react-icons/lib/md/arrow-back')
+const SectionOpened = require('react-icons/lib/md/signal-cellular-4-bar')
+const SectionClosed = require('react-icons/lib/md/signal-cellular-null')
+const BlankBox = require('react-icons/lib/md/check-box-outline-blank')
+const CheckedBox = require('react-icons/lib/md/check-box')
 const Default = () => <div></div>
 
 // TODO: Poner esto en un archivo separado e importarlo
@@ -39,6 +44,16 @@ const resolveIcon = (type = '') => {
             return DockRight
         case 'DOCKLEFT':
             return DockLeft
+        case 'ARROW_LEFT':
+            return ArrowLeft
+        case 'SECTION_OPENED':
+            return SectionOpened
+        case 'SECTION_CLOSED':
+            return SectionClosed
+        case 'BLANK_BOX':
+            return BlankBox
+        case 'CHECKED_BOX':
+            return CheckedBox
         default:
             return Default
     }

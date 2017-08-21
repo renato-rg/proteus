@@ -39,6 +39,7 @@
     margin: 13px 0px 13px 0px;
 }
 :local .useCase > table {
+    width: 100%;
     text-align: justify;
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 14px;
@@ -50,6 +51,9 @@
     font-family: 'Open Sans', sans-serif;
     font-family: 'Noto Sans', sans-serif;
     font-size: 12.5px;
+}
+:local .useCase td {
+    width: 100%;
 }
 
 /**************
