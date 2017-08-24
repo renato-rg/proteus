@@ -1,5 +1,5 @@
 import { SHOW_NOTIFICATION, APP_STATE, SET_PROJECT_PATH, SET_PROJECT_INFO,
-        SET_LOCALE, DELETE_DOCUMENT, INSERT_DOCUMENT } from '../actions'
+        SET_LOCALE, DELETE_DOCUMENT, INSERT_DOCIDS } from '../actions'
 import update from 'immutability-helper'
 
 // const DEFAULT = 'DEFAULT'
@@ -9,7 +9,11 @@ import update from 'immutability-helper'
 const initialState = {
     globalState: 'DEFAULT',
     projectPath: '',
-    projectInfo: undefined,
+    projectInfo: {
+        name: '',
+        template: 'empty',
+        childrenIDs: []
+    },
     locale: 'en'
 }
 
@@ -46,10 +50,16 @@ function appState(state = initialState, action) {
                 projectInfo: {childrenIDs: {$splice: [[action.docIndex, 1]]}}
             })
 
-        case INSERT_DOCUMENT:
+        case INSERT_DOCIDS:
             return update(state, {
-                projectInfo: {childrenIDs: {$push: [action.docID]}}
+                projectInfo: {childrenIDs: {$push: action.docIDs}}
             })
+
+
+        case 'LOG_ENTITIES':
+            console.log('\nAPPSTATE')
+            console.log(JSON.stringify(state, null, 2))
+            return state
 
         default:
             return state

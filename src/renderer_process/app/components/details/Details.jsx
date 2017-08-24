@@ -1,48 +1,21 @@
 import React from 'react'
 import Icon from '../icons/Icon.jsx'
+import { scrollbar } from './styles.css'
 
-import Editable2 from '../editable/Editable2.jsx'
 
-
-import entity from '../../constants/entity'
+import propTypes from '../../constants/propTypes/'
+import resolveREMIcon from '../icons/resolveREMIcon'
 
 // div (classname: editpanel) > section > div (className: label) > div height toggle 0:inherit
 const Details = props => {
+    let {__, node, hidePropertiesPanel, update, includeField} = props
+    //
+    // const updateIn = fieldPath => event => {
+    //     update(node.nodeID, fieldPath, event.target.value)
+    // }
 
-    const nav = {
-        position: 'fixed',
-        width: '100%',
-        height: '100%',
-        transform: 'translate(100%)',
-        display: 'flex',
-        flexDirection: 'column',
-        userSelect: 'none',
-        fontSize: '12px',
-        fontFamily: '"Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif'
-    }
-    const header = {
-        borderBottom: '1px solid #dadada',
-        display: 'flex',
-        alignItems: 'center',
-        height: '32px',
-        cursor: 'default',
-        whiteSpace: 'nowrap',
-        overflow: 'hidden'
-    }
-    const body = {
-        flex: 1,
-        backgroundColor: '#f5f5f5'
-    }
-    const title = {
-        overflow: 'hidden',
-        textOverflow: 'ellipsis'
-    }
-
-    let {__, node, hidePropertiesPanel, update} = props
-
-    const updateIn = fieldPath => event => {
-        update(node.nodeID, fieldPath, event.target.value)
-    }
+    const short = 'short_of_'+node.type
+    const id = __(short) === short ? '' : `[${__(short)}] `
 
     return (
         <nav style={nav}>
@@ -50,13 +23,14 @@ const Details = props => {
                 <Icon containerSize='32px' type='ARROW_LEFT' size='19px'
                     containerStyle={{background: '#6b9fff', color: 'white', cursor: 'pointer'}}
                     onClick={hidePropertiesPanel}/>
-                <Icon type={node.type} containerSize='32px'/>
-                <div style={title}>{node.title}</div>
+                <img src={resolveREMIcon(node.type)} style={{margin: '0px 8px 0px 10px'}}/>
+                <div style={title}>{id}{node.title}</div>
             </div>
-            <div style={body}>
-                {Object.keys(entity(node.type))
+            <div className={scrollbar} style={body}>
+                {Object.keys(propTypes(node.type))
                 .map( section =>
-                    <Section key={section} payload={node[section]} {... {__, section, updateIn, type: node.type}}/>
+                    <Section key={section} payload={node[section]}
+                        {... {__, section, includeField, type: node.type, nodeID: node.nodeID}}/>
                 )}
             </div>
         </nav>
@@ -67,90 +41,106 @@ class Section extends React.Component {
     constructor (props) {
         super(props)
         this.state = { expanded : this.props.section === 'general' }
+        this.checkBoxHandler = this.checkBoxHandler.bind(this)
         this.toggleFields = this.toggleFields.bind(this)
     }
     toggleFields () {
         this.setState({expanded: !this.state.expanded})
     }
+    checkBoxHandler (section, property) {
+        return e => {
+            this.props.includeField(this.props.nodeID, section, property, e.target.checked)
+        }
+    }
+
     render () {
-        const {__, section} = this.props
+        const {__, section, payload={}, type} = this.props
         const { expanded } = this.state
+        const iconType = expanded ? 'SECTION_OPENED' : 'SECTION_CLOSED'
+        const iconStyle = expanded ? {} : {transform: 'rotate(-45deg)'}
         return (
-            <section style={{ backgroundColor: '#fafafa', borderBottom: '1px solid #e1e1e1' }}>
-                <div onClick={this.toggleFields} style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        height: '22px',
-                        cursor: 'pointer'
-                    }}>
-                    <Icon containerSize='19px' type={expanded?'SECTION_OPENED':'SECTION_CLOSED'} size='7px'
-                        styles={expanded?{}:{transform: 'rotate(-45deg)'}}/>
-                    <div style={{fontWeight: '500', fontSize: '12px', letterSpacing: '0.5px'}}>{__(section)}</div>
+            <section style={sectionContainer}>
+                <div onClick={this.toggleFields} style={sectionHeader}>
+                    <Icon containerSize='19px' type={iconType} size='7px' styles={iconStyle}/>
+                    <div style={sectionLabel}>{__(section)}</div>
                 </div>
                 { expanded &&
-                    <Fields {...this.props}/>
+                    <div style={fieldsContainer}>
+                        {Object.keys(propTypes(type)[section]).map( property =>
+                            <div key={property} style={field}>
+                                <input type='checkbox'  readOnly
+                                    onClick={this.checkBoxHandler(section, property)}
+                                    checked={payload.hasOwnProperty(property)}
+                                    style={checkbox}/>
+                                <div>{__(property)}</div>
+                            </div>
+                        )}
+                    </div>
                 }
             </section>
         )
     }
 }
+const nav = {
+    position: 'fixed',
+    width: '100%',
+    height: '100%',
+    transform: 'translate(100%)',
+    display: 'flex',
+    flexDirection: 'column',
+    userSelect: 'none',
+    fontSize: '12px',
+    fontFamily: '"Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif'
+}
+const header = {
+    borderBottom: '1px solid #dadada',
+    display: 'flex',
+    alignItems: 'center',
+    height: '32px',
+    cursor: 'default',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden'
+}
+const body = {
+    flex: 1,
+    backgroundColor: '#f5f5f5'
+}
+const title = {
+    overflow: 'hidden',
+    textOverflow: 'ellipsis'
+}
 
+const sectionContainer = {
+    backgroundColor: '#fafafa',
+    borderBottom: '1px solid #e1e1e1'
+}
+const sectionHeader = {
+    display: 'flex',
+    alignItems: 'center',
+    height: '22px',
+    cursor: 'pointer'
+}
+const sectionLabel = {
+    fontWeight: '500',
+    fontSize: '12px',
+    letterSpacing: '0.5px'
+}
 const fieldsContainer = {
-    padding: '4px 23px 20px 18px'
-}
-const label = {
-    display: 'flex',
-    fontSize: '12px',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-}
-const textarea = {
-    display: 'flex',
-    fontFamily: 'inherit',
-    width: 'auto',
-    height: 'auto',
-    textAlign: 'justify',
-    fontSize: '12px',
-    outline: 'none',
-    border: '1px solid #e0e0e0',
-    marginTop: '2px',
-    padding: '0px 10px'
+    padding: '4px 23px 13px 18px'
 }
 const field = {
     padding: '6px 0px',
     display: 'flex',
-    flexDirection: 'column'
+    alignItems: 'center',
+    fontSize: '12px'
+}
+const checkbox = {
+    margin: '0px 2px',
+    outline: 'none',
+    height: '11px',
+    width: '11px'
 }
 
-const checkBoxHandler = e => {
-    console.log(e.target.checked)
-}
-
-const Fields = ({__, section, payload, updateIn, type}) => {
-    const fields = Object.keys(entity(type)[section])
-        .map( property =>
-            <div key={property} style={field}>
-                <div style={label}>
-                    <div>{__(property)}</div>
-                    { type === 'useCase' &&
-                        <div style={{display: 'flex', alignItems: 'center'}}>
-                            <input type='checkbox' onClick={checkBoxHandler}
-                                style={{margin: '0px 2px',
-                                        outline: 'none',
-                                        height: '11px',
-                                        width: '11px'}}/>
-                            <div style={{fontSize: '11px'}}>{__('hide')}</div>
-                        </div>
-                    }
-                </div>
-                <Editable2 style={textarea}
-                            value={payload[property]}
-                            introForbidden={entity(type)[section][property]==='oneline'}
-                            callback={updateIn([section, property])}/>
-            </div>
-        )
-    return <div style={fieldsContainer}> {fields} </div>
-}
 
 
 export default Details

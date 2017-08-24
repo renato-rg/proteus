@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import './global.css'
+import './fonts.css'
 
 // Two main parts
 import Editor from './Editor.jsx'

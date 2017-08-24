@@ -1,4 +1,5 @@
 import { DropTarget } from 'react-dnd'
+const acceptedChildren = require('../../constants/acceptedChildren.json')
 
 // Makes the component droppable
 export default function makeItDroppable (component) {
@@ -10,12 +11,12 @@ const collect = (connect, monitor) => ({
     isOver: monitor.isOver()
 })
 
-const canDropInto = (acceptedChildren, innerType, type, fromToolbar, sourceID, sParentID, targetID) => {
+const canDropInto = (accepted = [], innerType, type, fromToolbar, sourceID, sParentID, targetID) => {
     const shallowChecker = (sourceID !== sParentID && sourceID !== targetID) || fromToolbar
     const effect = fromToolbar ? 'copy' : 'move'
-    if (acceptedChildren === 'all')
+    if (accepted === 'all')
         return shallowChecker && !innerType ? effect : 'none'
-    return shallowChecker && acceptedChildren.indexOf(type) >= 0 ? effect : 'none'
+    return shallowChecker && accepted.indexOf(type) >= 0 ? effect : 'none'
 }
 
 // Dragging area relative to target component's size
@@ -34,8 +35,8 @@ const spec = {
     hover(props, monitor, component) {
         const direction = whatDirection(monitor, component)
         const {updateDropEffectTo, innerType, type, sourceNodeID, sourceParentID, fromToolbar} = monitor.getItem()
-        const acceptedChildren = direction === 'MID' ? props.node.acceptedChildren : props.parentAcceptedChildren
-        const dropEffect = canDropInto(acceptedChildren, innerType, type, fromToolbar,
+        const accepted = direction === 'MID' ? acceptedChildren[props.node.type] : acceptedChildren[props.parentType]
+        const dropEffect = canDropInto(accepted, innerType, type, fromToolbar,
                                         sourceNodeID, sourceParentID, props.node.nodeID)
         component.updateCSSEffect(dropEffect, direction)
         updateDropEffectTo(dropEffect)

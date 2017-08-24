@@ -8,15 +8,15 @@ import { connect } from 'react-redux'
 class NodeItem extends Component {
 
     render() {
-        const {node, parentID, parentAcceptedChildren, depth} = this.props
+        const {node, parentID, parentType, depth} = this.props
         const childrenShouldBeRendered = node.childrenIDs && node.childrenIDs.length > 0 && node.showChildren
 
         return (
             <div>
-                <NodeLabel {...{node, parentID, parentAcceptedChildren, depth}}/>
+                <NodeLabel {...{node, parentID, parentType, depth}}/>
                 {childrenShouldBeRendered &&
                     <NodeList childrenIDs={node.childrenIDs} parentID={node.nodeID}
-                        parentAcceptedChildren={node.acceptedChildren} depth={depth}/>
+                        parentType={node.type} depth={depth}/>
                 }
             </div>
         )

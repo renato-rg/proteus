@@ -1,56 +1,37 @@
-:local .node:hover {
-    box-shadow: -4px 0 0 0 #4daf7c;
+:local .shadow:hover {
+    box-shadow: -2px 0 0 0 #6ba9ce;
 }
-
-/************
-*** TITLE ***
-************/
-:local .title {
-    font-family: Century Gothic;
-    font-size: 22px;
-    text-align: center;
-}
-
-/*************
-*** FOLDER ***
-*************/
-:local .folder {
-    composes: node;
-    text-align: justify;
-    font-family: Century Gothic;
-    font-size: 15px;
-}
-
-/****************
-*** PARAGRAPH ***
-****************/
-:local .paragraph {
-    composes: node;
-    text-align: justify;
-    font-family: inherit;
+:local .editable {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: auto;
+    resize: none;
+    outline: none;
+    border: none;
+    font-size: inherit;
+    background-color: inherit;
+    vertical-align: middle;
 }
 
 /***************
 *** USE CASE ***
 ***************/
 :local .useCase {
-    composes: node;
+    composes: shadow;
+    margin-bottom: 12pt;
     text-align: justify;
-    margin: 13px 0px 13px 0px;
+    line-height: 15pt;
+    font-size: 11pt;
+    font-family: Calibri;
 }
 :local .useCase > table {
     width: 100%;
     text-align: justify;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: 14px;
-    font-family: 'Roboto', sans-serif;
-    font-family: 'Muli', sans-serif;
-    font-family: Helvetica;
-    font-size: 13px;
-    font-family: 'Montserrat', sans-serif;
-    font-family: 'Open Sans', sans-serif;
-    font-family: 'Noto Sans', sans-serif;
-    font-size: 12.5px;
+}
+:local .useCase th {
+    user-select: none;
+    cursor: default;
 }
 :local .useCase td {
     width: 100%;

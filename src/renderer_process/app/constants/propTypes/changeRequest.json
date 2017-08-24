@@ -1,0 +1,20 @@
+{
+    "general": {
+        "version": "oneline",
+        "createdBy": "oneline",
+        "created": "oneline"
+    },
+    "details": {
+        "affects": "multiline",
+        "description": "multiline",
+        "analysis": "multiline"
+    },
+    "priority": {
+        "importance": "oneline",
+        "urgency": "oneline",
+        "status": "oneline"
+    },
+    "comments" : {
+        "comments": "multiline"
+    }
+}

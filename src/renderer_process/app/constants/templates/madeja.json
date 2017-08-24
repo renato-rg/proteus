@@ -1,0 +1,109 @@
+[{
+    "name": "Especificación de Requisitos del Sistema",
+    "type": "document",
+    "children": [{
+        "name": "1. Introducción",
+        "children": [{
+            "name": "1.1. Alcance"
+        }, {
+            "name": "1.2. Objetivos"
+        }]
+    }, {
+        "name": "2. Información sobre el dominio del problema",
+        "children": [{
+            "name": "2.1. Introducción al dominio del problema"
+        }, {
+            "name": "2.2. Glosario de términos del domonio del problema"
+        }]
+    }, {
+        "name": "3. Descripción de la situación actual",
+        "children": [{
+            "name": "3.1. Pros y contras de la situación actual",
+            "children": [{
+                "name": "3.1.1. Fortalezas de la situación actual"
+            }, {
+                "name": "3.1.2. Debilidades de la situación actual"
+            }]
+        }, {
+            "name": "3.2. Modelos de proceso de negocio actuales",
+            "children": [{
+                "name": "3.2.1. Descripción de actores de negocio actuales"
+            }, {
+                "name": "3.2.2. Descripción de procesos de negocio actuales"
+            }]
+        }, {
+            "name": "3.3. Entorno tecnológico actual",
+            "children": [{
+                "name": "3.3.1. Descripción del entorno de hardware actual"
+            }, {
+                "name": "3.3.2. Descripción del entorno de software actual"
+            }]
+        }]
+    }, {
+        "name": "4. Necesidades de negocio",
+        "children": [{
+            "name": "4.1. Objetivos de negocio"
+        }, {
+            "name": "4.2. Modelos de procesos de negocio a implantar",
+            "children" : [{
+                "name": "4.2.1. Descripción de actores de negocio a implantar"
+            }, {
+                "name": "4.2.2. Descripción de procesos de negocio a implantar"
+            }]
+        }]
+    }, {
+        "name": "5. Descripción de los subsistemas del sistema a desarrollar"
+    }, {
+        "name": "6. Catálogo de requisitos del sistema a desarrollar",
+        "children": [{
+            "name": "6.1. Requisitos generales del sistema"
+        }, {
+            "name": "6.2. Casos de uso del sistema",
+            "children" : [{
+                "name": "6.2.1. Diagramas de casos de uso del sistema"
+            }, {
+                "name": "6.2.2. Especificación de actores del sistema"
+            }, {
+                "name": "6.2.3. Especificación de casos de uso del sistema"
+            }]
+        }, {
+            "name": "6.3. Requisitos funcionales del sistema",
+            "children" : [{
+                "name": "6.3.1. Requisitos de información del sistema"
+            }, {
+                "name": "6.3.2. Requisitos de reglas de negocio"
+            }, {
+                "name": "6.3.3. Requisitos de conducta del sistema"
+            }]
+        }, {
+            "name": "6.4. Requisitos no funcionales del sistema",
+            "children" : [{
+                "name": "6.4.1 Requisitos de fiabilidad del sistema"
+            }, {
+                "name": "6.4.2. Requisitos de usabilidad de sistema"
+            }, {
+                "name": "6.4.3. Requisitos de mantenibilidad del sistema"
+            }, {
+                "name": "6.4.4. Requisitos de eficiencia del sistema"
+            }, {
+                "name": "6.4.5. Requisitos de portabilidad del sistema"
+            }, {
+                "name": "6.4.6. Requisitos de seguridad del sistema"
+            }, {
+                "name": "6.4.7. Otros requisitos no funcionales del sistema"
+            }]
+        }, {
+            "name": "6.5. Restricciones técnicas del sistema"
+        }, {
+            "name": "6.6. Requisitos de integración del sistema"
+        }, {
+            "name": "6.7. Información sobre trazabilidad"
+        }]
+    }, {
+        "name": "A. Actas de reuniones"
+    }, {
+        "name": "B. Documentación relevante"
+    }, {
+        "name": "C. Glosario de acrónimos y abreviaturas"
+    }]
+}]

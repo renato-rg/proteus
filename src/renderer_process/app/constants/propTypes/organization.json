@@ -1,0 +1,15 @@
+{
+    "general": {
+        "version": "oneline",
+        "createdBy": "oneline",
+        "created": "oneline"
+    },
+    "details": {
+        "address": "oneline",
+        "phone": "oneline",
+        "fax": "oneline"
+    },
+    "comments" : {
+        "comments": "multiline"
+    }
+}

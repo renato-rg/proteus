@@ -2,7 +2,6 @@
     flex: 1;
     background-color: var(--color-a);
     overflow: hidden;
-    padding-right: 3px;
     list-style: none;
     color: #424243;
     text-align: left;
@@ -42,7 +41,6 @@
 
 :local .hoverTarget {
     display: flex;
-    border-left: 0.3em solid transparent;
 }
 :local .hoverTarget > div {
     overflow: hidden;
@@ -52,8 +50,7 @@
 }
 :local .hoverTarget:hover {
     color: black;
-    border-left: 0.3em solid #4DAF7C;
-    background-color: rgba(77, 175, 124, 0.1);
+    background-color: rgba(12, 87, 193, 0.08);
 }
 
 :local .hoverTarget > div > svg, :local .hoverTarget > div > div {
@@ -75,6 +72,7 @@
 }
 :local .dropdown {
     position: absolute;
+    z-index: 1;
     right: 0px;
     left: 28px;
     margin-top: 14px;

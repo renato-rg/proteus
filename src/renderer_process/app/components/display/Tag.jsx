@@ -3,48 +3,77 @@ import { updateEditableField } from '../../state_manager/actions'
 import { connect } from 'react-redux'
 import styles from './styles.css'
 import UseCase from './UseCase.jsx'
+import i18n from '../../i18n'
+import Editable from '../editable/Editable.jsx'
 
-import Editable2 from '../editable/Editable2.jsx'
+
+const placeholders = require('../../constants/placeholders.json')
+const tableTypes = require('../../constants/tableTypes.json')
+
+const paragraph = {
+    textAlign: 'justify',
+    lineHeight: '15pt',
+    fontSize: '12pt',
+    fontFamily: 'Calibri',
+    marginBottom: '6pt'
+}
+
+const title = {
+    marginBottom: '18pt',
+    fontFamily: '"Crimson Text", serif',
+    fontSize: '20pt',
+    textAlign: 'center'
+}
+
+const folder = {
+    textAlign: 'justify',
+    verticalAlign: 'middle',
+    fontFamily: '"Crimson Text", serif',
+    fontSize: '14pt',
+    marginBottom: '12pt'
+}
 
 const Tag = props => {
-    const { node, update } = props
-    const updateFieldInExperimental = fieldPath => event => {
-        update(node.nodeID, fieldPath, event.target.value)
+    const { __, node, update } = props
+    const updateFieldInExperimental = fieldPath => newValue => {
+        update(node.nodeID, fieldPath, newValue)
     }
-    switch (node.type) {
+    const type = node.type
 
-        // DOCUMENT
-        case 'document':
-            return <Editable2 className={styles.title}
+    if (type === 'document') {
+        return <Editable type='oneline'
+                        style={title}
+                        placeholder={'<'+__(placeholders[node.type])+'>'}
+                        className={styles.shadow+' '+styles.editable}
                         value={node.title}
-                        type={node.type}
-                        introForbidden
-                        callback={updateFieldInExperimental(['title'])}/>
+                        onChange={updateFieldInExperimental(['title'])}/>
+    }
 
-        // FOLDER
-        case 'folder':
-            return <Editable2 className={styles.folder}
+    else if (type === 'folder') {
+        return <Editable type='oneline'
+                        style={folder}
+                        placeholder={'<'+__(placeholders[node.type])+'>'}
+                        className={styles.shadow+' '+styles.editable}
                         value={node.title}
-                        type={node.type}
-                        introForbidden
-                        callback={updateFieldInExperimental(['title'])}/>
+                        onChange={updateFieldInExperimental(['title'])}/>
+    }
 
-        // USE CASE
-        case 'useCase':
-            return <UseCase node={node}/>
+    else if (tableTypes.indexOf(type) > -1)
+        return <UseCase node={node}/>
 
-        // PARAGRAPH
-        case 'paragraph':
-            return <Editable2 className={styles.paragraph}
+    else if (type === 'paragraph') {
+        return <Editable type='multiline'
+                        style={paragraph}
+                        placeholder={'<'+__(placeholders[node.type])+'>'}
+                        className={styles.shadow+' '+styles.editable}
                         value={node.title}
-                        type={node.type}
-                        callback={updateFieldInExperimental(['title'])}/>
+                        onChange={updateFieldInExperimental(['title'])}/>
+    }
 
-        // OTHER
-        default:
-            return <div className={styles.folder}>
-                <span>{node.title}</span>
-            </div>
+    else {
+        return <div className={styles.folder}>
+            <span>{node.title}</span>
+        </div>
     }
 }
 
@@ -59,4 +88,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 export default connect(
     null,
     mapDispatchToProps
-)(Tag)
+)(i18n(Tag))

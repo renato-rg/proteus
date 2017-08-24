@@ -31,6 +31,12 @@ function switchDocument(state = initialState, action) {
             return Object.assign({}, state, {
                 detailsNodeID: action.id
             })
+
+
+        case 'LOG_ENTITIES':
+            console.log('\nSWITCHDOCUMENTS')
+            console.log(JSON.stringify(state, null, 2))
+            return state
         default:
             return state
     }

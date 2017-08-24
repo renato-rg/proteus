@@ -1,86 +1,82 @@
 import React from 'react'
 import { updateEditableField } from '../../state_manager/actions'
 import { connect } from 'react-redux'
-import Editable2 from '../editable/Editable2.jsx'
+import Editable from '../editable/Editable.jsx'
 import styles from './styles.css'
 import i18n from '../../i18n'
 
-import entity from '../../constants/entity'
-const sections = entity('useCase')
+import propTypes from '../../constants/propTypes/'
+import referenceByTitle from '../../constants/referenceByTitle.json'
+
+const table = {
+    borderCollapse: 'collapse',
+    border: '1px solid rgb(221, 221, 221)'
+}
+const tdBordersAndPadding = {
+    border: '1px solid rgb(221, 221, 221)',
+    padding: '4px 8px',
+    whiteSpace: 'nowrap'
+}
+const thBordersAndPadding = {
+    border: '1px solid rgb(221, 221, 221)',
+    padding: '4px 8px',
+    whiteSpace: 'nowrap'
+}
+const headerColor = {
+    backgroundColor: '#f5f5f5'
+}
 
 const UseCase = props => {
-    const { node, childrenNodes, update, __ } = props
+    const { node, update, __ } = props
+    const { type } = node
+    const sections = propTypes(type)
+    const refByTitle = referenceByTitle[type]
 
-    const updateIn = fieldPath => event => {
-        update(node.nodeID, fieldPath, event.target.value)
+    const updateIn = fieldPath => newValue => {
+        update(node.nodeID, fieldPath, newValue)
     }
 
     return <div className={styles.useCase}>
-        <table>
+        <table style={table}>
             <thead>
-                <tr>
-                    <th>{__('UC')}</th>
-                    <td>
-                        <Editable2 className={styles.paragraph}
-                                    value={node.title}
-                                    introForbidden
-                                    callback={updateIn(['title'])}/>
+                <tr style={headerColor}>
+                    <th style={thBordersAndPadding}>{__(refByTitle?type:'short_of_'+type)}</th>
+                    <td style={tdBordersAndPadding}>
+                        <Editable type='oneline'
+                            placeholder='...'
+                            className={styles.editable}
+                            onChange={updateIn(['title'])}
+                            value={node.title}
+                        />
                     </td>
                 </tr>
             </thead>
             <tbody>
                 {Object.keys(sections)
-                .filter(s => s !== 'traces')
+                .filter(s => node.hasOwnProperty(s))
                 .map( section =>
                     Object.keys(sections[section])
-                    .filter(p => node[section][p] && node[section][p] !== '')
+                    .filter(p => node[section].hasOwnProperty(p))
                     .map( property =>
                         <tr key={property}>
-                            <th>{__(property)}</th>
-                            <td>
-                                <Editable2 className={styles.paragraph}
-                                            value={node[section][property]}
-                                            introForbidden={sections[section][property]==='oneline'}
-                                            callback={updateIn([section, property])}/>
+                            <th  style={thBordersAndPadding}>{__(property)}</th>
+                            <td  style={tdBordersAndPadding}>
+                                <Editable type={sections[section][property]}
+                                    placeholder='...'
+                                    className={styles.editable}
+                                    onChange={updateIn([section, property])}
+                                    value={node[section][property]}
+                                />
                             </td>
                         </tr>
                     )
                 )
                 }
-                <tr>
-                    <th>{__('Secuence')}</th>
-                    <td>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>{__('Step')}</th>
-                                    <th>{__('Action')}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            {childrenNodes.map((step, index) =>
-                                <tr key={index}>
-                                    <th>{index+1}</th>
-                                    <td>
-                                        <Editable2 className={styles.paragraph}
-                                                    value={step.title}
-                                                    callback={updateIn(step.nodeID, ['title'])}/>
-                                    </td>
-                                </tr>
-                            )}
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
             </tbody>
         </table>
     </div>
 }
-const mapStateToProps = (state, ownProps) => {
-    return {
-        childrenNodes: ownProps.node.childrenIDs.map( n => state.entities[n] )
-    }
-}
+
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         update: (nodeID, fieldPath, newValue) => {
@@ -89,7 +85,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(i18n(UseCase))
+export default connect(null, mapDispatchToProps)( i18n( UseCase ) )

@@ -31,6 +31,11 @@ export function setDetailedNodeID(id) {
 /***************************
 ** TreeView Drag and Drop **
 ***************************/
+export const MERGE_NODES = 'MERGE_NODES'
+export function mergeNodes(nodes) {
+    return { type: MERGE_NODES, nodes}
+}
+
 export const TOGGLE_NODE = 'TOGGLE_NODE'
 export function toggleNode(nodeID) {
     return { type: TOGGLE_NODE, nodeID}
@@ -80,9 +85,13 @@ export function deleteDocument(docIndex) {
     return { type: DELETE_DOCUMENT, docIndex }
 }
 
-export const INSERT_DOCUMENT = 'INSERT_DOCUMENT'
+
+export const INSERT_DOCIDS = 'INSERT_DOCIDS'
+export function insertDocIDs(docIDs) {
+    return { type: INSERT_DOCIDS, docIDs}
+}
 export function insertDocument(docID) {
-    return { type: INSERT_DOCUMENT, docID }
+    return { type: INSERT_DOCIDS, docIDs: [docID] }
 }
 
 /************************
@@ -109,12 +118,16 @@ export function openModal(modalName) {
     return { type: OPEN_MODAL, modalName }
 }
 
-/**************************
-** Update Editable Field **
-**************************/
+/********************
+** Editable Fields **
+********************/
 export const UPDATE_EDITABLE_FIELD = 'UPDATE_EDITABLE_FIELD'
 export function updateEditableField(nodeID, fieldPath, newValue) {
     return { type: UPDATE_EDITABLE_FIELD, nodeID, fieldPath, newValue }
+}
+export const INCLUDE_FIELD = 'INCLUDE_FIELD'
+export function includeField(nodeID, section, property, include) {
+    return { type: INCLUDE_FIELD, nodeID, section, property, include}
 }
 
 

@@ -6,12 +6,13 @@ import {treeView} from './treeView.css'
 class TreeView extends Component {
     render() {
         const  {docNode} = this.props
+        
         return (
             <div className={treeView}>
                 { docNode &&
                     <div>
                         <NodeList childrenIDs={docNode.childrenIDs} parentID={docNode.nodeID}
-                            parentAcceptedChildren={docNode.acceptedChildren} depth={0}/>
+                            parentType={docNode.type} depth={0}/>
                     </div>
                 }
             </div>

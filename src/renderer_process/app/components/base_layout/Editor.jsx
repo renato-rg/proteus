@@ -39,7 +39,7 @@ const mapStateToProps = (state, ownProps) => {
     const proj = state.appState.projectInfo
     let docNode = undefined
     let documents = []
-    if (state.appState.globalState === 'DEFAULT' && proj) {
+    if (state.appState.globalState === 'DEFAULT' && proj.childrenIDs.length>0) {
         documents = proj.childrenIDs.map(i => state.entities[i])
         docNode = documents[activeIndex]
     }

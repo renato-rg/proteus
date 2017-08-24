@@ -1,0 +1,26 @@
+{
+    "general": {
+        "version": "oneline",
+        "createdBy": "oneline",
+        "created": "oneline"
+    },
+    "details": {
+        "description": "multiline",
+        "precondition": "multiline",
+        "secuence": "orderedList",
+        "postcondition": "multiline"
+    },
+    "priority": {
+        "importance": "oneline",
+        "urgency": "oneline",
+        "devStatus": "oneline",
+        "stability": "oneline"
+    },
+    "traces": {
+        "source": "oneline",
+        "target": "oneline"
+    },
+    "comments" : {
+        "comments": "multiline"
+    }
+}

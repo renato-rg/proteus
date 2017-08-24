@@ -13,6 +13,9 @@
     "New paragraph" : "Nuevo párrafo",
     "Delete" : "Eliminar",
     "Properties..." : "Propiedades...",
+
+    "short_of_useCase": "CU",
+    "useCase": "Caso de uso",
     "general" : "General",
     "details" : "Detalles",
     "comments" : "Comentarios",
@@ -21,6 +24,7 @@
     "createdBy" : "Creado por",
     "created" : "Fecha de creación",
     "precondition" : "Precondición",
+    "secuence" : "Secuencia",
     "postcondition" : "Postcondición",
     "description" : "Descripción",
     "priority" : "Prioridad",
@@ -30,5 +34,50 @@
     "stability" : "Estabilidad",
     "hide" : "Ocultar",
     "target" : "Destino",
-    "source" : "Origen"
+    "source" : "Origen",
+    "source" : "Source",
+
+    "short_of_organization": "ORG",
+    "organization": "Organización",
+    "address" : "Dirección",
+    "phone" : "Teléfono",
+    "fax" : "Fax",
+
+    "short_of_stakeholder": "STK",
+    "stakeholder" : "Stakeholder",
+    "role" : "Rol",
+    "isDeveloper" : "Es desarrollador",
+    "isClient" : "Es cliente",
+    "isUser" : "Es usuario",
+
+
+    "short_of_meeting": "REU",
+    "meeting" : "Reunión",
+    "date": "Fecha",
+    "time": "Hora",
+    "duration": "Duración",
+    "location": "Lugar",
+    "attendants": "Asistentes",
+    "results": "Resultados",
+
+    "short_of_objective": "OBJ",
+    "objective" : "Objetivo",
+    "subobjectives": "Subobjetivo",
+
+    "short_of_actor": "ACT",
+    "actor" : "Actor",
+
+    "short_of_informationReq": "IRQ",
+    "informationReq" : "Requisito de información",
+    "specificData" : "Datos específicos",
+    "lifetime": "Tiempo de vida",
+    "simultaneousOccurrences": "Ocurrencias simultáneas",
+
+
+
+    "short_of_conflict" : "CFL",
+    "conflict" : "Conflicto",
+    "affects": "Afecta",
+    "solution": "Solución",
+    "status" : "Estado"
 }

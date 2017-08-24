@@ -20,15 +20,9 @@ const getMenuTemplate = ({language, code} = getAppLocale()) => {
         submenu: [
             {
                 label: __('New Window'),
-                accelerator: process.platform === 'darwin'?'Alt+Command+N':'Ctrl+Shift+N',
+                accelerator: 'CmdOrCtrl+Z',
                 click (item, focusedWindow) {
                     newBrowserWindow()
-                }
-            },{
-                label: __('New Project'),
-                accelerator: process.platform === 'darwin'?'Command+N':'Ctrl+N',
-                click (item, focusedWindow) {
-                    focusedWindow.webContents.send('new-project-form')
                 }
             },{
                 label: __('Open Project'),
@@ -42,6 +36,16 @@ const getMenuTemplate = ({language, code} = getAppLocale()) => {
                         focusedWindow.webContents.send('open-project', projectPath[0])
                 }
             },{
+                label: __('Add Template...'),
+                submenu: [
+                    {
+                        label: 'MADEJA',
+                        click (item, focusedWindow) {
+                            focusedWindow.webContents.send('menu-add-template', 'MADEJA')
+                        }
+                    }
+                ]
+            },{
                 label: __('Toggle Developer Tools'),
                 accelerator: process.platform === 'darwin'?'Alt+Command+I':'Ctrl+Shift+I',
                 click (item, focusedWindow) {
@@ -52,14 +56,12 @@ const getMenuTemplate = ({language, code} = getAppLocale()) => {
             },{
                 label: __('Save Project'),
                 accelerator: 'CmdOrCtrl+S',
-                enabled: false,
                 click (item, focusedWindow) {
-                    focusedWindow.webContents.send('menu-save')
+                    focusedWindow.webContents.send('menu-save', __('Save Project As...'))
                 }
             },{
                 label: __('Save Project As...'),
                 accelerator: process.platform === 'darwin'?'Alt+Command+S':'Ctrl+Shift+S',
-                enabled: false,
                 click (item, focusedWindow) {
                     const filename = dialog.showOpenDialog({
                         title: __('Save Project As...'),
@@ -96,7 +98,7 @@ const getMenuTemplate = ({language, code} = getAppLocale()) => {
             },{
                 type: 'separator'
             },{
-                label: __('Close'),
+                label: __('Close Window'),
                 accelerator: 'CmdOrCtrl+Z',
                 role: 'close'
             }

@@ -1,0 +1,17 @@
+{
+    "general": {
+        "version": "oneline",
+        "createdBy": "oneline",
+        "created": "oneline"
+    },
+    "details": {
+        "description": "multiline"
+    },
+    "traces": {
+        "source": "oneline",
+        "target": "oneline"
+    },
+    "comments" : {
+        "comments": "multiline"
+    }
+}

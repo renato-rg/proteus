@@ -1,0 +1,17 @@
+{
+    "general": {
+        "version": "oneline",
+        "createdBy": "oneline",
+        "created": "oneline"
+    },
+    "details": {
+        "organization": "oneline",
+        "role": "oneline",
+        "isDeveloper": "oneline",
+        "isClient": "oneline",
+        "isUser": "oneline"
+    },
+    "comments" : {
+        "comments": "multiline"
+    }
+}

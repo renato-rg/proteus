@@ -1,7 +1,6 @@
 import React from 'react'
 import { DragSource } from 'react-dnd'
-
-const size = 24
+import resolveREMIcon from '../icons/resolveREMIcon'
 
 class Tool extends React.Component {
 
@@ -18,9 +17,9 @@ class Tool extends React.Component {
     }
 
     render() {
-        const {src, connectDragSource} = this.props
+        const {type, connectDragSource} = this.props
         return connectDragSource(
-            <img src={src} height={size} width={size}></img>,
+            <img src={resolveREMIcon(type)}/>,
             {dropEffect: this.state.dropEffect}
         )
     }

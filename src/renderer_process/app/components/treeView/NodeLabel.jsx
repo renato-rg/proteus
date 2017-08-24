@@ -2,8 +2,9 @@ import React, {Component} from 'react'
 import Icon from '../icons/Icon.jsx'
 import {hoverTarget} from './treeView.css'
 import i18n from '../../i18n'
+import resolveREMIcon from '../icons/resolveREMIcon'
 
-const defaultProps = require('../display/defaultProps.json')
+const placeholders = require('../../constants/placeholders.json')
 
 //Redux
 import { toggleNode, moveNode, createNode } from '../../state_manager/actions'
@@ -52,7 +53,7 @@ class NodeLabel extends Component {
             opacity: isDragging ? 0.5 : 1
         }, isOver ? this.state.styles : {})
         const padding = {
-            paddingLeft: 2*(depth-1) + 'em',
+            paddingLeft: 19*(depth-1) + 'px',
             height: '28px'
         }
 
@@ -64,8 +65,13 @@ class NodeLabel extends Component {
         }
 
         // Opened/Closed arrow
-        const arrowType = node.type==='useCaseStep' ? '' : node.showChildren ? 'OPENED' : 'CLOSED'
-        const placeholder = '<'+__(defaultProps[node.type].placeholder)+'>'
+        const arrowType = node.type==='folder' ? (node.showChildren ? 'SECTION_OPENED' : 'SECTION_CLOSED') : ''
+        const arrowStyle = node.type==='folder' ? (node.showChildren ? {} : {transform: 'rotate(-45deg)', paddingRight: '3px'}) : {}
+        const arrowSize = (node.type==='folder' && node.showChildren) ? '7px': '8px'
+
+        const short = 'short_of_'+node.type
+        const id = __(short) === short ? '' : `[${__(short)}] `
+
 
         return connectDragSource(connectDropTarget(
             <li className={hoverTarget} style={styles} ref={nodeRef => this.nodeRef = nodeRef}
@@ -73,9 +79,9 @@ class NodeLabel extends Component {
                 onDoubleClick={this.props.showPropertiesPanel}
                 onClick={toggleNode}>
                 <div style={padding}>
-                    <Icon type={arrowType} containerSize='25px' size='13px'/>
-                    <Icon type={node.type} containerSize='25px'/>
-                    <div style={label}>{ node.title ? node.title : placeholder }</div>
+                    <Icon containerSize='22px' type={arrowType} size={arrowSize} styles={arrowStyle}/>
+                    <img src={resolveREMIcon(node.type)}/>
+                    <div style={label}>{ id }{ node.title }</div>
                 </div>
             </li>
         ), {dropEffect: this.state.dropEffect})

@@ -1,22 +1,53 @@
 import { MOVE_NODE, TOGGLE_NODE, LOAD_PROJECT, UPDATE_EDITABLE_FIELD,
-        CREATE_NODE, CREATE_DOCUMENT, DELETE_NODE } from '../actions'
+        CREATE_NODE, CREATE_DOCUMENT, DELETE_NODE, INCLUDE_FIELD, MERGE_NODES } from '../actions'
 import update from 'immutability-helper'
 import uuid from 'uuid/v1'
-import objects from './defaultObjects'
+import entities from '../../constants/entities/'
 
 function entitiesReducer(state = {}, action) {
     switch (action.type) {
 
-        case UPDATE_EDITABLE_FIELD:
+        case MERGE_NODES: {
+            return update(state, {
+                $merge: action.nodes
+            })
+        }
+
+        case INCLUDE_FIELD: {
+            const {nodeID, section, property, include} = action
+
+            if (include) {
+                return update(state, {
+                    [nodeID] : {
+                        [section]: { $apply: s => update(s||{}, {
+                            [property] : {$set: ['']}
+                        })}
+                    }
+                })
+            } else if (state[nodeID][section][property]!==undefined) {
+                return update(state, {
+                    [nodeID] : {
+                        [section]: { $apply: s => {
+                            const copy = Object.assign({},s)
+                            delete copy[property]
+                            return copy
+                        }}
+                    }
+                })
+            }
+
+            return state
+        }
+
+        case UPDATE_EDITABLE_FIELD: {
             const query = action.fieldPath.reduceRight( (last, current) => {
                 return { [current] : last }
             }, {$set: action.newValue})
 
-            console.log(action)
-            console.log(query)
             return update(state, {
                 [action.nodeID]: query
             })
+        }
 
         case TOGGLE_NODE:
             const currentBool = state[action.nodeID].showChildren
@@ -36,8 +67,8 @@ function entitiesReducer(state = {}, action) {
         case CREATE_DOCUMENT: {
             const {docID} = action
             const folderID = uuid()
-            const folderToInsert = Object.assign({}, objects['folder'], {nodeID: folderID})
-            const docToInsert = Object.assign({}, objects['document'], {nodeID: docID, childrenIDs: [folderID]})
+            const folderToInsert = Object.assign({}, entities('folder'), {nodeID: folderID})
+            const docToInsert = Object.assign({}, entities('document'), {nodeID: docID, childrenIDs: [folderID]})
             return update(state, {
                 $merge: { [folderID]: folderToInsert, [docID]: docToInsert }
             })
@@ -45,12 +76,13 @@ function entitiesReducer(state = {}, action) {
 
         case CREATE_NODE: {
             const {nodeType, direction, nodeID, parentID} = action
+            console.log({nodeType, direction, nodeID, parentID})
             const sourceNodeID = uuid()
-            const nodeToInsert = Object.assign({}, objects[nodeType] || objects['folder'], {nodeID: sourceNodeID})
+            const nodeToInsert = Object.assign({}, entities(nodeType), {nodeID: sourceNodeID})
             let targetID, operation
             if (direction === 'MID') {
                 targetID = nodeID
-                operation = {$push: [sourceNodeID]}
+                operation = { $apply: node => update(node||[], {$push: [sourceNodeID]} ) }
             } else {
                 const index = state[parentID].childrenIDs.indexOf(nodeID)
                 targetID = parentID
@@ -96,6 +128,7 @@ function entitiesReducer(state = {}, action) {
 
 
         case 'LOG_ENTITIES':
+            console.log('\nENTITIES')
             console.log(JSON.stringify(state, null, 2))
             return state
 

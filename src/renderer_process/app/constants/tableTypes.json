@@ -1,0 +1,17 @@
+[
+    "organization",
+    "stakeholder",
+    "meeting",
+
+    "objective",
+    "actor",
+    "informationReq",
+    "constraintReq",
+    "useCase",
+    "functionalReq",
+    "nonFunctionalReq",
+
+    "conflict",
+    "defect",
+    "changeRequest"
+]

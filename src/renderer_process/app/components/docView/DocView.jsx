@@ -5,6 +5,7 @@ import Tag from '../display/Tag.jsx'
 
 const DocView = props => {
     const  {docNode} = props
+
     return (
         <div className={styles.background}>
             <div className={styles.page}>
@@ -22,6 +23,7 @@ const DocView = props => {
 
 let DocNode = props => {
     const { node } = props
+
     const childrenShouldBerendered = node.childrenIDs && node.childrenIDs.length>0 && (node.type=='document'||node.type=='folder')
     return (
         <div>
@@ -34,6 +36,7 @@ let DocNode = props => {
 }
 
 const mapStateToProps = (state, ownProps) => {
+    //agregar customStyle : state.ui.nodeStyles[ownProps.nodeID]
     return {
         node : state.entities[ownProps.nodeID]
     }

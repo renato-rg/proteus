@@ -1,10 +1,9 @@
-import { remote, ipcRenderer } from 'electron'
+import { remote } from 'electron'
 import React from 'react'
 import { openModal } from '../../state_manager/actions'
 import { connect } from 'react-redux'
 import {modal, labels, fields, title, form, controls, selectPath} from './styles.css'
 
-import { createProject } from '../../io'
 
 class NewProjectModal extends React.Component {
     constructor(props) {
@@ -21,15 +20,7 @@ class NewProjectModal extends React.Component {
     }
 
     handleSubmit(event) {
-        createProject(this.state, status => {
-            if (status.error) {
-                // Show error either in the form itself or in a fancy notification
-                console.log(status.message)
-            }
-            ipcRenderer.send('load-project-in-new-window', this.state.projectPath)
-            this.props.closeModal()
-            // dispatch some notification no? both here and inside the new window
-        })
+        this.props.closeModal()
     }
 
     handlePath() {

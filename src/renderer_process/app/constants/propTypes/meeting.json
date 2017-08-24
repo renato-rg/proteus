@@ -1,0 +1,22 @@
+{
+    "general": {
+        "version": "oneline",
+        "createdBy": "oneline",
+        "created": "oneline"
+    },
+    "details": {
+        "date": "oneline",
+        "time": "oneline",
+        "duration": "oneline",
+        "location": "oneline",
+        "attendants": "multiline",
+        "results": "multiline"
+    },
+    "traces": {
+        "source": "oneline",
+        "target": "oneline"
+    },
+    "comments" : {
+        "comments": "multiline"
+    }
+}

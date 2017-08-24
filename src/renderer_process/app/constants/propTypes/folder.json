@@ -1,0 +1,10 @@
+{
+    "general": {
+        "version": "oneline",
+        "createdBy": "oneline",
+        "created": "oneline"
+    },
+    "comments" : {
+        "comments": "multiline"
+    }
+}

@@ -1,21 +1,21 @@
 import React from 'react'
-import styles from './styles.css'
-
-// Choose what html tag use for Editable
-const Tag = props => {
-    if (props.type == 'td')
-        return <td {...props}>{props.children}</td>
-    else
-        return <div {...props}>{props.children}</div>
-}
+import OrderedList from './OrderedList.jsx'
+import Multiline from './Multiline.jsx'
+import Oneline from './Oneline.jsx'
 
 // Field that allows editing and integrates very well with redux
 const Editable = props => {
-    const { type, callback } = props
-    return <Tag type = {type}
-        className = {styles.outlineNone}
-        contentEditable = {true}
-        onKeyUp = {callback}>{props.children}</Tag>
+    switch (props.type) {
+        case 'oneline':
+            return <Oneline {...props}/>
+        case 'multiline':
+            return <Multiline {...props}/>
+        case 'orderedList':
+            return <OrderedList {...props}/>
+        default:
+            return <Multiline {...props}/>
+
+    }
 }
 
 export default Editable

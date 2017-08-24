@@ -5,19 +5,16 @@
         "created": "oneline"
     },
     "details": {
+        "affects": "multiline",
         "description": "multiline",
-        "precondition": "multiline",
-        "postcondition": "multiline",
-        "comments": "multiline"
+        "solution": "multiline"
     },
     "priority": {
         "importance": "oneline",
         "urgency": "oneline",
-        "devStatus": "oneline",
-        "stability": "oneline"
+        "status": "oneline"
     },
-    "traces": {
-        "source": "oneline",
-        "target": "oneline"
+    "comments" : {
+        "comments": "multiline"
     }
 }
