@@ -90,7 +90,8 @@ const nav = {
     flexDirection: 'column',
     userSelect: 'none',
     fontSize: '12px',
-    fontFamily: '"Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif'
+    fontFamily: '"Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif',
+    borderRight: '1px solid var(--tree-border-right-color)'
 }
 const header = {
     borderBottom: '1px solid #dadada',

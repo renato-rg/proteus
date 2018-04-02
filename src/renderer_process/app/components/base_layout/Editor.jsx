@@ -16,6 +16,7 @@ class Editor extends Component {
             <div className={styles.editor}>
                 <header className={styles.header}>
                     <ToolGroup/>
+                    <span style={{width: '1px', background: 'white'}}/>
                     <DockSide/>
                 </header>
 
@@ -25,7 +26,6 @@ class Editor extends Component {
                     }
                     <span className={styles.resizer}></span>
                     <section className={styles.section}>
-                        <DocViewTabs tabs={['Log State']}/>
                         <DocView {...{docNode}}/>
                     </section>
                 </main>

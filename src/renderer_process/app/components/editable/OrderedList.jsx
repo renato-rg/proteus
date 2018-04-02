@@ -1,7 +1,5 @@
 import React from 'react'
-import Oneline2 from './Oneline2.jsx'
-
-
+import Oneline from './Oneline.jsx'
 
 const stls = {
     margin: '0',
@@ -14,7 +12,6 @@ const stls = {
     fontSize: 'inherit',
     fontFamily: 'inherit'
 }
-let i=0
 
 // Field that allows editing and integrates very well with redux
 class OrderedList extends React.Component {
@@ -28,17 +25,14 @@ class OrderedList extends React.Component {
         this.onKeyDown = this.onKeyDown.bind(this)
     }
     onBlur () {
-        console.log('onBlur')
         this.isFocused = false
     }
     onFocus () {
-        console.log('onFocus')
         this.isFocused = true
     }
     onChange (index) {
         //this.props.onChange
         return newValue => {
-            console.log(index, 'onChange', i)
             const copy = this.props.value.slice()
             copy[index] = newValue
             this.props.onChange(copy)
@@ -47,7 +41,6 @@ class OrderedList extends React.Component {
     onKeyDown (index) {
         //this.props.onChange
         return e => {
-            console.log(index, 'onKeyDown:', e.key)
             this.focused = index
             if (e.keyCode == 13) {
                 e.preventDefault()
@@ -80,18 +73,15 @@ class OrderedList extends React.Component {
         }
     }
     componentDidUpdate(prevProps, prevState) {
-        console.log('componentDidUpdate')
-        console.log(this.focused)
         this.body.children[this.focused].lastElementChild.firstElementChild.focus()
     }
     shouldComponentUpdate(nextProps, nextState) {
-        console.log('shouldComponentUpdate:', this.isFocused)
         return this.isFocused
     }
     render () {
         const { className, style } = this.props
         return (
-            <table ref={el => this.el = el} onBlur={this.onBlur} onFocus={this.onFocus}>
+            <table onBlur={this.onBlur} onFocus={this.onFocus}>
                 <thead>
                     <tr>
                         <th>{'Step'}</th>
@@ -103,7 +93,7 @@ class OrderedList extends React.Component {
                     <tr key={index}>
                         <th>{index+1}</th>
                         <td>
-                            <Oneline2 value={action} style={stls}
+                            <Oneline value={action} style={stls}
                                 onKeyDown={this.onKeyDown(index)}
                                 onChange={this.onChange(index)}/>
                         </td>

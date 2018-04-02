@@ -9,7 +9,6 @@ const padding = {
 }
 const HoverItem = ({style, icon, label, onClick}) => (
     <div style={style} onClick={onClick}>
-        <Icon type={icon} containerSize='35px'/>
         <div>{label}</div>
     </div>
 )
@@ -31,9 +30,8 @@ class TreeViewTabs extends React.Component {
     render () {
         const bgdEffect = {
             transition: 'all 0.2s',
-            color: this.state.clicked ? 'white' : 'inherit',
-            background: this.state.clicked ? '#6b9fff' : 'inherit',
-            borderBottom: '1px solid #dadada',
+            color: this.state.clicked ? 'var(--doc-picker-font--active)' : 'var(--doc-picker-font)',
+            background: this.state.clicked ? 'var(--doc-picker--active)' : 'var(--doc-picker)',
             display: 'flex',
             alignItems: 'center',
             height: '32px',
@@ -43,11 +41,13 @@ class TreeViewTabs extends React.Component {
         const toggleDropdown = this.toggleDropdown
 
         return (
-            <div style={{position: 'relative'}}>
+            <div>
                 <div style={bgdEffect} onClick={this.toggleDropdown}>
-                    <Icon styles={{color: this.state.clicked ? 'white' : 'inherit', padding: '0px 1px 0px 12px'}}
-                        type='DOC_CONFIG'
-                        size='16px'/>
+
+                      <Icon styles={{color: this.state.clicked ? 'white' : 'inherit'}}
+                        type={this.state.clicked ? 'CLOSE' : 'DOC_CONFIG'} containerSize='35px'
+                        size={this.state.clicked ? '20px' : '22px'}/>
+
                     { docNode ?
                         <HoverItem style={padding} icon={'DOCUMENT'} label={docNode.title}/> :
                         <div style={{width: '100%'}}>{__('No Documents')}</div>

@@ -10,9 +10,11 @@
     width: 100%;
 }
 :local .header {
-    background-color: #5d5d5d;
+    background-color: var(--toolbar);
     color: rgba(#ffffff, 0.6);
     display: flex;
+    border: solid var(--tree-border-right-color);
+    border-width: 1px 0px 1px 0px;
 }
 :local .footer {
     background: var(--color-d);
@@ -33,7 +35,7 @@
 }
 :local .section {
     flex: 1;
-    background-color: var(--color-b);
+    background-color: var(--sheet-background-color);
     height: 100%;
     overflow: hidden;
     padding-right: 0.6em;
@@ -58,8 +60,7 @@
 /* Resizer */
 :local .resizer {
     cursor: e-resize;
-    padding-right: 5px;
-    background: #fdfdfd;
-    border-left: 1px solid #e0e0e0;
+    width: 5px;
+    background: var(--sheet-background-color);
     z-index: 15;
 }

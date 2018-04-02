@@ -1,5 +1,5 @@
 :local .shadow:hover {
-    box-shadow: -2px 0 0 0 #6ba9ce;
+    /*box-shadow: -2px 0 0 0 #6ba9ce;*/
 }
 :local .editable {
     margin: 0;

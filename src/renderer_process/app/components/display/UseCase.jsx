@@ -36,6 +36,10 @@ const UseCase = props => {
         update(node.nodeID, fieldPath, newValue)
     }
 
+    const fontStyle = {
+        fontFamily: 'inherit'
+    }
+
     return <div className={styles.useCase}>
         <table style={table}>
             <thead>
@@ -43,6 +47,7 @@ const UseCase = props => {
                     <th style={thBordersAndPadding}>{__(refByTitle?type:'short_of_'+type)}</th>
                     <td style={tdBordersAndPadding}>
                         <Editable type='oneline'
+                            style={fontStyle}
                             placeholder='...'
                             className={styles.editable}
                             onChange={updateIn(['title'])}
@@ -62,6 +67,7 @@ const UseCase = props => {
                             <th  style={thBordersAndPadding}>{__(property)}</th>
                             <td  style={tdBordersAndPadding}>
                                 <Editable type={sections[section][property]}
+                                    style={fontStyle}
                                     placeholder='...'
                                     className={styles.editable}
                                     onChange={updateIn([section, property])}

@@ -3,9 +3,26 @@
 */
 :root {
     --color-a: #f5f5f5;
-    --color-b: #fdfdfd;
+    --sheet-background-color: #ffffff;
     --color-c: #36393e;
     --color-d: #1d2120;
+    --toolbar: hsl(0, 0%, 94%);
+    --doc-picker: #5C7080;
+    --doc-scroll: rgba(0, 150, 136, 0.8);
+    --doc-picker--active: hsla(207, 16%, 29%, 1);
+    --doc-picker-font: #ffffff;
+    --doc-picker-font--active: white;
+    --doc-manager: white;
+    --doc-manager-font: black;
+    --doc-manager-hover: hsl(207, 100%, 98%);
+    --doc-manager-hover-font: #000000;
+    --doc-manager-bottom-border: hsl(0, 0%, 82%);
+    --tree: rgb(250, 250, 250);
+    --tree-border-right-color: hsl(0, 0%, 82%);
+    --sheet-border-color: hsl(0, 0%, 82%);
+    --doc-manager-add: rgb(9, 204, 70);
+    --doc-manager-remove: rgb(169, 169, 169);
+    --doc-manager-remove-hover: #E53935;
 }
 
 /*

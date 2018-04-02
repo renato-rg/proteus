@@ -3,7 +3,7 @@ import React from 'react'
 import DockRight from './DockRight.jsx'
 import DockLeft from './DockLeft.jsx'
 const Document = require('react-icons/lib/md/content-paste')
-const Doc_Config = require('react-icons/lib/go/three-bars')
+const Doc_Config = require('react-icons/lib/md/more-vert')
 const Paragraph = require('react-icons/lib/go/file-text')
 const Folder = require('react-icons/lib/go/file-directory')
 const Opened = require('react-icons/lib/go/chevron-down')
@@ -15,6 +15,7 @@ const SectionOpened = require('react-icons/lib/md/signal-cellular-4-bar')
 const SectionClosed = require('react-icons/lib/md/signal-cellular-null')
 const BlankBox = require('react-icons/lib/md/check-box-outline-blank')
 const CheckedBox = require('react-icons/lib/md/check-box')
+const Close = require('react-icons/lib/md/close')
 const Default = () => <div></div>
 
 // TODO: Poner esto en un archivo separado e importarlo
@@ -54,6 +55,8 @@ const resolveIcon = (type = '') => {
             return BlankBox
         case 'CHECKED_BOX':
             return CheckedBox
+        case 'CLOSE':
+            return Close
         default:
             return Default
     }
@@ -67,12 +70,12 @@ const container = {
 }
 
 const Icon = props => {
-    const {type, size, styles, containerSize, containerStyle, onClick} = props
+    const {type, size, styles, containerSize, clssNm, containerStyle, onClick} = props
     const joinedStyle = Object.assign({height: containerSize, width: containerSize}, container, containerStyle)
     const Resolved = resolveIcon(type)
     return (
         <div style={joinedStyle} onClick={onClick}>
-            <Resolved size={size} style={styles}/>
+            <Resolved size={size} style={styles} className={clssNm}/>
         </div>
     )
 }

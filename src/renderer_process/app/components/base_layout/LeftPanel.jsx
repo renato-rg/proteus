@@ -13,7 +13,8 @@ class LeftPanel extends Component {
         const {documents, activeIndex, docNode, showDetails} = this.props
         return (
             <div style={{display: 'flex', width: '25em', transition: 'all 0.5s',
-                transform: showDetails?'translate(-100%)':'translate(0%)'}}>
+                transform: showDetails?'translate(-100%)':'translate(0%)',
+                borderRight: '1px solid var(--tree-border-right-color)'}}>
                 <nav className={styles.nav}>
                     <TreeViewTabs {...{documents, activeIndex, docNode}}/>
                     <TreeView {...{docNode}}/>

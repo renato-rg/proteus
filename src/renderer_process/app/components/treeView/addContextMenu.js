@@ -8,14 +8,14 @@ export default function addContextMenu(ComponentToModify) {
 
     class ComponentWithContextMenu extends Component {
         render() {
-            const { __, deleteNode, showPropertiesPanel } = this.props
+            const { __, deleteNode, showPropertiesPanel, node, parentID } = this.props
             const contextMenuHandler = e => {
                 e.preventDefault()
                 const template = [
                     {
                         label: __('Delete'),
                         click () {
-                            deleteNode()
+                            deleteNode(node.nodeID, parentID)
                         }
                     },
                     { type: 'separator' },
@@ -33,8 +33,8 @@ export default function addContextMenu(ComponentToModify) {
     }
     const mapDispatchToProps = (dispatch, ownProps) => {
         return {
-            deleteNode: () => {
-                dispatch(deleteNode(this.props.node.nodeID, this.props.parentID))
+            deleteNode: (nodeID, parentID) => {
+                dispatch(deleteNode(nodeID, parentID))
             },
             showPropertiesPanel: () => {
                 dispatch(setDetailedNodeID(ownProps.node.nodeID))

@@ -4,26 +4,20 @@ import uuid from 'uuid/v1'
 import Icon from '../icons/Icon.jsx'
 import i18n from '../../i18n'
 import { setTreeViewTab, deleteDocument, createDocument, insertDocument } from '../../state_manager/actions'
-import { dropdown } from './treeView.css'
+import { dropdown, dropdownDoc, newDoc, dropdownDocItem } from './treeView.css'
 
-const styles = {
-    width: '100%',
-    textAlign: 'left'
-}
-const HoverItem = ({placeholder, size, style, icon, label, onClick, deleteAction, index, activeIndex, setTreeViewTab}) => (
-    <div style={style} onClick={onClick}>
-        <Icon type={icon} containerSize='35px' size={size}/>
-        <div style={styles}>{label ? label : placeholder}</div>
-        {deleteAction &&
-            <Icon type={'TRASHCAN'} containerSize='35px' onClick={e => {
-                e.stopPropagation()
-                deleteAction(index)
-                if (index===activeIndex)
-                    setTreeViewTab(0)
-                else
-                    setTreeViewTab(activeIndex + (index<=activeIndex ? -1 : 0))
-            }}/>
-        }
+const HoverItem = ({placeholder, label, onClick, deleteAction, index, activeIndex, setTreeViewTab}) => (
+    <div onClick={onClick} className={dropdownDocItem}>
+        <div className={dropdownDoc}>{label ? label : placeholder}</div>
+        <Icon type={'CLOSE'} containerSize='35px'
+          onClick={e => {
+            e.stopPropagation()
+            deleteAction(index)
+            if (index===activeIndex)
+                setTreeViewTab(0)
+            else
+                setTreeViewTab(activeIndex + (index<=activeIndex ? -1 : 0))
+        }}/>
     </div>
 )
 
@@ -69,16 +63,15 @@ class Dropdown extends React.Component {
                     <HoverItem key={doc.nodeID} icon={'DOCUMENT'} label={doc.title}
                         activeIndex={activeIndex}
                         index={index}
-                        style={{color: index===activeIndex?'black':'inherit'}}
                         onClick={() => this.changeDocument(index)}
                         deleteAction={this.props.deleteDocument}
                         setTreeViewTab={this.props.setTreeViewTab}
                         placeholder={'<'+__('New document')+'>'}/>)
                 }
-                <HoverItem icon={'PLUS'} size='19px' label={__('New Document')} onClick={e => {
-                    e.stopPropagation()
-                    createDocument()
-                }}/>
+                <div className={newDoc} onClick={e => {e.stopPropagation(); createDocument()}}>
+                    <Icon type={'PLUS'} containerSize='35px'/>
+                    <div style={{width: '100%', textAlign: 'left'}}>{__('New Document')}</div>
+                </div>
             </div>
         )
     }
