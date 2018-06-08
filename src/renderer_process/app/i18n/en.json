@@ -1,99 +1,42 @@
 {
-    "UC" : "UC",
-    "Description" : "Description",
-    "Secuence" : "Secuence",
-    "Step" : "Step",
-    "Action" : "Action",
     "New Document" : "New Document",
     "No Documents" : "No Documents",
-    "New use case's step" : "New use case's step",
-    "New use case": "New use case",
-    "New folder": "New folder",
-    "New document" : "New document",
-    "New paragraph" : "New paragraph",
     "Delete" : "Delete",
     "Properties..." : "Properties...",
 
-    "short_of_useCase": "UC",
-    "useCase": "UC",
-    "general" : "General",
-    "details" : "Details",
-    "comments" : "Comments",
-    "traces" : "Traces",
+    "DELETE": "Delete",
+    "EDIT_PROPERTIES": "Edit Properties...",
+
+    "DOCUMENT_VIEWER": "Document Viewer",
+    "OBJECT_MANAGER": "Object Manager",
+
+    "NEW": "New",
+
+    "VERSIONING": "General",
+    "HEADER": "Header",
+    "TRACEABILITY": "Traceability",
+
+    "PROJECT_PROPERTIES": "Project Properties",
+    "EDIT_PROJECT": "Edit Project",
+    "EDIT_PROJECT_SUBTITLE": "Information relative to a project is not visible in the document view, however, it can be edited and displayed within this tab.",
+
+    "DOCUMENT_PROPERTIES": "Document Properties",
+    "EDIT_DOCUMENT": "Edit Document",
+    "EDIT_DOCUMENT_SUBTITLE": "Information relative to a document is not visible in the document view except from its title, however, all its other properties can be edited and displayed within this tab.",
+
+    "name": "Name",
+
     "version" : "Version",
-    "createdBy" : "Created by",
-    "created" : "Creation date",
-    "precondition" : "Precondition",
-    "secuence": "Secuence",
-    "postcondition" : "Postcondition",
-    "description" : "Description",
-    "priority" : "Priority",
-    "importance" : "Importance",
-    "urgency" : "Urgency",
-    "devStatus" : "Development status",
-    "stability" : "Stability",
-    "hide" : "Hide",
+    "creationDate": "Creation date",
+    "authors": "Authors",
     "target" : "Target",
     "source" : "Source",
 
-    "short_of_organization": "ORG",
-    "organization": "Organization",
-    "address" : "Address",
-    "phone" : "Phone",
-    "fax" : "Fax",
+    "title": "Title",
+    "ref": "Reference",    
 
-    "short_of_stakeholder": "STK",
-    "stakeholder" : "Stakeholder",
-    "role" : "Role",
-    "isDeveloper" : "Is developer",
-    "isClient" : "Is client",
-    "isUser" : "Is user",
+    "SAVE_CHANGES": "Save Changes",
 
-
-    "short_of_meeting": "MET",
-    "meeting" : "Meeting",
-    "date": "Date",
-    "time": "Time",
-    "duration": "Duration",
-    "location": "Location",
-    "attendants": "Attendants",
-    "results": "Results",
-
-    "short_of_objective": "OBJ",
-    "objective" : "Objective",
-    "subobjectives": "Sub-objective",
-
-    "short_of_actor": "ACT",
-    "actor" : "Actor",
-
-    "short_of_informationReq": "IRQ",
-    "informationReq" : "Information requeriment",
-    "specificData" : "Specific data",
-    "lifetime": "Lifetime",
-    "simultaneousOccurrences": "Simultaneous Occurrences",
-
-    "short_of_constraintReq" : "CRQ",
-    "constraintReq" : "Constraint requirement",
-
-    "short_of_functionalReq" : "FRQ",
-    "functionalReq" : "Functional requirement",
-
-    "short_of_nonFunctionalReq" : "NFR",
-    "nonFunctionalReq" : "Non functional requirement",
-
-
-
-    "short_of_conflict" : "CFL",
-    "conflict" : "Conflict",
-    "affects" : "Affects",
-    "solution" : "Solution",
-    "status" : "Status",
-
-    "short_of_defect" : "DEF",
-    "defect" : "Defect",
-    "defectType" : "Defect type",
-
-    "short_of_changeRequest" : "CHR",
-    "chageRequest" : "Change request",
-    "analysis" : "Analysis"
+    "UNTITLED": "Untitled",
+    "OBJECT": "Object"
 }

@@ -1,27 +1,28 @@
-import React, {Component} from 'react'
-import { connect } from 'react-redux'
 import en from './en'
 import es from './es'
 
 const languages = { en, es }
+import { connect } from 'react-redux'
+import { store } from '../entry'
 
-const translate = locale => key => {
-    return languages[locale][key] || key
+export const translate = key => {
+    return languages[store.getState().appState.locale][key] || key
 }
 
-export default function i18n(ComponentToTranslate) {
-
-    class ComponentWithTranslations extends Component {
-        render() {
-            return <ComponentToTranslate {...this.props} {...this.state} __={translate(this.props.locale)}/>
-        }
+const mapStateToProps = state => {
+    return {
+        locale: state.appState.locale
     }
-
-    function mapStateToProps(state, props) {
-        return {
-            locale : state.appState.locale
-        }
-    }
-
-    return connect(mapStateToProps)(ComponentWithTranslations)
 }
+
+export const T = connect(mapStateToProps, ()=>({}))(
+    ({txt, children, locale}) => {
+        if (txt && typeof txt === 'string')
+            return languages[locale][txt] || txt
+        
+        if (children && typeof children === 'string')
+            return languages[locale][children] || children
+        
+        return ''
+    }
+)

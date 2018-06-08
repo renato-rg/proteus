@@ -1,0 +1,14 @@
+{
+  "ref": "009",
+  "title": "Nice day for fishing ain't it?",
+  "version": "1.0.0",
+  "authors": "Me",
+  "creationDate": "Today",
+  "source": "",
+  "target": "",
+  "fields": {
+    "Custom field 1": ""
+  },
+  "type": "Sample Table",
+  "nodeID": "93d3d050-6b09-11e8-af99-dd08eafa0470"
+}

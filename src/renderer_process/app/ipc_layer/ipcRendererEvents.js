@@ -1,14 +1,11 @@
 // Electron comunication
 const {ipcRenderer, remote} = require('electron')
 const {Menu, dialog} = remote
-import uuid from 'uuid/v1'
 
 import { loadProject, setAppStateTo, showNotification, setProjectPath,
-            setProjectInfo, setLocale, mergeNodes, insertDocIDs } from '../state_manager/actions'
-import { saveProjectIO, openProjectIO } from '../io'
-
-import templates from '../constants/templates/'
-import entities from '../constants/entities/'
+          setProjectInfo, setLocale,
+          showExplorer, replaceAllCustomObjects, pushTab } from '../state_manager/actions'
+import { saveProjectIO, openProjectIO } from './io'
 
 //////////////////////////////
 /// IPC with main process ////
@@ -16,51 +13,43 @@ import entities from '../constants/entities/'
 // TODO: Use constants as events' names: 'OPEN_PROJECT'
 export default function ipcRendererEvents(store) {
 
+    //TODO: load the custom objects
     ipcRenderer.on('open-project', (event, path) => {
         store.dispatch( setAppStateTo( 'LOADING_PROJECT' ) )
         openProjectIO(path)
         .then( result => {
-            store.dispatch( setProjectPath( path ) )
-            store.dispatch( loadProject( result.entities ) )
-            store.dispatch( setProjectInfo( result.project ) )
-            store.dispatch( setAppStateTo( 'DEFAULT' ) )
+            store.dispatch( setProjectPath(path) )
+            store.dispatch( replaceAllCustomObjects(result.customObjects) )
+            store.dispatch( loadProject(result.entities) )
+            store.dispatch( setProjectInfo(result.project) )
+            store.dispatch( setAppStateTo('DEFAULT') )
         })
         .catch( error => {
-            store.dispatch( setAppStateTo( 'UNLOADING_PROJECT' ) )
-            store.dispatch( loadProject( {} ) )
-            store.dispatch( setProjectInfo( undefined ) )
-            store.dispatch( setAppStateTo( 'DEFAULT' ) )
+            store.dispatch( setAppStateTo('UNLOADING_PROJECT') )
+            store.dispatch( loadProject({}) )
+            store.dispatch( setProjectInfo(undefined) )
+            store.dispatch( setAppStateTo('DEFAULT') )
             store.dispatch( showNotification( { type: 'ERROR', title: '', subtitle: error.stack} ) )
         } )
 
     })
 
-    const recursive = (template = []) => {
-        let nodes = {}
-        const nodeIDs = []
-        template.forEach( obj => {
-
-            const res = recursive(obj.children)
-            const accNodes = res.nodes
-            const accDocIDs = res.nodeIDs
-
-            const nodeID = uuid()
-            const node = Object.assign({}, entities(obj.type),
-                {nodeID, childrenIDs: accDocIDs, title: obj.name})
-
-            nodes = Object.assign({}, nodes, accNodes)
-            nodes[nodeID] = node
-            nodeIDs.push(nodeID)
-        })
-        return {nodes, nodeIDs}
-    }
-
-    ipcRenderer.on('menu-add-template', (event, type) => {
-        const {nodes, nodeIDs} = recursive(templates(type))
-        store.dispatch(mergeNodes(nodes))
-        store.dispatch(insertDocIDs(nodeIDs))
+    ipcRenderer.on('new-object', () => {
+        store.dispatch(pushTab('OBJECT_MANAGER', true))
+        return
     })
 
+    ipcRenderer.on('project-properties', () => {
+        store.dispatch(pushTab('PROJECT_PROPERTIES', true))
+        return
+    })
+
+    ipcRenderer.on('show-explorer', (event, show) => {
+        if (store.getState().switchDocument.showExplorer != show)
+            store.dispatch(showExplorer(show))
+    })
+
+    // TODO: now it has to save as well the custom objects
     ipcRenderer.on('menu-save', (event, title) => {
         let init = false
         if (store.getState().appState.projectPath===''){
@@ -98,7 +87,7 @@ export default function ipcRendererEvents(store) {
 
     ipcRenderer.on('menu-language', (event, {language, code})  => {
         // Unchecks the other items
-        for (var item of Menu.getApplicationMenu(null).items[0].submenu.items[8].submenu.items) {
+        for (var item of Menu.getApplicationMenu(null).items[0].submenu.items[9].submenu.items) {
             if (item.label != language) {
                 item.checked = false
                 item.enabled = true

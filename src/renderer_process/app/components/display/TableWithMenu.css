@@ -1,0 +1,36 @@
+:local .trigger {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+}
+:local .trigger > div {
+    position: relative;
+    left: -100%;
+    background: blue;
+}
+:local .menu {
+    position: absolute;
+    z-index: 3;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+:local .section {
+    position: relative;
+    z-index: 3;
+}
+:local .submenuWrapper {
+    position: absolute;
+    right: 0;
+    z-index: 1;
+}
+:local .submenu {
+    position: relative;
+    right: -100%;
+    background: antiquewhite;
+}
+:local .label {
+    position: relative;
+    z-index: 2;
+}

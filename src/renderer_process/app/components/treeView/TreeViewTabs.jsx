@@ -1,11 +1,12 @@
 import React from 'react'
 import Dropdown from './Dropdown.jsx'
 import Icon from '../icons/Icon.jsx'
-import i18n from '../../i18n'
+import { T } from '../../i18n'
 
 const padding = {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    whiteSpace: 'nowrap'
 }
 const HoverItem = ({style, icon, label, onClick}) => (
     <div style={style} onClick={onClick}>
@@ -37,7 +38,7 @@ class TreeViewTabs extends React.Component {
             height: '32px',
             cursor: 'pointer'
         }
-        const {__, documents, activeIndex, docNode} = this.props
+        const {documents, activeIndex, docNode} = this.props
         const toggleDropdown = this.toggleDropdown
 
         return (
@@ -50,7 +51,7 @@ class TreeViewTabs extends React.Component {
 
                     { docNode ?
                         <HoverItem style={padding} icon={'DOCUMENT'} label={docNode.title}/> :
-                        <div style={{width: '100%'}}>{__('No Documents')}</div>
+                        <div style={{width: '100%'}}><T>No Documents</T></div>
                     }
                 </div>
                 { this.state.clicked &&
@@ -61,4 +62,4 @@ class TreeViewTabs extends React.Component {
     }
 }
 
-export default i18n(TreeViewTabs)
+export default TreeViewTabs

@@ -1,6 +1,6 @@
 // Electron's modules
 const electron = require('electron')
-const {app, ipcMain} = electron
+const {app, ipcMain, BrowserWindow} = electron
 
 // App's constants
 const path = require('path')
@@ -47,6 +47,8 @@ app.on('ready', () => {
         rebuildMenuFromTemplate({language, code})
         saveAppLocale({language, code})
     })
+
+    BrowserWindow.addDevToolsExtension('C:\\Users\\pasta\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\fmkadmapgofadopljbjfkapdkoienihi\\3.2.3_0')
 
 })
 

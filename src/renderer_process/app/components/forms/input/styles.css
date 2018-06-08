@@ -1,0 +1,42 @@
+.field {
+  display: flex;
+  width: 80%;
+}
+
+.input {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+
+  width: 100%;
+  outline: none;
+  caret-color: #008080;
+  transition: border-color 0.4s cubic-bezier(0.05, -0.66, 1, 1.6);
+  border-width: 0px 0px 1px 0px;
+  border-color: #cecece;
+}
+.inputFocused {
+  border-color: #008080;
+}
+
+.label {
+  font-size: 13px;
+  user-select: none;
+  cursor: default;
+}
+.primaryColor {
+  color: #008080;
+}
+
+.errMsg {
+  transform: translate(0%, 100%);
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.invalidColor {
+  color: #e81324;
+}
+.invalidBorderColor {
+  border-color: #e81324;
+}

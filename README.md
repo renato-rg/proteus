@@ -1,22 +1,17 @@
-# remus
-[![Build status](https://ci.appveyor.com/api/projects/status/q7h4amvatnu7um9o/branch/appveyor?svg=true)](https://ci.appveyor.com/project/pastahito/remus/branch/appveyor)
-[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/dfd6ea76489149da9162bfa9c4ce49b6)](https://www.codacy.com/app/pastahito/remus?utm_source=github.com&utm_medium=referral&utm_content=pastahito/remus&utm_campaign=Badge_Coverage)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/dfd6ea76489149da9162bfa9c4ce49b6)](https://www.codacy.com/app/pastahito/remus?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pastahito/remus&amp;utm_campaign=Badge_Grade)
-[![bitHound Dependencies](https://www.bithound.io/github/pastahito/remus/badges/dependencies.svg)](https://www.bithound.io/github/pastahito/remus/dev/dependencies/npm)
-[![bitHound Dev Dependencies](https://www.bithound.io/github/pastahito/remus/badges/devDependencies.svg)](https://www.bithound.io/github/pastahito/remus/dev/dependencies/npm)
-
+# proteus
+[![Build status](https://ci.appveyor.com/api/projects/status/q7h4amvatnu7um9o?svg=true)](https://ci.appveyor.com/project/pastahito/proteus/branch/dev)
+[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/dfd6ea76489149da9162bfa9c4ce49b6)](https://www.codacy.com/app/pastahito/proteus?utm_source=github.com&utm_medium=referral&utm_content=pastahito/proteus&utm_campaign=Badge_Coverage)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/dfd6ea76489149da9162bfa9c4ce49b6)](https://www.codacy.com/app/pastahito/proteus?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pastahito/proteus&amp;utm_campaign=Badge_Grade)
 Desktop editor for requirements management built on Electron and React.
-
-*The project is still under development.*
 
 ## Install and run
 *No installers available yet, so you have to run it from source instead.*
 
 Clone and install dependencies:
 ``` bash
-$ git clone https://github.com/pastahito/remus
+$ git clone https://github.com/pastahito/proteus
 
-$ cd remus
+$ cd proteus
 
 $ npm install
 ```

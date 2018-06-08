@@ -1,0 +1,84 @@
+:local .table{
+    display: flex;
+    flex-direction: column;    
+    border: 1px solid rgb(221, 221, 221);
+}
+:local .table > div > div > textarea {
+    padding: 0;
+    resize: none;
+    outline: none;
+    border: none;
+    font-size: inherit;
+    font-weight: inherit;
+    font-family: inherit;
+    background-color: inherit;
+    vertical-align: middle;
+}
+:local .th{
+    display: flex;
+    background-color: #f5f5f5;
+}
+:local .thLeft{
+    width: 150px;
+    border-right: 1px solid rgb(221, 221, 221);
+    text-align: left;
+    display: flex;
+
+    font-weight: bold;
+    font-size: 11pt;
+    font-family: Calibri;
+}
+:local .thLeft > div {
+    margin: 4px 0px 4px 8px;
+}
+:local .thLeft > textarea {
+    flex: 1;
+    margin: 4px 15px 4px 0px;
+    text-align: left;    
+}
+
+:local .thRight{
+    flex: 1;
+    display: flex;
+
+    font-weight: bold;
+    font-size: 11pt;
+    font-family: Calibri;
+}
+:local .thRight > * {
+    flex: 1;
+    margin: 4px 15px 4px 8px;
+    text-align: left;
+}
+
+:local .tr{
+    display: flex;
+    border-top: 1px solid rgb(221, 221, 221);
+}
+:local .trLeft{
+    width: 150px;
+    border-right: 1px solid rgb(221, 221, 221);
+    display: flex;
+
+    font-weight: bold;
+    font-size: 11pt;
+    font-family: Calibri;
+}
+:local .trLeft > * {
+    flex: 1;
+    margin: 4px 15px 4px 8px;
+    text-align: left;
+}
+
+:local .trRight{
+    flex: 1;
+    display: flex;
+    
+    font-size: 11pt;
+    font-family: Calibri;
+}
+:local .trRight > * {
+    flex: 1;
+    margin: 4px 15px 4px 8px;
+    text-align: left;
+}

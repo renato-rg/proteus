@@ -1,0 +1,32 @@
+{
+  "name": "",
+  "template": "empty",
+  "childrenIDs": [
+    "54218240-6b09-11e8-af99-dd08eafa0470"
+  ],
+  "customObjects": {
+    "Sample Table": {
+      "type": "Sample Table",
+      "prefix": "ST",
+      "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAlElEQVQ4ja2T0Q3DIAwFj4olMiFr3BpM2DHcr1ShCSZVa8kfYOsw78kFCOZRkhoAD4CIfkoANYMDUAFKaau+dMTYXxwKpXG+hfbxrZrRnzqcN0UN9Q1JAQDH5n4h+M8aVKDsam96Gvur6BAX1kWSaw0AZi7dBsw0UuP/E2w62LXyZwC0gyOHOVPActtItlW9BUi38gXvk0YB4d1idAAAAABJRU5ErkJggg==",
+      "scheme": {
+        "Custom Section 1": [
+          "Custom field 1"
+        ]
+      },
+      "defaultInstance": {
+        "ref": "",
+        "title": "",
+        "version": "1.0.0",
+        "authors": "Me",
+        "creationDate": "Today",
+        "source": "",
+        "target": "",
+        "fields": {
+          "Custom field 1": ""
+        },
+        "type": "Sample Table"
+      }
+    }
+  }
+}

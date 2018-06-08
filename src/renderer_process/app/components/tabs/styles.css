@@ -1,0 +1,65 @@
+:local .tabs{
+    display: flex;
+    height: var(--tabs-height);
+    border-bottom: 1px solid var(--tabs-separator);
+    background: var(--tabs-background);
+    cursor: pointer;
+    user-select: none;
+}
+:local .fixed{
+    display: flex;
+    height: calc(100% - 1px);
+    align-items: center;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 0px;
+    color: var(--tabs-inactive-color);
+    padding: 0px 6px 0px 6px;
+}
+:local .activeFixed{
+    border-bottom-color: var(--tabs-accent-color);
+    color: var(--tabs-active-color);
+}
+:local .fixedImage{
+    pointer-events: none;
+    height: 18px;
+    width: auto;
+}
+:local .fixedTitle{
+    margin-left: 5px;
+    margin-right: 6px;
+}
+
+
+:local .unfixed{
+    display: flex;
+    height: calc(100% - 1px);
+    align-items: center;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 0px;
+    color: var(--tabs-inactive-color);
+    padding: 0px 6px 0px 6px;
+}
+:local .activeUnfixed{
+    border-bottom-color: var(--tabs-accent-color);
+    color: var(--tabs-active-color);
+}
+:local .unfixedImage{
+    height: 18px;
+    width: auto;
+}
+:local .unfixedTitle{
+    margin-left: 5px;
+    margin-right: 6px;
+}
+:local .unfixedClose {
+    margin-left: 6px;
+    opacity: 0;
+}
+:local .unfixed:hover > .unfixedClose {
+    color: var(--tabs-hover-color);
+    opacity: 1;
+}
+:local .activeUnfixedClose{
+    margin-left: 6px;
+    color: var(--tabs-hover-color);
+}

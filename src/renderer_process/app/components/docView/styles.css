@@ -19,3 +19,23 @@
 :local .doc {
     margin: 3cm;
 }
+
+:local .docViewContainer {
+    flex: 1;
+    background-color: var(--sheet-background-color);
+    overflow: auto;
+}
+/* Scrollbar */
+:local .docViewContainer::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+:local .docViewContainer::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+:local .docViewContainer::-webkit-scrollbar {
+    width: 0.6em;
+}
+/* Scrollbar display */
+:local .docViewContainer:hover::-webkit-scrollbar-thumb{
+    background-color: rgba(64, 128, 128, 0.4);
+}

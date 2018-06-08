@@ -29,38 +29,29 @@
     color: rgba(0, 0, 0, .9);
 }
 :local .nav {
-    width: 100%;
     display: flex;
     flex-direction: column;
+    width: 25em;
+    border-right: 1px solid var(--tree-border-right-color);
 }
-:local .section {
+:local .mainSection {
     flex: 1;
     background-color: var(--sheet-background-color);
     height: 100%;
-    overflow: hidden;
-    padding-right: 0.6em;
-    z-index: 15;
-}
-/* Scrollbar */
-:local .section::-webkit-scrollbar-thumb {
-    background-color: rgba(64, 128, 128, 0.4);
-}
-:local .section::-webkit-scrollbar-track {
-    background-color: transparent;
-}
-:local .section::-webkit-scrollbar {
-    width: 0.6em;
-}
-/* Scrollbar display */
-:local .section:hover{
-    overflow: auto;
-    padding-right: 0em;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Resizer */
 :local .resizer {
     cursor: e-resize;
     width: 5px;
+}
+:local .resizerHead{
+    height: var(--tabs-height);
+    border-bottom: 0px solid var(--tabs-separator);
+    background: var(--tabs-background);
+}
+:local .resizerBody{
     background: var(--sheet-background-color);
-    z-index: 15;
 }

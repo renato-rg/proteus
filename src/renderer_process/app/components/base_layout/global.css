@@ -17,12 +17,22 @@
     --doc-manager-hover: hsl(207, 100%, 98%);
     --doc-manager-hover-font: #000000;
     --doc-manager-bottom-border: hsl(0, 0%, 82%);
+    --doc-manager-config-color-active: #8686d6;
     --tree: rgb(250, 250, 250);
     --tree-border-right-color: hsl(0, 0%, 82%);
     --sheet-border-color: hsl(0, 0%, 82%);
     --doc-manager-add: rgb(9, 204, 70);
     --doc-manager-remove: rgb(169, 169, 169);
     --doc-manager-remove-hover: #E53935;
+
+    --tabs-height: 31px;
+    --tabs-background: white;
+    --tabs-separator: hsl(0, 0%, 82%);
+    --tabs-accent-color: rgb(236, 114, 114);
+    --tabs-inactive-color: hsl(0, 0%, 67%);
+    --tabs-hover-color: hsl(0, 0%, 40%);
+    --tabs-active-color: black;
+
 }
 
 /*

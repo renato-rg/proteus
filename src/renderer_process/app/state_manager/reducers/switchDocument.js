@@ -1,42 +1,57 @@
-import { SET_TREE_VIEW_TAB, SET_DOC_VIEW_TAB, TOGGLE_LEFT_PANEL,
-    SLIDE_NODE_PROPERTIES, SET_DETAILS_NODE_ID } from '../actions'
+import { SET_TREE_VIEW_TAB, SET_DOC_VIEW_TAB, SHOW_EXPLORER,
+    PUSH_TAB, REMOVE_TAB } from '../actions'
 
 const initialState = {
     navActiveTab: 0,
     sectionActiveTab: 0,
-    showLeftPanel: true,
-    showDetails: false,
-    detailsNodeID: ''
+    showExplorer: true,
+    sectionTabs: ['DOCUMENT_VIEWER']
 }
 
 function switchDocument(state = initialState, action) {
     switch (action.type) {
-        case SET_TREE_VIEW_TAB:
+        case PUSH_TAB: {
+            const index = state.sectionTabs.indexOf(action.id)
+            let query
+            if (index>-1){
+                query = {
+                    sectionActiveTab: index
+                }
+            }
+            else if (action.focus) {
+                query = {
+                    sectionActiveTab: state.sectionTabs.length,
+                    sectionTabs: state.sectionTabs.concat(action.id)
+                }
+            }
+            else {
+                query = {
+                    sectionTabs: state.sectionTabs.concat(action.id)
+                }
+            }
+            return Object.assign({}, state, query)
+        }
+        case REMOVE_TAB: {
+            return Object.assign({}, state, {
+                sectionActiveTab: state.sectionActiveTab-(action.index<=state.sectionActiveTab?1:0),
+                sectionTabs: state.sectionTabs.slice(0, action.index).concat(state.sectionTabs.slice(action.index+1, state.sectionTabs.length))
+            })
+        }
+        case SET_TREE_VIEW_TAB: {
             return Object.assign({}, state, {
                 navActiveTab: action.index
             })
-        case SET_DOC_VIEW_TAB:
+        }
+        case SET_DOC_VIEW_TAB: {
             return Object.assign({}, state, {
                 sectionActiveTab: action.index
             })
-        case TOGGLE_LEFT_PANEL:
+        }
+        case SHOW_EXPLORER: {
             return Object.assign({}, state, {
-                showLeftPanel: !state.showLeftPanel
+                showExplorer: action.payload
             })
-        case SLIDE_NODE_PROPERTIES:
-            return Object.assign({}, state, {
-                showDetails: action.payload
-            })
-        case SET_DETAILS_NODE_ID:
-            return Object.assign({}, state, {
-                detailsNodeID: action.id
-            })
-
-
-        case 'LOG_ENTITIES':
-            console.log('\nSWITCHDOCUMENTS')
-            console.log(JSON.stringify(state, null, 2))
-            return state
+        }
         default:
             return state
     }

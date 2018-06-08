@@ -1,12 +1,26 @@
 {
     "File": "Archivo",
     "New Window": "Nueva Ventana",
-    "New Project": "Nuevo Projecto",
-    "Open Project": "Abrir Projecto",
-    "Add Template...": "Añadir Plantilla...",
-    "Toggle Developer Tools": "Herramientas para Desarrolladores",
-    "Save Project": "Guardar Projecto",
-    "Save Project As...": "Guardar Projecto Como...",
+    "New Project": "Nuevo Proyecto",
+    "Open Project": "Abrir Proyecto",
+    "Save Project": "Guardar Proyecto",
+    "Save Project As...": "Guardar Proyecto Como...",
+    "PROJECT_PROPERTIES": "Propiedades de Proyecto",
+    "New Object...": "Nuevo Objeto...",
     "Language...": "Idioma...",
-    "Close Window": "Cerrar Ventana"
+    "Close Window": "Cerrar Ventana",
+
+    "EDIT": "Editar",
+    "UNDO": "Deshacer",
+    "REDO": "Rehacer",
+    "CUT": "Cortar",
+    "COPY": "Copiar",
+    "PASTE": "Pegar",
+
+    "Views": "Ver",
+    "TREE_VIEW": "Vista de Árbol",
+
+    "HELP": "Ayuda",
+    "REPOSITORY": "Repositorio",
+    "DEV_TOOLS": "Herramientas para Desarrolladores"
 }

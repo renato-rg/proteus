@@ -3,30 +3,54 @@ import { connect } from 'react-redux'
 import styles from './layout.css'
 
 // Components
-import DocViewTabs from '../tabs/DocViewTabs.jsx'
 import ToolGroup from '../toolbar/ToolGroup.jsx'
-import LeftPanel from './LeftPanel.jsx'
 import DocView from '../docView/DocView.jsx'
-import DockSide from '../toolbar/DockSide.jsx'
+import Tabs from '../tabs/Tabs.jsx'
+import ObjectManager from '../objectManager/ObjectManager.jsx'
+import TreeViewTabs from '../treeView/TreeViewTabs'
+import TreeView from '../treeView/TreeView'
+import TableProperties from '../propertiesPanels/TableProperties'
+import ProjectProperties from '../propertiesPanels/ProjectProperties'
+import DefaultObjectProperties from '../propertiesPanels/DefaultObjectProperties'
 
 class Editor extends Component {
     render() {
-        const {documents, activeIndex, docNode, showLeftPanel} = this.props
+        const {documents, activeIndex, docNode, showExplorer, tabs, types, activeTab} = this.props
         return (
             <div className={styles.editor}>
                 <header className={styles.header}>
                     <ToolGroup/>
-                    <span style={{width: '1px', background: 'white'}}/>
-                    <DockSide/>
                 </header>
 
                 <main className={styles.main}>
-                    { showLeftPanel &&
-                        <LeftPanel {...{documents, activeIndex, docNode}}/>
-                    }
-                    <span className={styles.resizer}></span>
-                    <section className={styles.section}>
-                        <DocView {...{docNode}}/>
+                    <nav className={styles.nav} style={showExplorer?{}:{display: 'none'}}>
+                            <TreeViewTabs {...{documents, activeIndex, docNode}}/>
+                            <TreeView {...{docNode}}/>
+                    </nav>
+                    <div className={styles.resizer}>
+                        <div className={styles.resizerHead}/>
+                        <div className={styles.resizerBody}/>
+                    </div>
+                    <section className={styles.mainSection}>
+                        <Tabs/>
+                        
+                {
+                    tabs.map((id, index) => {                        
+                        if (id === 'DOCUMENT_VIEWER')
+                            return <DocView key={id} {...{docNode}} isVisible={activeTab===index}/>
+                        
+                        if (id === 'OBJECT_MANAGER')
+                            return <ObjectManager key={id} isVisible={activeTab===index}/>
+
+                        if (id === 'PROJECT_PROPERTIES')
+                            return <ProjectProperties key={id} isVisible={activeTab===index}/>
+                        
+                        if (['document', 'folder', 'paragraph', 'image'].indexOf(types[index])>-1)
+                            return <DefaultObjectProperties key={id} nodeID={id} isVisible={activeTab===index}/>
+
+                        return <TableProperties key={id} nodeID={id} isVisible={activeTab===index}/>
+                    })
+                }
                     </section>
                 </main>
             </div>
@@ -39,7 +63,7 @@ const mapStateToProps = (state, ownProps) => {
     const proj = state.appState.projectInfo
     let docNode = undefined
     let documents = []
-    if (state.appState.globalState === 'DEFAULT' && proj.childrenIDs.length>0) {
+    if (proj.childrenIDs.length>0) {
         documents = proj.childrenIDs.map(i => state.entities[i])
         docNode = documents[activeIndex]
     }
@@ -47,7 +71,10 @@ const mapStateToProps = (state, ownProps) => {
         documents,
         activeIndex,
         docNode,
-        showLeftPanel: state.switchDocument.showLeftPanel
+        showExplorer: state.switchDocument.showExplorer,
+        activeTab: state.switchDocument.sectionActiveTab,
+        tabs: state.switchDocument.sectionTabs,
+        types: state.switchDocument.sectionTabs.map( id => (state.entities[id]||{}).type )
     }
 }
 

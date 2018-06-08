@@ -1,83 +1,42 @@
 {
-    "UC" : "CU",
-    "Description" : "Descripción",
-    "Secuence" : "Secuencia",
-    "Step" : "Paso",
-    "Action" : "Acción",
     "New Document" : "Nuevo Documento",
     "No Documents" : "Sin Documentos",
-    "New use case's step" : "Nuevo paso de caso de uso",
-    "New use case": "Nuevo caso de uso",
-    "New folder": "Nueva carpeta",
-    "New document" : "Nuevo documento",
-    "New paragraph" : "Nuevo párrafo",
     "Delete" : "Eliminar",
     "Properties..." : "Propiedades...",
 
-    "short_of_useCase": "CU",
-    "useCase": "Caso de uso",
-    "general" : "General",
-    "details" : "Detalles",
-    "comments" : "Comentarios",
-    "traces" : "Rastreabilidad",
-    "version" : "Version",
-    "createdBy" : "Creado por",
-    "created" : "Fecha de creación",
-    "precondition" : "Precondición",
-    "secuence" : "Secuencia",
-    "postcondition" : "Postcondición",
-    "description" : "Descripción",
-    "priority" : "Prioridad",
-    "importance" : "Importancia",
-    "urgency" : "Urgencia",
-    "devStatus" : "Estado de desarrollo",
-    "stability" : "Estabilidad",
-    "hide" : "Ocultar",
+    "DELETE": "Eliminar",
+    "EDIT_PROPERTIES": "Editar Propiedades...",
+
+    "DOCUMENT_VIEWER": "Visor de Documentos",
+    "OBJECT_MANAGER": "Gestor de Objetos",
+
+    "NEW": "New",
+
+    "VERSIONING": "General",
+    "HEADER": "Cabecera",
+    "TRACEABILITY": "Trazabilidad",
+
+    "PROJECT_PROPERTIES": "Propiedades de Proyecto",
+    "EDIT_PROJECT": "Editar Proyecto",
+    "EDIT_PROJECT_SUBTITLE": "La información referente a un proyecto no es visible en el documento, no obstante, se puede editar y visualizar dicha información en esta pestaña.",
+
+    "DOCUMENT_PROPERTIES": "Propiedades de Documento",
+    "EDIT_DOCUMENT": "Editar Documento",
+    "EDIT_DOCUMENT_SUBTITLE": "La información referente a un documento no es visible en el documento, salvo el título, no obstante, sus otras propiedades se pueden editar y visualizar en esta pestaña.",
+
+    "name": "Nombre",
+
+    "version" : "Versión",
+    "creationDate": "Fecha de creación",
+    "authors": "Autores",
     "target" : "Destino",
     "source" : "Origen",
-    "source" : "Source",
 
-    "short_of_organization": "ORG",
-    "organization": "Organización",
-    "address" : "Dirección",
-    "phone" : "Teléfono",
-    "fax" : "Fax",
+    "title": "Título",
+    "ref": "Referencia",
 
-    "short_of_stakeholder": "STK",
-    "stakeholder" : "Stakeholder",
-    "role" : "Rol",
-    "isDeveloper" : "Es desarrollador",
-    "isClient" : "Es cliente",
-    "isUser" : "Es usuario",
+    "SAVE_CHANGES": "Guardar Cambios",
 
-
-    "short_of_meeting": "REU",
-    "meeting" : "Reunión",
-    "date": "Fecha",
-    "time": "Hora",
-    "duration": "Duración",
-    "location": "Lugar",
-    "attendants": "Asistentes",
-    "results": "Resultados",
-
-    "short_of_objective": "OBJ",
-    "objective" : "Objetivo",
-    "subobjectives": "Subobjetivo",
-
-    "short_of_actor": "ACT",
-    "actor" : "Actor",
-
-    "short_of_informationReq": "IRQ",
-    "informationReq" : "Requisito de información",
-    "specificData" : "Datos específicos",
-    "lifetime": "Tiempo de vida",
-    "simultaneousOccurrences": "Ocurrencias simultáneas",
-
-
-
-    "short_of_conflict" : "CFL",
-    "conflict" : "Conflicto",
-    "affects": "Afecta",
-    "solution": "Solución",
-    "status" : "Estado"
+    "UNTITLED": "Sin título",
+    "OBJECT": "Object"
 }

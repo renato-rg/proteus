@@ -41,19 +41,15 @@
 
 :local .hoverTarget {
     display: flex;
-}
-:local .hoverTarget > div {
-    overflow: hidden;
-    display: flex;
     align-items: center;
-    align-content: center;
+    height: 28px;
 }
 :local .hoverTarget:hover {
     color: black;
     background-color: rgba(12, 87, 193, 0.08);
 }
 
-:local .hoverTarget > div > svg, :local .hoverTarget > div > div {
+:local .hoverTarget > svg, :local .hoverTarget > div {
     pointer-events: none;
     display: inline-block;
 }
@@ -70,54 +66,85 @@
 :local .dropdown > div {
     display: flex;
     align-items: center;
+    height: 35px;
 }
 :local .dropdown > div:hover {
     background: var(--doc-manager-hover);
     color: var(--doc-manager-hover-font);
 }
-:local .dropdownDoc {
-    width: 100%;
-    text-align: left;
-    padding-left: 11px;
-}
+
 :local .newDoc > div {
     color: gray;
 }
 :local .newDoc:hover > div {
     color: black;
 }
-:local .newDoc > div > svg {
-    height: 20px;
-    width: 20px;
+:local .newDoc > svg {
+    height: auto;
+    width: 16px;
+    margin: 0px 7px;
     background: transparent;
-    transition: 0.3s all ease;
+    transition: 0.2s all ease;
+    border-radius: 15px;
+    color: gray;
+    border: 1px solid transparent;
 }
-:local .newDoc:hover > div > svg {
-        height: 15px;
-        width: 15px;
-        color: var(--doc-manager-add);
-        background: white;
-        border-radius: 15px;
-        border: 1px solid var(--doc-manager-add);
+:local .newDoc:hover > svg {
+    color: var(--doc-manager-add);
+    background: white;
+    border: 1px solid var(--doc-manager-add);
 }
-:local .dropdownDocItem > div:last-child > svg {
+
+:local .dropdownDocItem > div {
+    color: gray;
+    width: 100%;
+    text-align: left;
+}
+:local .dropdownDocItem:hover > div {
+    color: black;
+}
+:local .dropdownDocItem > svg:last-of-type {
     opacity: 0;
-        height: 20px;
-        width: 20px;
-        color: var(--doc-manager-remove);
-        background: transparent;
-        transition: 0.3s all ease;
+    margin-right: 7px;
+    height: auto;
+    width: 20px;
+    color: var(--doc-manager-remove);
+    background: transparent;
+    transition: 0.2s all ease;
+    border-radius: 15px;
+    border: 1px solid transparent;
 }
-:local .dropdownDocItem:hover > div:last-child > svg {
+:local .dropdownDocItem:hover > svg:last-of-type {
     opacity: 1;
 }
-:local .dropdownDocItem > div:last-child > svg:hover {
+:local .dropdownDocItem  > svg:last-of-type:hover {
     opacity: 1;
-        height: 14px;
-        width: 14px;
-        color: white;
-        padding: 2px;
-        border-radius: 15px;
-        background: var(--doc-manager-remove-hover);
-        border: 1px solid white;
+    height: auto;
+    width: 16px;
+    fill: white;
+    padding: 1px;
+    border-radius: 15px;
+    border: 1px solid white;
+    background: var(--doc-manager-remove-hover);
+}
+
+:local .dropdownDocItem > svg:first-of-type {
+    opacity: 0;
+    height: auto;
+    width: 20px;
+    margin: 0px 7px;
+    color: var(--doc-manager-remove);
+    background: transparent;
+    transition: 0.2s all ease;
+    border: 1px solid transparent;
+    border-radius: 15px;
+}
+:local .dropdownDocItem:hover > svg:first-of-type {
+    opacity: 1;
+}
+:local .dropdownDocItem > svg:first-of-type:hover {
+    color: white;
+    background: var(--doc-manager-config-color-active);
+    border-radius: 15px;
+    border: 1px solid var(--doc-manager-config-color-active);
 }

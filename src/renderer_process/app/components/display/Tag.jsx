@@ -2,13 +2,9 @@ import React from 'react'
 import { updateEditableField } from '../../state_manager/actions'
 import { connect } from 'react-redux'
 import styles from './styles.css'
-import UseCase from './UseCase.jsx'
-import i18n from '../../i18n'
 import Editable from '../editable/Editable.jsx'
+import TableWrapper from './TableWrapper'
 
-
-const placeholders = require('../../constants/placeholders.json')
-const tableTypes = require('../../constants/tableTypes.json')
 
 const paragraph = {
     textAlign: 'justify',
@@ -34,7 +30,7 @@ const folder = {
 }
 
 const Tag = props => {
-    const { __, node, update } = props
+    const { node, update } = props
     const updateFieldInExperimental = fieldPath => newValue => {
         update(node.nodeID, fieldPath, newValue)
     }
@@ -43,7 +39,7 @@ const Tag = props => {
     if (type === 'document') {
         return <Editable type='oneline'
                         style={title}
-                        placeholder={'<'+__(placeholders[node.type])+'>'}
+                        placeholder='...'
                         className={styles.shadow+' '+styles.editable}
                         value={node.title}
                         onChange={updateFieldInExperimental(['title'])}/>
@@ -52,19 +48,19 @@ const Tag = props => {
     else if (type === 'folder') {
         return <Editable type='oneline'
                         style={folder}
-                        placeholder={'<'+__(placeholders[node.type])+'>'}
+                        placeholder='...'
                         className={styles.shadow+' '+styles.editable}
                         value={node.title}
                         onChange={updateFieldInExperimental(['title'])}/>
     }
 
-    else if (tableTypes.indexOf(type) > -1)
-        return <UseCase node={node}/>
+    else if (props.tableTypes.indexOf(type) > -1)
+        return <TableWrapper node={node}/>
 
     else if (type === 'paragraph') {
         return <Editable type='multiline'
                         style={paragraph}
-                        placeholder={'<'+__(placeholders[node.type])+'>'}
+                        placeholder='...'
                         className={styles.shadow+' '+styles.editable}
                         value={node.title}
                         onChange={updateFieldInExperimental(['title'])}/>
@@ -85,7 +81,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 }
 
-export default connect(
-    null,
-    mapDispatchToProps
-)(i18n(Tag))
+const mapStateToProps = state => {
+    return {
+        tableTypes: Object.keys(state.classes.details).filter(e => ['folder', 'paragraph', 'image'].indexOf(e) < 0)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tag)

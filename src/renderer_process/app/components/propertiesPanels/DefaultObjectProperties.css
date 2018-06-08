@@ -1,0 +1,82 @@
+/* RIGHT */
+:local .objectManager::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+:local .objectManager::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+:local .objectManager::-webkit-scrollbar {
+    width: 0.6em;
+}
+:local .objectManager:hover::-webkit-scrollbar-thumb{
+    background-color: var(--tabs-accent-color);
+}
+/* RIGHT - END */
+
+/* BASIC */
+:local .input{
+    font-size: 13px;
+    height: 30px;
+    outline: none;
+    caret-color: var(--tabs-accent-color);
+    border-radius: 2px;
+    border: 1px solid #cdd7de;
+    background-color: inherit;
+    padding: 0px 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 350px;
+    font-weight: inherit;
+    font-size: 11pt;
+    font-family: Calibri;
+}
+:local .input:focus {
+    border-color: rgb(99, 191, 239);
+}
+
+/* My components */
+:local .sectionTitle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    height: 17px;
+}
+:local .sectionTitle :first-child {
+    font-size: 8pt;
+    margin-right: 10px;
+    color: #737373;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: all 0.3s ease;
+}
+:local .sectionTitle :last-child {
+    flex: 1;
+    height: 1px;
+    background-color: rgb(201, 201, 201);
+}
+
+:local .finish {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+:local .finish > div {
+    box-shadow: rgb(214, 214, 214) 4px 4px 2px 0px;
+    text-transform: uppercase;
+    transition: all 0.3s linear;
+    user-select: none;
+    letter-spacing: 1px;
+    cursor: pointer;
+    font-size: 10pt;
+    font-weight: 500;
+    padding: 10px 17px 10px 17px;
+    border-radius: 5px; 
+    background-color: #7283ff;
+    color: white;
+}

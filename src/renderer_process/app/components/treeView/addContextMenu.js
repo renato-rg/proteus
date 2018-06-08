@@ -1,28 +1,28 @@
 import { remote } from 'electron'
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
+import {translate as __} from '../../i18n'
 
-import { deleteNode, openNodeProperties, setDetailedNodeID } from '../../state_manager/actions'
+import { deleteNode, pushTab } from '../../state_manager/actions'
 
 export default function addContextMenu(ComponentToModify) {
 
     class ComponentWithContextMenu extends Component {
         render() {
-            const { __, deleteNode, showPropertiesPanel, node, parentID } = this.props
+            const { deleteNode, node, parentID, pushTab } = this.props
             const contextMenuHandler = e => {
                 e.preventDefault()
                 const template = [
                     {
-                        label: __('Delete'),
+                        label: __('DELETE'),
                         click () {
                             deleteNode(node.nodeID, parentID)
                         }
                     },
-                    { type: 'separator' },
                     {
-                        label: __('Properties...'),
+                        label: __('EDIT_PROPERTIES'),
                         click () {
-                            showPropertiesPanel()
+                            pushTab(node.nodeID, true)
                         }
                     }
                 ]
@@ -31,15 +31,11 @@ export default function addContextMenu(ComponentToModify) {
             return <ComponentToModify {...this.props} {...this.state} contextMenuHandler={contextMenuHandler}/>
         }
     }
+    
     const mapDispatchToProps = (dispatch, ownProps) => {
         return {
-            deleteNode: (nodeID, parentID) => {
-                dispatch(deleteNode(nodeID, parentID))
-            },
-            showPropertiesPanel: () => {
-                dispatch(setDetailedNodeID(ownProps.node.nodeID))
-                dispatch(openNodeProperties())
-            }
+            deleteNode: (nodeID, parentID) => dispatch(deleteNode(nodeID, parentID)),
+            pushTab: (id, focus) => dispatch(pushTab(id, focus))
         }
     }
     return connect(null, mapDispatchToProps)(ComponentWithContextMenu)

@@ -1,0 +1,196 @@
+:local .objectManager{
+    display: flex;
+    flex: 1;
+    padding: 15px 0px;
+}
+
+
+/* LEFT */
+:local .tabs{
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+}
+:local .tabs > div {
+    display: flex;
+    padding: 9px 35px 9px 30px;
+    border-right: 4px solid transparent;
+}
+:local .tabs :first-child {
+    border-right-color: var(--tabs-accent-color);
+}
+/* LEFT - END */
+
+
+/* MIDDLE */
+:local .separator{
+    width: 1px;
+    background-color: var(--tabs-separator);
+    margin-left: -1px;
+}
+/* MIDDLE - END */
+
+
+/* RIGHT */
+:local .details{
+    flex: 1;
+    padding: 15px 35px;
+    overflow: auto;
+}
+:local .details::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+:local .details::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+:local .details::-webkit-scrollbar {
+    width: 0.6em;
+}
+:local .details:hover::-webkit-scrollbar-thumb{
+    background-color: var(--tabs-accent-color);
+}
+/* RIGHT - END */
+
+
+:local .title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+}
+:local .title :last-child{
+    font-size: 22px;
+    font-weight: bold;
+}
+
+:local .description{
+    text-align: justify;
+}
+
+/* BASIC */
+:local .rows{
+    display: flex;
+    flex-direction: column;
+    padding: 0px 70px;
+}
+:local .field{
+    display: flex;
+    justify-content: flex-start;
+    margin: 8px 0px;
+}
+:local .label{
+    min-width: 100px;
+    text-align: left;
+    font-weight: 500;
+}
+:local .input{
+    font-size: 13px;
+    height: 24px;
+    outline: none;
+    caret-color: var(--tabs-accent-color);
+    border-radius: 2px;
+    border: 1px solid #b7c4ce;
+    background-color: inherit;
+    padding: 0px 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 180px;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+:local .image{
+    border-radius: 2px;
+    min-width: 180px;
+    padding: 0px 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: inherit;
+    height: 50px;
+    border: 1px dashed #4b4c5f;
+    cursor: pointer;
+}
+
+/* Fields */
+:local .fields{
+    display: flex;
+    flex-direction: column;
+    padding: 0px 70px;
+    align-items: flex-start;
+}
+:local .fields > div{
+    display: flex;
+    margin: 10px 0px;
+}
+:local .fieldsDesc{
+    
+}
+:local .fieldsNames {
+    flex-direction: column;
+    width: 100%;
+}
+:local .fieldsNames > div {
+    display: flex;
+}
+:local .rowName{
+    display: flex;
+}
+:local .sectionRows {
+    flex: 1;
+    flex-wrap: wrap;
+    flex-direction: row;
+    display: flex;
+}
+:local .fieldsNew {
+}
+
+
+
+:local .preview{
+    padding: 0px 70px;
+    display: flex;
+    flex-direction: column;
+}
+:local .previewTable > div > div:last-child{    
+    border: 1px solid rgb(221, 221, 221);
+}
+
+/* My components */
+:local .sectionTitle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 30px;
+}
+:local .sectionTitle :first-child {
+    font-size: 10px;
+    margin-right: 10px;
+    color: rgb(131, 131, 131);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+:local .sectionTitle :last-child {
+    flex: 1;
+    height: 1px;
+    background-color: rgb(201, 201, 201);
+}
+
+:local .finish {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+:local .finish > div {
+    padding: 8px 15px 8px 15px;
+    border-radius: 5px;
+    border: 1px solid #4b4c5f;
+    background-color: aqua;
+    color: black;
+    text-transform: uppercase;
+    letter-spacing: 0.1px;
+    cursor: pointer;
+}

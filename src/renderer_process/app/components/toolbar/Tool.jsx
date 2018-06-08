@@ -1,42 +1,50 @@
 import React from 'react'
-import { DragSource } from 'react-dnd'
-import resolveREMIcon from '../icons/resolveREMIcon'
+import fs from 'fs'
+import path from 'path'
+
+//Redux
+import { connect } from 'react-redux'
+
+import remDefaultImage from '../../assets/img/rem.png'
+import { setDraggingData } from '../../state_manager/actions'
 
 class Tool extends React.Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            dropEffect: 'move'
-        }
-        this.updateDropEffectTo = this.updateDropEffectTo.bind(this)
+  constructor(props) {
+    super(props)
+    
+    this.onDragStart = () => {
+      this.props.setDraggingData({ fromToolbar: true, sourceType: this.props.type })
     }
+  }
 
-    updateDropEffectTo(dropEffect) {
-        this.setState({ dropEffect })
-    }
+  render() {
+    return (
+      <img
+        height={16}
+        width={16}
+        src={this.props.image}
+        title={this.props.type}
 
-    render() {
-        const {type, connectDragSource} = this.props
-        return connectDragSource(
-            <img src={resolveREMIcon(type)}/>,
-            {dropEffect: this.state.dropEffect}
-        )
+        draggable
+        onDragStart={this.onDragStart}
+
+      />
+    )
+  }
+}
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+      classes: state.classes,
+        image: state.classes.details[ownProps.type].image || ''
     }
 }
 
-const spec = {
-    beginDrag(props, monitor, component) {
-        return {
-            type: props.type,
-            fromToolbar: true,
-            updateDropEffectTo: component.updateDropEffectTo
-        }
+const mapDispatchToProps = dispatch => {
+    return {
+        setDraggingData: payload => dispatch(setDraggingData(payload))
     }
 }
 
-const collect = (connect, monitor) => ({
-    connectDragSource: connect.dragSource(),
-})
-
-export default DragSource('tool', spec, collect)(Tool)
+export default connect(mapStateToProps, mapDispatchToProps)(Tool)

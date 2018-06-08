@@ -6,15 +6,17 @@ import Tag from '../display/Tag.jsx'
 const DocView = props => {
     const  {docNode} = props
 
-    return (
-        <div className={styles.background}>
-            <div className={styles.page}>
-                <div className={styles.doc}>
-                { docNode ?
-                    <DocNode nodeID={docNode.nodeID}/>
-                    :
-                    <span>Select a document...</span>
-                }
+    return (        
+        <div className={styles.docViewContainer} style={{display: props.isVisible ? 'inherit': 'none'}}>
+            <div className={styles.background}>
+                <div className={styles.page}>
+                    <div className={styles.doc}>
+                    { docNode ?
+                        <DocNode nodeID={docNode.nodeID}/>
+                        :
+                        <span>Select a document...</span>
+                    }
+                    </div>
                 </div>
             </div>
         </div>
@@ -36,7 +38,6 @@ let DocNode = props => {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    //agregar customStyle : state.ui.nodeStyles[ownProps.nodeID]
     return {
         node : state.entities[ownProps.nodeID]
     }

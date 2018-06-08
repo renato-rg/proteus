@@ -42,7 +42,7 @@ function appState(state = initialState, action) {
 
         case SET_PROJECT_INFO:
             return update(state, {
-                projectInfo: { $set: action.payload }
+                projectInfo: { $set: action.payload || initialState.projectInfo }
             })
 
         case DELETE_DOCUMENT:

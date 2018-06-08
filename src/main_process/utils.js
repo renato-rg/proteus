@@ -1,6 +1,6 @@
 // Electron's modules
 const electron = require('electron')
-const {BrowserWindow} = electron
+const {BrowserWindow, nativeImage} = electron
 
 // Configuration files manager
 const {set, get} = require('./storage')
@@ -8,10 +8,12 @@ const {set, get} = require('./storage')
 // Constants
 const path = require('path')
 const webAppPath = path.resolve(__dirname, '../renderer_process/index.html')
+const appIcon = nativeImage.createFromPath(__dirname + 'assets/icon.png')
 const defaultWindowState = {
     width: 1280,
     height: 680,
-    show: false
+    show: false,
+    icon: appIcon
 }
 
 

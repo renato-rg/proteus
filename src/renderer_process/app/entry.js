@@ -14,7 +14,7 @@ import ipcRendererEvents from './ipc_layer/ipcRendererEvents'
 //////////////////////////
 /// React Application ////
 //////////////////////////
-let store = createStore(reducers)
+export let store = createStore(reducers)
 render(
     <Provider store={store}>
         <App />
@@ -30,14 +30,7 @@ ipcRendererEvents(store)
 ///////////////////
 /// Workarounds ///
 ///////////////////
-console.error = (function() {
-    var error = console.error
-    return function(exception) {
-        if ((exception + '').indexOf('Warning: A component is `contentEditable`') != 0)
-            error.apply(console, arguments)
-    }
-})()
-/* The below chunk will be executed after the react app is rendered */
+/* The chunk below will be executed after the react app is rendered */
 import {resizer} from './components/base_layout/layout.css'
 let nav = document.querySelector('nav')
 let node = document.querySelector('.'+resizer)
@@ -49,7 +42,8 @@ const initDrag = e => {
    window.addEventListener('mouseup', stopDrag, false)
 }
 const doDrag = e => {
-   nav.style.width = (startWidth + e.clientX - startX) + 'px'
+    const newWidth = (startWidth + e.clientX - startX)
+    nav.style.width = (newWidth < 200 ? 200 : (newWidth > 400 ? 400: newWidth) ) + 'px'
 }
 const stopDrag = e => {
     window.removeEventListener('mousemove', doDrag, false)

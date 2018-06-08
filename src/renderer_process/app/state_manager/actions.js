@@ -1,6 +1,6 @@
-/****************
+/*************
 ** UI State **
-****************/
+*************/
 export const SET_TREE_VIEW_TAB = 'SET_TREE_VIEW_TAB'
 export function setTreeViewTab(index) {
     return { type: SET_TREE_VIEW_TAB, index }
@@ -11,31 +11,55 @@ export function setDocViewTab(index) {
     return { type: SET_DOC_VIEW_TAB, index }
 }
 
-export const TOGGLE_LEFT_PANEL = 'TOGGLE_LEFT_PANEL'
-export function toggleLeftPanel() {
-    return { type: TOGGLE_LEFT_PANEL }
+export const SHOW_EXPLORER = 'SHOW_EXPLORER'
+export function showExplorer(payload) {
+    return { type: SHOW_EXPLORER, payload }
 }
 
-export const SLIDE_NODE_PROPERTIES = 'SLIDE_NODE_PROPERTIES'
-export function openNodeProperties() {
-    return { type: SLIDE_NODE_PROPERTIES, payload: true }
+export const PUSH_TAB = 'PUSH_TAB'
+export function pushTab(id, focus = false) {
+    return { type: PUSH_TAB, id, focus}
 }
-export function closeNodeProperties() {
-    return { type: SLIDE_NODE_PROPERTIES, payload: false }
+export const REMOVE_TAB = 'REMOVE_TAB'
+export function removeTab(index) {
+    return { type: REMOVE_TAB, index}
 }
-export const SET_DETAILS_NODE_ID = 'SET_DETAILS_NODE_ID'
-export function setDetailedNodeID(id) {
-    return { type: SET_DETAILS_NODE_ID, id }
+/***************
+** Drag Store **
+***************/
+export const SET_DRAGGING_DATA = 'SET_DRAGGING_DATA'
+export function setDraggingData(payload) {
+    return { type: SET_DRAGGING_DATA, payload }
+}
+
+export const CLEAR_DRAGGING_DATA = 'CLEAR_DRAGGING_DATA'
+export function clearDraggingData(payload) {
+    return { type: CLEAR_DRAGGING_DATA, payload }
+}
+
+/*************
+** Entities **
+*************/
+export const UPDATE_NODE = 'UPDATE_NODE'
+export function updateNode(data) {
+    return { type: UPDATE_NODE, data }
+}
+
+/************
+** Classes **
+************/
+export const REPLACE_ALL_CUSTOM_OBJECTS = 'REPLACE_ALL_CUSTOM_OBJECTS'
+export function replaceAllCustomObjects(payload) {
+    return { type: REPLACE_ALL_CUSTOM_OBJECTS, payload }
+}
+export const ADD_CUSTOM_OBJECTS = 'ADD_CUSTOM_OBJECTS'
+export function addCustomObjects(payload) {
+    return { type: ADD_CUSTOM_OBJECTS, payload }
 }
 
 /***************************
 ** TreeView Drag and Drop **
 ***************************/
-export const MERGE_NODES = 'MERGE_NODES'
-export function mergeNodes(nodes) {
-    return { type: MERGE_NODES, nodes}
-}
-
 export const TOGGLE_NODE = 'TOGGLE_NODE'
 export function toggleNode(nodeID) {
     return { type: TOGGLE_NODE, nodeID}
@@ -47,8 +71,8 @@ export function moveNode(direction, sourceNodeID, sourceParentID, targetNodeID, 
 }
 
 export const CREATE_NODE = 'CREATE_NODE'
-export function createNode(nodeType, direction, nodeID, parentID) {
-    return { type: CREATE_NODE, nodeType, direction, nodeID, parentID }
+export function createNode(nodeType, direction, nodeID, parentID, entities) {
+    return { type: CREATE_NODE, nodeType, direction, nodeID, parentID, entities }
 }
 
 export const DELETE_NODE = 'DELETE_NODE'
@@ -87,9 +111,6 @@ export function deleteDocument(docIndex) {
 
 
 export const INSERT_DOCIDS = 'INSERT_DOCIDS'
-export function insertDocIDs(docIDs) {
-    return { type: INSERT_DOCIDS, docIDs}
-}
 export function insertDocument(docID) {
     return { type: INSERT_DOCIDS, docIDs: [docID] }
 }
@@ -125,9 +146,9 @@ export const UPDATE_EDITABLE_FIELD = 'UPDATE_EDITABLE_FIELD'
 export function updateEditableField(nodeID, fieldPath, newValue) {
     return { type: UPDATE_EDITABLE_FIELD, nodeID, fieldPath, newValue }
 }
-export const INCLUDE_FIELD = 'INCLUDE_FIELD'
-export function includeField(nodeID, section, property, include) {
-    return { type: INCLUDE_FIELD, nodeID, section, property, include}
+export const TOGGLE_TABLE_ROW = 'TOGGLE_TABLE_ROW'
+export function toggleTableRow(nodeID, scheme, rowName) {
+    return { type: TOGGLE_TABLE_ROW, nodeID, scheme, rowName }
 }
 
 

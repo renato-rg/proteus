@@ -3,10 +3,7 @@ import { updateEditableField } from '../../state_manager/actions'
 import { connect } from 'react-redux'
 import Editable from '../editable/Editable.jsx'
 import styles from './styles.css'
-import i18n from '../../i18n'
-
-import propTypes from '../../constants/propTypes/'
-import referenceByTitle from '../../constants/referenceByTitle.json'
+import {translate} from '../../i18n'
 
 const table = {
     borderCollapse: 'collapse',
@@ -27,10 +24,8 @@ const headerColor = {
 }
 
 const UseCase = props => {
-    const { node, update, __ } = props
+    const { node, update, __, sections, refByTitle } = props
     const { type } = node
-    const sections = propTypes(type)
-    const refByTitle = referenceByTitle[type]
 
     const updateIn = fieldPath => newValue => {
         update(node.nodeID, fieldPath, newValue)
@@ -91,4 +86,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)( i18n( UseCase ) )
+const mapStateToProps = (state, ownProps) => {
+  return {
+    __: translate(state.appState.locale),
+    refByTitle: state.classes.details[ownProps.node.type].referencedByTitle,
+    sections: state.classes.details[ownProps.node.type].propTypes
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UseCase)

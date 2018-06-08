@@ -1,0 +1,67 @@
+{
+  "names": ["folder", "paragraph", "image"],
+  "details": {
+    "document": {
+      "acceptedChildren" : "all"
+    },
+    "folder": {
+      "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAcUlEQVQ4jdWR0Q3AIAhEz4aN2AlnqjPBTPajMWpt1Gh/el/Gkwd4wO/l0kFVYmmYAd4H15a8AFQlMteG2RzEPTvPKsEJAJjPBYCHiETKV2FlEBxLVR8DbBfA41d9wJ62AQTcmWYZ+mvVPoUm/tGf1P4FYm0ghjAy44sAAAAASUVORK5CYII=",
+      "acceptedChildren": "all",
+      "defaultInstance": {
+        "title": "",
+        "type": "folder"
+      },
+      "propTypes": {
+        "general": {
+          "version": "oneline",
+          "createdBy": "oneline",
+          "created": "oneline"
+        },
+        "comments" : {
+          "comments": "multiline"
+        }
+      }
+    },
+    "paragraph": {
+      "name": "paragraph",
+      "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAb0lEQVQ4je2SQQqAMAwEJ+LD+rPmaenL1oNUFFusInhxoYeQ7mZaAl/L3F0jF93deg1dKSLUGzSNouacaYXMI+aU0r4UsD3nQGBmpwMgCUlExCn8QCAN/Wc/oE5sqRf+E7xFUEq5bawy1s164gNgAQmEUoRKXTaMAAAAAElFTkSuQmCC",
+      "defaultInstance": {
+        "title": "",
+        "type": "paragraph"
+      },
+      "propTypes": {
+        "general": {
+          "version": "oneline",
+          "createdBy": "oneline",
+          "created": "oneline"
+        },
+        "traces": {
+          "source": "oneline",
+          "target": "oneline"
+        },
+        "comments" : {
+          "comments": "multiline"
+        }
+      }
+    },
+    "image": {
+      "name": "image",
+      "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAArUlEQVQ4jaWTXQ6EIAyEvzHeaD1gr+GdvNPsAywBLWqyfYEwP7SlwJ+hybnfcpeZs71jH9g7ABGRmc4N4HNa81hngLTdCp8MfvU6Il4ZZWHbJm9oi1kPbBuVDXcm/dM0UhNXggFJqW7IICKICCRdxD+s8pwaVFBFo0HcYZcS7qbOnTihoaXUfLTJO6Wo/ubCY+DVEjZmEzemvQHHgK8ApcHPk5fxVkCzj3LWZ7wv5RpWRVUe35sAAAAASUVORK5CYII=",
+      "defaultInstance": {
+        "description": "",
+        "type": "image"
+      },
+      "propTypes": {
+        "general": {
+          "version": "oneline",
+          "createdBy": "oneline",
+          "created": "oneline"
+        },
+        "comments" : {
+          "comments": "multiline"
+        }
+      }
+    }
+
+  }
+}

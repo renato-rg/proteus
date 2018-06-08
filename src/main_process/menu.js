@@ -1,6 +1,6 @@
 // Electron's modules
 const electron = require('electron')
-const {Menu, dialog} = electron
+const {Menu, dialog, shell} = electron
 
 // Utils to create chromium windows
 const {newBrowserWindow, getAppLocale} = require('./utils')
@@ -15,16 +15,21 @@ const getMenuTemplate = ({language, code} = getAppLocale()) => {
     const __ = keyword => {
         return dictionary[code][keyword] || keyword
     }
-    return  [{
+    return  [
+    {
         label: __('File'),
         submenu: [
             {
                 label: __('New Window'),
-                accelerator: 'CmdOrCtrl+Z',
+                accelerator: process.platform === 'darwin'?'Alt+Command+N':'Ctrl+Shift+N',
                 click (item, focusedWindow) {
                     newBrowserWindow()
                 }
-            },{
+            },
+            {
+                type: 'separator'
+            },
+            {
                 label: __('Open Project'),
                 accelerator: process.platform === 'darwin'?'Command+O':'Ctrl+O',
                 click (item, focusedWindow) {
@@ -35,31 +40,15 @@ const getMenuTemplate = ({language, code} = getAppLocale()) => {
                     if (projectPath !== undefined )
                         focusedWindow.webContents.send('open-project', projectPath[0])
                 }
-            },{
-                label: __('Add Template...'),
-                submenu: [
-                    {
-                        label: 'MADEJA',
-                        click (item, focusedWindow) {
-                            focusedWindow.webContents.send('menu-add-template', 'MADEJA')
-                        }
-                    }
-                ]
-            },{
-                label: __('Toggle Developer Tools'),
-                accelerator: process.platform === 'darwin'?'Alt+Command+I':'Ctrl+Shift+I',
-                click (item, focusedWindow) {
-                    if (focusedWindow) focusedWindow.toggleDevTools()
-                }
-            },{
-                type: 'separator'
-            },{
+            },
+            {
                 label: __('Save Project'),
                 accelerator: 'CmdOrCtrl+S',
                 click (item, focusedWindow) {
                     focusedWindow.webContents.send('menu-save', __('Save Project As...'))
                 }
-            },{
+            },
+            {
                 label: __('Save Project As...'),
                 accelerator: process.platform === 'darwin'?'Alt+Command+S':'Ctrl+Shift+S',
                 click (item, focusedWindow) {
@@ -70,9 +59,27 @@ const getMenuTemplate = ({language, code} = getAppLocale()) => {
                     if (filename !== undefined )
                         focusedWindow.webContents.send('menu-save-as', filename[0])
                 }
-            },{
+            },
+            {
+                label: __('PROJECT_PROPERTIES'),
+                click (item, focusedWindow) {
+                    focusedWindow.webContents.send('project-properties')
+                }
+            },
+            {
                 type: 'separator'
-            },{
+            },
+            {
+                label: __('New Object...'),
+                accelerator: process.platform === 'darwin'?'Alt+Command+C':'Ctrl+Shift+C',
+                click (item, focusedWindow) {
+                    focusedWindow.webContents.send('new-object')
+                }
+            },
+            {
+                type: 'separator'
+            },
+            {
                 label: __('Language...'),
                 submenu: [
                     {
@@ -84,26 +91,74 @@ const getMenuTemplate = ({language, code} = getAppLocale()) => {
                             focusedWindow.webContents.send('menu-language',
                             { language: 'English', code: 'en' })
                         }
-                    }, {
+                    },
+                    {
                         label: 'Español',
                         type: 'checkbox',
                         checked: language == 'Español',
                         enabled: language != 'Español',
                         click (item, focusedWindow) {
                             focusedWindow.webContents.send('menu-language',
-                            { language: 'Español', code: 'es' })
+                                { language: 'Español', code: 'es' })
                         }
                     }
                 ]
-            },{
+            },
+            {
                 type: 'separator'
-            },{
+            },
+            {
                 label: __('Close Window'),
-                accelerator: 'CmdOrCtrl+Z',
                 role: 'close'
             }
         ]
-    }]
+    },
+    {
+        label: __('EDIT'),
+        submenu: [
+            { label: __('UNDO'), accelerator: 'CmdOrCtrl+Z', selector: 'undo:' },
+            { label: __('REDO'), accelerator: 'Shift+CmdOrCtrl+Z', selector: 'redo:' },
+            { type: 'separator' },
+            { label: __('CUT'), accelerator: 'CmdOrCtrl+X', selector: 'cut:' },
+            { label: __('COPY'), accelerator: 'CmdOrCtrl+C', selector: 'copy:' },
+            { label: __('PASTE'), accelerator: 'CmdOrCtrl+V', selector: 'paste:' }
+        ]
+    },
+    {
+        label: __('Views'),
+        submenu: [
+            {
+                label: __('TREE_VIEW'),
+                type: 'checkbox',
+                checked: true,
+                click (item, focusedWindow) {
+                    focusedWindow.webContents.send('show-explorer', item.checked)
+                }
+            }
+        ]
+    },
+    {
+        label: __('HELP'),
+        submenu: [
+            {
+                label: __('REPOSITORY'),
+                click (item, focusedWindow) {
+                    shell.openExternal('https://github.com/pastahito/proteus')
+                }
+            },
+            {
+                label: __('DEV_TOOLS'),
+                type: 'checkbox',
+                checked: false,
+                accelerator: process.platform === 'darwin'?'Alt+Command+I':'Ctrl+Shift+I',
+                click (item, focusedWindow) {
+                    if (focusedWindow) focusedWindow.toggleDevTools()
+                }
+            }
+        ]
+    }
+
+    ]
 }
 
 // Each time this function module is called the entire menu es updated
