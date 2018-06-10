@@ -1,8 +1,15 @@
 {
-  "title": "Sample Document 1",
-  "type": "document",
   "nodeID": "54218240-6b09-11e8-af99-dd08eafa0470",
   "childrenIDs": [
     "54218241-6b09-11e8-af99-dd08eafa0470"
-  ]
+  ],
+  "type": "document",
+  "version": "fdsfdsfds",
+  "creationDate": "fdsdsfdsfds",
+  "authors": "df\nfd\n\nfd\n\n\n",
+  "title": "Sample Document 1",
+  "description": "",
+  "comments": "",
+  "source": "fds\nfd\nsfd\ns\n",
+  "target": "\nfdsa\nfd\nas\n"
 }

@@ -1,27 +1,13 @@
 import { MOVE_NODE, TOGGLE_NODE, LOAD_PROJECT, UPDATE_EDITABLE_FIELD,
-        CREATE_NODE, CREATE_DOCUMENT, DELETE_NODE, TOGGLE_TABLE_ROW, UPDATE_NODE} from '../actions'
+        CREATE_NODE, CREATE_DOCUMENT, DELETE_NODE, UPDATE_NODE} from '../actions'
 import update from 'immutability-helper'
 import uuid from 'uuid/v1'
 
-
-const fromSchemeToInstance = (scheme, actualInstance = {}, newField) => {
-    const res = {}
-    Object.keys(scheme).map( section => {
-        scheme[section].map( field => {
-            if (actualInstance[field]!==undefined)
-                res[field] = actualInstance[field]
-            else if (field === newField)
-                res[newField] = ''
-        })
-    })
-    return res
-}
 
 function entitiesReducer(state = {}, action) {
     switch (action.type) {
 
         case UPDATE_EDITABLE_FIELD: {
-            console.log({action})
             const query = action.fieldPath.reduceRight( (last, current) => {
                 return { [current] : last }
             }, {$set: action.newValue})
@@ -29,18 +15,6 @@ function entitiesReducer(state = {}, action) {
             return update(state, {
                 [action.nodeID]: query
             })
-        }
-
-        case TOGGLE_TABLE_ROW: {            
-            if (state[action.nodeID].fields[action.rowName]===undefined) {
-                return update(state, {
-                    [action.nodeID]: { fields: { $set: fromSchemeToInstance(action.scheme, state[action.nodeID].fields, action.rowName) }}
-                })
-            } else {
-                return update(state, {
-                    [action.nodeID]: { fields: { $unset: [action.rowName] } }
-                })
-            }
         }
 
         case TOGGLE_NODE: {
@@ -121,9 +95,10 @@ function entitiesReducer(state = {}, action) {
         }
 
         case UPDATE_NODE: {
-            return update(state, {
+            const newState = update(state, {
                 [action.data.nodeID]: { $set: action.data }
             })
+            return newState
         }
 
         default:

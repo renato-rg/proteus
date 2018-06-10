@@ -1,14 +1,15 @@
 {
-  "ref": "009",
-  "title": "Nice day for fishing ain't it?",
-  "version": "1.0.0",
-  "authors": "Me",
-  "creationDate": "Today",
-  "source": "",
-  "target": "",
+  "nodeID": "93d3d050-6b09-11e8-af99-dd08eafa0470",
+  "showChildren": true,
+  "type": "Sample Table",
   "fields": {
     "Custom field 1": ""
   },
-  "type": "Sample Table",
-  "nodeID": "93d3d050-6b09-11e8-af99-dd08eafa0470"
+  "version": "1.0.0",
+  "creationDate": "Tod",
+  "authors": "",
+  "title": "Nice day for fishing ain't it? Nice day for fishing ain't it? Nice day for fishing ain't it?",
+  "ref": "009",
+  "source": "Este\nEste \nY ete también",
+  "target": "Ese\nAquel\nY ese también"
 }

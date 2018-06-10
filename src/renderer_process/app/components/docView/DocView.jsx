@@ -7,7 +7,14 @@ const DocView = props => {
     const  {docNode} = props
 
     return (        
-        <div className={styles.docViewContainer} style={{display: props.isVisible ? 'inherit': 'none'}}>
+        <div className={styles.docViewContainer} style={{
+            position: 'absolute',
+            width: '100%',
+            bottom: '0',
+            top: '0',
+            zIndex: '0',            
+            opacity: props.isVisible ? '1': '0'
+        }}>
             <div className={styles.background}>
                 <div className={styles.page}>
                     <div className={styles.doc}>

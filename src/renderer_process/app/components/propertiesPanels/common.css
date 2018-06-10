@@ -13,7 +13,8 @@
 }
 /* RIGHT - END */
 
-/* BASIC */
+
+/* INPUT V1 */
 :local .input{
     font-size: 13px;
     height: 30px;
@@ -22,7 +23,7 @@
     border-radius: 2px;
     border: 1px solid #cdd7de;
     background-color: inherit;
-    padding: 0px 7px;
+    padding: 5px 7px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -30,10 +31,82 @@
     font-weight: inherit;
     font-size: 11pt;
     font-family: Calibri;
+    resize: none;
+    box-sizing: border-box;
 }
 :local .input:focus {
     border-color: rgb(99, 191, 239);
 }
+/* INPUT V1 */
+
+
+
+/* INPUT V2 */
+:local .inputLeft{
+    font-size: 13px;
+    height: 30px;
+    outline: none;
+    caret-color: var(--tabs-accent-color);
+    border-bottom-left-radius: 2px;
+    border-top-left-radius: 2px;
+    border: 1px solid #cdd7de;
+    border-right: none;
+    background-color: inherit;
+    padding: 5px 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 350px;
+    font-weight: inherit;
+    font-size: 11pt;
+    font-family: Calibri;
+    resize: none;
+    box-sizing: border-box;
+}
+:local .inputLeft:focus {
+    border-color: rgb(99, 191, 239);
+}
+:local .inputRight {
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+    border: 1px solid #cdd7de;
+    border-left: none;
+    padding: 7px 10px 0px 5px;
+}
+:local .inputLeft:focus + .inputRight{
+    border-color: rgb(99, 191, 239);
+    color:red;
+}
+/* INPUT V2 - END */
+
+
+/* TOGGLE BUTTON */
+:local .toggle {
+    height: 15px;
+    background-color: #7283ff;
+    transition: all 0.3s linear;
+    border-radius: 15px;
+    width: 25px;
+    flex-direction: row;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+:local .toggle > div {
+    height: 11px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    width: 11px;
+    transition: all 0.3s linear;
+    position: absolute;
+    margin-left: 2px;
+    left: 0%;
+    transform: translateX(-100%);
+    left: 100%;
+    margin-left: -2px;
+}
+/* TOGGLE BUTTON - END */
+
 
 /* My components */
 :local .sectionTitle {

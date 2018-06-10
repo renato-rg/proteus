@@ -146,10 +146,6 @@ export const UPDATE_EDITABLE_FIELD = 'UPDATE_EDITABLE_FIELD'
 export function updateEditableField(nodeID, fieldPath, newValue) {
     return { type: UPDATE_EDITABLE_FIELD, nodeID, fieldPath, newValue }
 }
-export const TOGGLE_TABLE_ROW = 'TOGGLE_TABLE_ROW'
-export function toggleTableRow(nodeID, scheme, rowName) {
-    return { type: TOGGLE_TABLE_ROW, nodeID, scheme, rowName }
-}
 
 
 /*********

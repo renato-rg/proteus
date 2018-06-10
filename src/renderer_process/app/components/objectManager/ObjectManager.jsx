@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './styles.css'
 import update from 'immutability-helper'
-import TableWithMenu from '../display/TableWithMenu'
+import SimpleTable from '../display/SimpleTable'
 import LoadImage from './LoadImage'
 import CreateTableWrapper from './CreateTableWrapper'
 
@@ -30,17 +30,13 @@ const fromSchemeToInstance = (scheme, actualInstance = {}, newField) => {
 class ObjectManager extends React.Component {
     constructor (props) {
         super(props)
-        this.id = ''
-        this.inputs={}
+        this.inputs = {}
         this.state = {
-            validations : {},
-
             type: '',
             prefix: '',
             image: '',
             scheme: {
-                'details': [],
-                'priority': ['importance', 'urgency', 'status', 'stability']
+                'Sample Section': ['Field A', 'Field B']
             },
             defaultInstance: {
                 ref: '',
@@ -51,16 +47,10 @@ class ObjectManager extends React.Component {
                 source: '',
                 target: '',
                 fields: {
-                    'importance': '',
-                    'urgency': '',
-                    'status': '',
-                    'stability': ''
+                    'Field A': '',
+                    'Field B': ''
                 }
             }
-        }
-        this.onDrop = e => {
-            console.log(e.originalEvent.dataTransfer)
-            console.log(e.dataTransfer)
         }
         this.setField = field => e => {
             this.setState({ [field]: e.target.value})
@@ -121,18 +111,6 @@ class ObjectManager extends React.Component {
                 }))
             }
         }
-        this.toggleRow = row => {
-            if (this.state.defaultInstance.fields[row]===undefined) {
-                this.setState(update(this.state, {                 
-                    defaultInstance: { fields: { $set: fromSchemeToInstance(this.state.scheme, this.state.defaultInstance.fields, row) }}
-                }))
-            } else {
-                this.setState(update(this.state, {
-                    defaultInstance: { fields: { $unset: [row] } }
-                }))
-            }
-
-        }
         this.getData = () => {
             return this.state
         }
@@ -140,7 +118,16 @@ class ObjectManager extends React.Component {
     render () {
 
         return (
-            <div className={styles.objectManager} style={{display: this.props.isVisible ? 'flex': 'none'}}>
+            <div className={styles.objectManager} style={{
+                display: this.props.isVisible ? 'flex': 'none',
+                position: 'absolute',
+                width: '100%',
+                bottom: '0',
+                top: '0',
+                right: '0',
+                left: '0',
+                zIndex: '2'            
+            }}>
                 <div className={styles.tabs}>
                     <div><T>CREATE_TABLE</T></div>
                     <div>Translations</div>
@@ -225,12 +212,10 @@ class ObjectManager extends React.Component {
                         </div>
                     <div className={styles.preview}>
                         <div className={styles.previewTable}>
-                            <TableWithMenu {...{sections: Object.keys(this.state.scheme||{}),
-                                                scheme: this.state.scheme,
-                                                table: this.state.defaultInstance,
-                                                prefix: this.state.prefix,
-                                                update: this.update,
-                                                toggleRow: this.toggleRow}}/>
+                            <SimpleTable {...{
+                                table: this.state.defaultInstance,
+                                prefix: this.state.prefix,
+                                update: this.update}}/>
                         </div>
                     </div>
                     <div className={styles.finish}>

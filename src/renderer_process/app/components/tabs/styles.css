@@ -5,6 +5,7 @@
     background: var(--tabs-background);
     cursor: pointer;
     user-select: none;
+    flex-shrink: 0;
 }
 :local .fixed{
     display: flex;

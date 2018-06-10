@@ -1,9 +1,16 @@
 {
-  "title": "1. Almost-empty folder",
-  "type": "folder",
   "nodeID": "54218241-6b09-11e8-af99-dd08eafa0470",
-  "showChildren": true,
   "childrenIDs": [
     "93d3d050-6b09-11e8-af99-dd08eafa0470"
-  ]
+  ],
+  "showChildren": true,
+  "type": "folder",
+  "version": "",
+  "creationDate": "",
+  "authors": "",
+  "title": "1. Almost-empty folder",
+  "description": "gfds\n\ngfs\n\n\n",
+  "comments": "4545\n\n5\n5\n5",
+  "source": "",
+  "target": ""
 }

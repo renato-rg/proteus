@@ -1,0 +1,3 @@
+:local .noScrollBar::-webkit-scrollbar {
+    width: 0em;
+}

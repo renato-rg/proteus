@@ -1,9 +1,13 @@
 {
-  "name": "",
-  "template": "empty",
   "childrenIDs": [
     "54218240-6b09-11e8-af99-dd08eafa0470"
   ],
+  "version": "",
+  "creationDate": "",
+  "authors": "fdsaf\ndas\nf\ndas\n\n",
+  "name": "",
+  "description": "",
+  "comments": "f\n\nf\nf\n",
   "customObjects": {
     "Sample Table": {
       "type": "Sample Table",

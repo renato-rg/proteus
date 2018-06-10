@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './TableProperties.css'
+import styles from './common.css'
 
 import Edit from 'react-icons/lib/md/edit'
 
@@ -8,6 +8,11 @@ import { T } from '../../i18n'
 //Redux
 import { connect } from 'react-redux'
 import { updateNode } from '../../state_manager/actions'
+import AutoHeightTextarea from '../display/AutoHeightTextarea';
+import AutoHeightInput from '../display/AutoHeightInput';
+
+
+import { Chapter, Title, Subtitle, Button } from './common'
 
 const toggleBack =  on => ({
     height: '14px',
@@ -34,98 +39,64 @@ const toggleFront = on => ({
 
 class Inputo extends React.Component {
     constructor (props) {
-        super(props)
-        this.state = { 
+        super(props)        
+        if (!this.props.refs.hasOwnProperty(this.props.label)) this.props.refs[this.props.label] = {}
+        this.state = {
             value: this.props.defaultValue || '',
             on: this.props.defaultValue === '' || !!this.props.defaultValue
-         }
-        this.handleInput = e => {
-            if ( !this.state.on && this.state.value === '' && e.target.value )
-                this.setState({ value: e.target.value, on: true })
-            this.setState({ value: e.target.value })
+        }
+        if (!this.props.noToggle) this.props.refs[this.props.label].show = this.state.on
+        this.handleInput = value => {
+            if ( !this.state.on && this.state.value === '' && value )
+                this.setState({ value, on: true })
+            this.setState({ value })
         }
         this.handleToggle = () => {
+            if (!this.props.noToggle) this.props.refs[this.props.label].show = !this.state.on
             if ( this.state.on && this.state.value !=='' )
                 this.setState({ value: '', on: false })
             this.setState({ on: !this.state.on })
         }
+        this.handleRef = i => {
+            if (this.props.noToggle)
+                this.props.refs[this.props.label].show = true
+            this.props.refs[this.props.label].ref=i
+        }
     }
     render () {
-        const {refs, label} = this.props
+        const Cmp = this.props.noMultiline ? AutoHeightInput : AutoHeightTextarea
+        console.log(this.props.label, Cmp)
         return <div style={{display: 'flex', flexDirection: 'row'}}>
-            <input ref={i => refs[label]=i} value={this.state.value}
-                type={'text'} className={styles.input} style={{position:'relative',zIndex:'4'}}
+            <Cmp handleRef={this.handleRef} value={this.state.value}
+                className={styles.inputLeft} style={{position:'relative',zIndex:'4'}}
                 onChange={this.handleInput}
             />
-            <div className={styles.inputRight}>
-                <div style={toggleBack(this.state.on)} onClick={this.handleToggle}>
-                    <div style={toggleFront(this.state.on)}/>
+                <div className={styles.inputRight}>
+            { !this.props.noToggle &&
+                    <div style={toggleBack(this.state.on)} onClick={this.handleToggle}>
+                        <div style={toggleFront(this.state.on)}/>
+                    </div>
+            }
                 </div>
-            </div>
         </div>
     }
 }
 
 
-const Chapter = props => {
+const Field = ({label, refs, defaultValue, noT, noToggle, noMultiline}) => {
     return (
-        <div className={styles.sectionTitle}>
-            <div>{props.noT ? props.name : <T>{props.name}</T>}</div>
-            <div/>
-        </div>
-    )
-}
-const Title = ({text}) => {
-    return (
-        <div style={{display: 'flex',flexDirection: 'row',alignItems: 'center', marginBottom: '10px'}}>
-            <Edit style={{color: '#949494', height: 'auto', width: '27px'}}/>
-            <div style={{fontSize: '22px', fontWeight: 'bold', marginLeft: '5px'}}>
-                <T>{text}</T>
-            </div>
-        </div>
-    )
-}
-
-const Subtitle = ({text}) => <div style={{textAlign: 'justify'}}><T>{text}</T></div>
-const Field = ({label, refs, defaultValue, noT}) => {
-    return (        
-        <div style={{display: 'flex', justifyContent: 'center', marginBottom: '15px'}}>
+    <div style={{display: 'flex', justifyContent: 'center', marginBottom: '15px'}}>
         <div style={{position: 'relative'}}>
             <div style={{position: 'absolute', height: '100%'}}>
                 <div style={{ position: 'relative',left: '-100%',marginRight: '10px', fontSize: '12px',
-                    fontWeight: '500',display: 'flex',alignItems: 'center',height: '100%'}}>      
+                    fontWeight: '500', paddingTop: '7px'}}>
                     {noT ? label : <T>{label}</T>}
                 </div>
             </div>
-            <Inputo refs={refs} label={label} defaultValue={defaultValue}/>
+            <Inputo refs={refs} label={label} defaultValue={defaultValue} noToggle={noToggle} noMultiline={noMultiline}/>
         </div>
     </div>
     )
-}
-
-class Button extends React.Component {
-    constructor (props) {
-        super(props)
-        this.state = { isBeingHovered: false, isBeingPressed: false }
-        this.onMouseEnter = e => this.setState({ isBeingHovered: true })
-        this.onMouseLeave = e => this.setState({ isBeingHovered: false, isBeingPressed: false })
-        this.onMouseDown = e => this.setState({ isBeingPressed: true })
-        this.onMouseUp = e => this.setState({ isBeingPressed: false })
-    }
-    render () {
-        const {children, onClick, className, pressStyle, hoverStyle} = this.props
-        const {onMouseDown, onMouseUp, onMouseEnter, onMouseLeave} = this
-        const style = Object.assign({},
-            this.props.style,
-            (this.state.isBeingPressed) ? pressStyle : {},
-            (this.state.isBeingHovered && !this.state.isBeingPressed) ? hoverStyle : {}
-        )
-        return (
-            <div {...{onClick, className, style, onMouseDown, onMouseUp, onMouseEnter, onMouseLeave}}>
-                {children}
-            </div>
-        )
-    }
 }
 
 /* ================================================ */
@@ -145,15 +116,16 @@ export class DocumentManagerDC extends React.Component {
                 fields: {}
             }
             const labels = ['version', 'creationDate', 'authors', 'title', 'ref', 'source', 'target']
-            labels.map(label => {
-                data[label] = this.inputs[label].value
+            labels.map(field => {
+                if (this.inputs[field].show)
+                    data[field] = this.inputs[field].ref.value
             })
             Object.keys(this.props.scheme).map( section => {
                 this.props.scheme[section].map( field => {
-                    data.fields[field] = this.fields[field].value
+                    if (this.fields[field].show)
+                        data.fields[field] = this.fields[field].ref.value
                 })
             })
-            console.log(data)
             this.props.updateNode(data)
         }
     }
@@ -161,21 +133,34 @@ export class DocumentManagerDC extends React.Component {
         const {object, scheme} = this.props
         return (
             <div className={styles.objectManager} style={{
-                padding: '35px 100px 0px 100px', overflow: 'auto', flex: '1',
-                display: this.props.isVisible ? 'flex': 'none'}}>
+                padding: '35px 100px 0px 100px',
+                display: this.props.isVisible ? 'flex': 'none',
+                overflow: 'auto',
+                position: 'absolute',
+                bottom: '0',
+                top: '0',
+                right: '0',
+                left: '0',
+                zIndex: '2'  
+            }}>
 
                 <div style={{flex: '1', minWidth: '530px'}}>
                     <Title text='EDIT_DOCUMENT'/>
                     <Subtitle text='EDIT_DOCUMENT_SUBTITLE'/>
-                    
-                    <Chapter name='VERSIONING'/>
-                    <Field refs={this.inputs} defaultValue={object['version']} label='version'/>
-                    <Field refs={this.inputs} defaultValue={object['creationDate']} label='creationDate'/>
-                    <Field refs={this.inputs} defaultValue={object['authors']} label='authors'/>
 
                     <Chapter name='HEADER'/>
-                    <Field refs={this.inputs} defaultValue={object['title']} label='title'/>
-                    <Field refs={this.inputs} defaultValue={object['ref']} label='ref'/>
+
+                    <Field refs={this.inputs} defaultValue={object['title']} label='title' noToggle noMultiline/>
+
+                    <Field refs={this.inputs} defaultValue={object['ref']} label='ref' noToggle noMultiline/>
+                    
+                    <Chapter name='VERSIONING'/>
+
+                    <Field refs={this.inputs} defaultValue={object['version']} label='version' noMultiline/>
+
+                    <Field refs={this.inputs} defaultValue={object['creationDate']} label='creationDate' noMultiline/>
+                        
+                    <Field refs={this.inputs} defaultValue={object['authors']} label='authors'/>
 
                     {
                         Object.keys(scheme).map(section => [
@@ -193,6 +178,7 @@ export class DocumentManagerDC extends React.Component {
 
                     <Chapter name='TRACEABILITY'/>
                     <Field refs={this.inputs} defaultValue={object['source']} label='source'/>
+
                     <Field refs={this.inputs} defaultValue={object['target']} label='target'/>
 
                     <div className={styles.finish}>

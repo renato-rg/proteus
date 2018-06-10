@@ -33,24 +33,26 @@ class Editor extends Component {
                     </div>
                     <section className={styles.mainSection}>
                         <Tabs/>
-                        
-                {
-                    tabs.map((id, index) => {                        
-                        if (id === 'DOCUMENT_VIEWER')
-                            return <DocView key={id} {...{docNode}} isVisible={activeTab===index}/>
-                        
-                        if (id === 'OBJECT_MANAGER')
-                            return <ObjectManager key={id} isVisible={activeTab===index}/>
+                        <div style={{flex: 1, position: 'relative'}}>
+                            <DocView {...{docNode}} isVisible={activeTab===0}/>
+                            {
+                                tabs.map((id, index) => {                        
+                                    if (id === 'DOCUMENT_VIEWER')
+                                        return null
+                                    
+                                    if (id === 'OBJECT_MANAGER')
+                                        return <ObjectManager key={id} isVisible={activeTab===index}/>
 
-                        if (id === 'PROJECT_PROPERTIES')
-                            return <ProjectProperties key={id} isVisible={activeTab===index}/>
-                        
-                        if (['document', 'folder', 'paragraph', 'image'].indexOf(types[index])>-1)
-                            return <DefaultObjectProperties key={id} nodeID={id} isVisible={activeTab===index}/>
+                                    if (id === 'PROJECT_PROPERTIES')
+                                        return <ProjectProperties key={id} isVisible={activeTab===index}/>
+                                    
+                                    if (['document', 'folder', 'paragraph', 'image'].indexOf(types[index])>-1)
+                                        return <DefaultObjectProperties key={id} nodeID={id} isVisible={activeTab===index}/>
 
-                        return <TableProperties key={id} nodeID={id} isVisible={activeTab===index}/>
-                    })
-                }
+                                    return <TableProperties key={id} nodeID={id} isVisible={activeTab===index}/>
+                                })
+                            }
+                        </div>
                     </section>
                 </main>
             </div>
