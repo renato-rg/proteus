@@ -59,8 +59,6 @@ class ObjectManager extends React.Component {
             }
         }
         this.onDrop = e => {
-            console.log(e.originalEvent.dataTransfer)
-            console.log(e.dataTransfer)
         }
         this.setField = field => e => {
             this.setState({ [field]: e.target.value})
@@ -79,13 +77,11 @@ class ObjectManager extends React.Component {
         this.addSection = e => {
             e.preventDefault()
             const value = this.newSection.value
-            console.log({value})
             if (Object.keys(this.state.scheme).indexOf(value) === -1) {
                 this.newSection.value = ''
                 const newObj = update(this.state, {
                     scheme: { $merge: { [value]: [] } }
                 })
-                console.log({state: this.state, newObj})
                 this.setState(newObj)
             }
         }

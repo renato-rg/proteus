@@ -2,7 +2,8 @@
   "names": ["folder", "paragraph", "image"],
   "details": {
     "document": {
-      "acceptedChildren" : "all"
+      "acceptedChildren" : "all",
+      "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAb0lEQVQ4je2SQQqAMAwEJ+LD+rPmaenL1oNUFFusInhxoYeQ7mZaAl/L3F0jF93deg1dKSLUGzSNouacaYXMI+aU0r4UsD3nQGBmpwMgCUlExCn8QCAN/Wc/oE5sqRf+E7xFUEq5bawy1s164gNgAQmEUoRKXTaMAAAAAElFTkSuQmCC"
     },
     "folder": {
       "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAcUlEQVQ4jdWR0Q3AIAhEz4aN2AlnqjPBTPajMWpt1Gh/el/Gkwd4wO/l0kFVYmmYAd4H15a8AFQlMteG2RzEPTvPKsEJAJjPBYCHiETKV2FlEBxLVR8DbBfA41d9wJ62AQTcmWYZ+mvVPoUm/tGf1P4FYm0ghjAy44sAAAAASUVORK5CYII=",

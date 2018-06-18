@@ -20,6 +20,10 @@
     "Views": "Ver",
     "TREE_VIEW": "Vista de Árbol",
 
+    "WINDOW": "Ventana",
+    "MINIMIZE": "Minimizar",
+    "CLOSE": "Cerrar",
+
     "HELP": "Ayuda",
     "REPOSITORY": "Repositorio",
     "DEV_TOOLS": "Herramientas para Desarrolladores"

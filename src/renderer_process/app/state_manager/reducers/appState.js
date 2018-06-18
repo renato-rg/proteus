@@ -32,7 +32,6 @@ function appState(state = initialState, action) {
 
         //TODO: make a notification-only reducer
         case SHOW_NOTIFICATION:
-            console.log(JSON.stringify(action.payload, null, 2))
             return state
 
         case SET_PROJECT_PATH:
@@ -57,8 +56,6 @@ function appState(state = initialState, action) {
 
 
         case 'LOG_ENTITIES':
-            console.log('\nAPPSTATE')
-            console.log(JSON.stringify(state, null, 2))
             return state
 
         default:

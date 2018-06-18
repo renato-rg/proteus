@@ -16,12 +16,12 @@ export const Chapter = props => {
         </div>
     )
 }
-export const Title = ({text}) => {
+export const Title = ({text, more = ''}) => {
     return (
         <div style={{display: 'flex',flexDirection: 'row',alignItems: 'center', marginBottom: '10px'}}>
             <Edit style={{color: '#949494', height: 'auto', width: '27px'}}/>
             <div style={{fontSize: '22px', fontWeight: 'bold', marginLeft: '5px'}}>
-                <T>{text}</T>
+                <T>{text}</T>{more ? ': ':''}{more ? <T>{more}</T>:null}
             </div>
         </div>
     )

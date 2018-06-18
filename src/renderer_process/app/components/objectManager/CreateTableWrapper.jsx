@@ -3,6 +3,9 @@ import { connect } from 'react-redux'
 import { addCustomObjects } from '../../state_manager/actions'
 import update from 'immutability-helper'
 
+import { T } from '../../i18n'
+import { Button } from '../propertiesPanels/common'
+
 const refineData = obj => {
     const scheme = {}
     Object.keys(obj.scheme).map(section => {
@@ -21,7 +24,11 @@ const refineData = obj => {
 }
 
 const CreateTableWrapper = props => {
-    return <div onClick={e =>props.createTable(refineData(props.getData()))}>Create Table</div>
+    return  <Button onClick={e =>props.createTable(refineData(props.getData()))}
+        hoverStyle={{ backgroundColor: '#576aff' }}
+        pressStyle={{ backgroundColor: '#b8c0ff' }}>
+            <T>CREATE_TABLE</T>
+        </Button>
 }
 
 const mapDispatchToProps = dispatch => {

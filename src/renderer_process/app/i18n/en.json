@@ -1,4 +1,9 @@
 {
+    "document": "Document",
+    "paragraph": "Paragraph",
+    "image": "Image",
+    "folder": "Folder",
+
     "New Document" : "New Document",
     "No Documents" : "No Documents",
     "Delete" : "Delete",
@@ -9,12 +14,17 @@
 
     "DOCUMENT_VIEWER": "Document Viewer",
     "OBJECT_MANAGER": "Object Manager",
+    "CREATE_TABLE": "Create Table",
+    "CREATE_TABLE_SUBTITLE": "In this section you can create a custom 2x2 table object that will show up in the toolbar and be available to clone by dragging it into the tree view.",
+    "CREATE_TABLE_FIELDS_DESC": "Insert new rows to the table and group them in sections.",
 
     "NEW": "New",
+    "ADD": "Add",
 
     "VERSIONING": "Versioning",
     "HEADER": "Header",
     "TRACEABILITY": "Traceability",
+    "PREFIX": "Prefix",
 
     "PROJECT_PROPERTIES": "Project Properties",
     "EDIT_PROJECT": "Edit Project",
@@ -23,6 +33,9 @@
     "DOCUMENT_PROPERTIES": "Document Properties",
     "EDIT_DOCUMENT": "Edit Document",
     "EDIT_DOCUMENT_SUBTITLE": "Information relative to a document is not visible in the document view except from its title, however, all its other properties can be edited and displayed within this tab.",
+
+    "EDIT_OBJECT": "Edit",
+    "EDIT_OBJECT_SUBTITLE": "Information relative to this object is not visible in the document view except from its title, however, all its other properties can be edited and displayed within this tab.",
 
     "name": "Name",
 

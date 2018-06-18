@@ -46,8 +46,8 @@ export class DocumentManagerDC extends React.Component {
             }}>
 
                 <div style={{flex: '1', minWidth: '530px'}}>
-                    <Title text='EDIT_DOCUMENT'/>
-                    <Subtitle text='EDIT_DOCUMENT_SUBTITLE'/>
+                    <Title text='EDIT_OBJECT' more={this.props.object.type}/>
+                    <Subtitle text='EDIT_OBJECT_SUBTITLE'/>
                     
                     <Chapter name='VERSIONING'/>
                     <Field inputs={this.inputs} defaultValue={object['version']} label='version' noMultiline/>

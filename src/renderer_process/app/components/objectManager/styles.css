@@ -1,9 +1,17 @@
-:local .objectManager{
-    display: flex;
-    flex: 1;
-    padding: 15px 0px;
+/* RIGHT */
+:local .objectManager::-webkit-scrollbar-thumb {
+    background-color: transparent;
 }
-
+:local .objectManager::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+:local .objectManager::-webkit-scrollbar {
+    width: 0.6em;
+}
+:local .objectManager:hover::-webkit-scrollbar-thumb{
+    background-color: var(--tabs-accent-color);
+}
+/* RIGHT - END */
 
 /* LEFT */
 :local .tabs{
@@ -182,15 +190,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 30px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 :local .finish > div {
-    padding: 8px 15px 8px 15px;
-    border-radius: 5px;
-    border: 1px solid #4b4c5f;
-    background-color: aqua;
-    color: black;
+    box-shadow: rgb(214, 214, 214) 4px 4px 2px 0px;
     text-transform: uppercase;
-    letter-spacing: 0.1px;
+    transition: all 0.3s linear;
+    user-select: none;
+    letter-spacing: 1px;
     cursor: pointer;
+    font-size: 10pt;
+    font-weight: 500;
+    padding: 10px 17px 10px 17px;
+    border-radius: 5px; 
+    background-color: #7283ff;
+    color: white;
 }

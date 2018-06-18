@@ -8,7 +8,6 @@
     "PROJECT_PROPERTIES": "Project Properties",
     "New Object...": "New Object...",
     "Language...": "Language...",
-    "Close Window": "Close Window",
 
     "EDIT": "Edit",
     "UNDO": "Undo",
@@ -19,6 +18,10 @@
 
     "Views": "Views",
     "TREE_VIEW": "Tree View",
+
+    "WINDOW": "Window",
+    "MINIMIZE": "Minimize",
+    "CLOSE": "Close",
 
     "HELP": "Help",
     "REPOSITORY": "Repository",

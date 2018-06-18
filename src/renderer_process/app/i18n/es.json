@@ -1,4 +1,9 @@
 {
+    "document": "Documento",
+    "paragraph": "Párrafo",
+    "image": "Imagen",
+    "folder": "Carpeta",
+
     "New Document" : "Nuevo Documento",
     "No Documents" : "Sin Documentos",
     "Delete" : "Eliminar",
@@ -9,12 +14,17 @@
 
     "DOCUMENT_VIEWER": "Visor de Documentos",
     "OBJECT_MANAGER": "Gestor de Objetos",
+    "CREATE_TABLE": "Crear Tabla",
+    "CREATE_TABLE_SUBTITLE": "En esta sección puedes crear objetos tipo tabla de doble entrada, que estarán disponibles desde la barra de herramientas para clonarse por arrastre sobre la vista de árbol.",
+    "CREATE_TABLE_FIELDS_DESC": "Inserta nuevas filas a la tabla y agrúpalas en secciones.",
 
     "NEW": "New",
+    "ADD": "Añadir",
 
     "VERSIONING": "Versionado",
     "HEADER": "Cabecera",
     "TRACEABILITY": "Trazabilidad",
+    "PREFIX": "Prefijo",
 
     "PROJECT_PROPERTIES": "Propiedades de Proyecto",
     "EDIT_PROJECT": "Editar Proyecto",
@@ -23,6 +33,9 @@
     "DOCUMENT_PROPERTIES": "Propiedades de Documento",
     "EDIT_DOCUMENT": "Editar Documento",
     "EDIT_DOCUMENT_SUBTITLE": "La información referente a un documento no es visible en el documento, salvo el título, no obstante, sus otras propiedades se pueden editar y visualizar en esta pestaña.",
+
+    "EDIT_OBJECT": "Editar",
+    "EDIT_OBJECT_SUBTITLE": "La información referente a este objeto no es visible en el documento, salvo el título, no obstante, sus otras propiedades se pueden editar y visualizar en esta pestaña.",
 
     "name": "Nombre",
 

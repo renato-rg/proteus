@@ -32,11 +32,9 @@ export function saveProjectIO (state, payload) {
         const entities = state.entities
         const projectInfo = state.appState.projectInfo
         projectInfo.customObjects = {}
-        console.log(projectInfo)
         Object.keys(state.classes.details)
             .filter(o => ['document','folder','paragraph','image'].indexOf(o) < 0)
             .map(o => projectInfo.customObjects[o] = state.classes.details[o])
-        console.log(projectInfo)
 
         const projectPath = payload.newPath || state.appState.projectPath
 

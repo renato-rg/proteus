@@ -7,8 +7,6 @@ function currentModal(state = '', action) {
 
 
         case 'LOG_ENTITIES':
-            console.log('\nCURRENT MODAL')
-            console.log(JSON.stringify(state, null, 2))
             return state
         default:
             return state

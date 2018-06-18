@@ -6,13 +6,8 @@ import LoadImage from './LoadImage'
 import CreateTableWrapper from './CreateTableWrapper'
 
 import { T } from '../../i18n'
+import { Chapter, Title, Subtitle, Button } from '../propertiesPanels/common'
 
-const Chapter = props => {
-    return <div className={styles.sectionTitle}>
-        <div>{props.name}</div>
-        <div/>
-    </div>
-}
 
 const fromSchemeToInstance = (scheme, actualInstance = {}, newField) => {
     const res = {}
@@ -69,13 +64,11 @@ class ObjectManager extends React.Component {
         this.addSection = e => {
             e.preventDefault()
             const value = this.newSection.value
-            console.log({value})
             if (Object.keys(this.state.scheme).indexOf(value) === -1) {
                 this.newSection.value = ''
                 const newObj = update(this.state, {
                     scheme: { $merge: { [value]: [] } }
                 })
-                console.log({state: this.state, newObj})
                 this.setState(newObj)
             }
         }
@@ -119,28 +112,20 @@ class ObjectManager extends React.Component {
 
         return (
             <div className={styles.objectManager} style={{
+                padding: '35px 100px 0px 100px',
                 display: this.props.isVisible ? 'flex': 'none',
+                overflow: 'auto',
                 position: 'absolute',
-                width: '100%',
                 bottom: '0',
                 top: '0',
                 right: '0',
                 left: '0',
-                zIndex: '2'            
+                zIndex: '2'           
             }}>
-                <div className={styles.tabs}>
-                    <div><T>CREATE_TABLE</T></div>
-                    <div>Translations</div>
-                </div>
-                <div className={styles.separator}/>
-                <div className={styles.details}>
-                    <div className={styles.title}>
-                        <div>O </div>
-                        <div>Create Table</div>
-                    </div>
-                    <div className={styles.description}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    </div>
+            <div style={{flex: '1', minWidth: '530px'}}>
+                    <Title text='CREATE_TABLE'/>
+                    <Subtitle text='CREATE_TABLE_SUBTITLE'/>
+
                     <Chapter name='Basic'/>
                     <div className={styles.rows}>
                         <div className={styles.field}>
@@ -165,10 +150,8 @@ class ObjectManager extends React.Component {
                         </div>
                     </div>
                     <Chapter name='Fields'/>
+                    <Subtitle text='CREATE_TABLE_FIELDS_DESC'/>
                     <div className={styles.fields}>
-                        <div className={styles.fieldsDesc}>
-                            Lorem ipsum ay lamo welp idk meh i skipperino bye bakatako
-                        </div>
                         <div className={styles.fieldsNames}>
                             {
                                 Object.keys(this.state.scheme).map( section =>
@@ -187,7 +170,7 @@ class ObjectManager extends React.Component {
                                         </div>
                                         <div className={styles.newRow}>
                                             <div onClick={this.addRow(section)}>
-                                                Add
+                                                <T>ADD</T>
                                             </div>
                                             <input type='text' ref={i => this.inputs[section] = i}/>
                                         </div>
@@ -197,14 +180,14 @@ class ObjectManager extends React.Component {
                         </div>
                         <div className={styles.newSection}>
                             <div onClick={this.addSection}>
-                                Add
+                                <T>ADD</T>
                             </div>
                             <input type='text' ref={i => this.newSection = i}/>
                         </div>
                     </div>
                     <Chapter name='Preview'/>
                     
-                    <div style={{ textAlign: 'justify' }}>
+                    <div style={{ textAlign: 'justify', marginBottom: '30px' }}>
                             By default, when a table is created on a document all its rows will be displayed.
                             Fortunately though you can hide the rows of your preference for a given table
                             by editing its properties, hover the element in the document view or open a contextual menu in

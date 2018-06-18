@@ -10,7 +10,6 @@ import { saveProjectIO, openProjectIO } from './io'
 //////////////////////////////
 /// IPC with main process ////
 //////////////////////////////
-// TODO: Use constants as events' names: 'OPEN_PROJECT'
 export default function ipcRendererEvents(store) {
 
     //TODO: load the custom objects
@@ -49,7 +48,6 @@ export default function ipcRendererEvents(store) {
             store.dispatch(showExplorer(show))
     })
 
-    // TODO: now it has to save as well the custom objects
     ipcRenderer.on('menu-save', (event, title) => {
         let init = false
         if (store.getState().appState.projectPath===''){
@@ -87,7 +85,8 @@ export default function ipcRendererEvents(store) {
 
     ipcRenderer.on('menu-language', (event, {language, code})  => {
         // Unchecks the other items
-        for (var item of Menu.getApplicationMenu(null).items[0].submenu.items[9].submenu.items) {
+        const index = process.platform === 'darwin' ? 1 : 0
+        for (var item of Menu.getApplicationMenu(null).items[index].submenu.items[9].submenu.items) {
             if (item.label != language) {
                 item.checked = false
                 item.enabled = true

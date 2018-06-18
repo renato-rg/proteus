@@ -89,7 +89,7 @@ function entitiesReducer(state = {}, action) {
             })
             return newState
         }
-        // Load project state
+ 
         case LOAD_PROJECT: {
             return action.payload
         }

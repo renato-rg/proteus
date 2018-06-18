@@ -21,7 +21,6 @@ export class ObjectManagerDC extends React.Component {
             labels.map(label => {
                 data[label] = this.inputs[label].value
             })
-            console.log(data)
             this.props.setProjectInfo(data)
         }
     }
