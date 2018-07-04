@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import styles from './styles.css'
 import Editable from '../editable/Editable.jsx'
 import TableWrapper from './TableWrapper'
+import { translate as __ } from '../../i18n'
 
 
 const paragraph = {
@@ -39,7 +40,7 @@ const Tag = props => {
     if (type === 'document') {
         return <Editable type='oneline'
                         style={title}
-                        placeholder='...'
+                        placeholder={__('UNTITLED')}
                         className={styles.shadow+' '+styles.editable}
                         value={node.title}
                         onChange={updateFieldInExperimental(['title'])}/>
@@ -48,7 +49,7 @@ const Tag = props => {
     else if (type === 'folder') {
         return <Editable type='oneline'
                         style={folder}
-                        placeholder='...'
+                        placeholder={__('UNTITLED')}
                         className={styles.shadow+' '+styles.editable}
                         value={node.title}
                         onChange={updateFieldInExperimental(['title'])}/>
@@ -60,10 +61,10 @@ const Tag = props => {
     else if (type === 'paragraph') {
         return <Editable type='multiline'
                         style={paragraph}
-                        placeholder='...'
+                        placeholder={__('EMPTY_PARAGRAPH')}
                         className={styles.shadow+' '+styles.editable}
-                        value={node.title}
-                        onChange={updateFieldInExperimental(['title'])}/>
+                        value={node.description}
+                        onChange={updateFieldInExperimental(['description'])}/>
     }
 
     else {

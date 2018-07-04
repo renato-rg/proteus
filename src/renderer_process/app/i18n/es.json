@@ -13,10 +13,11 @@
     "EDIT_PROPERTIES": "Editar Propiedades...",
 
     "DOCUMENT_VIEWER": "Visor de Documentos",
-    "OBJECT_MANAGER": "Gestor de Objetos",
-    "CREATE_TABLE": "Crear Tabla",
-    "CREATE_TABLE_SUBTITLE": "En esta sección puedes crear objetos tipo tabla de doble entrada, que estarán disponibles desde la barra de herramientas para clonarse por arrastre sobre la vista de árbol.",
-    "CREATE_TABLE_FIELDS_DESC": "Inserta nuevas filas a la tabla y agrúpalas en secciones.",
+    "OBJECT_MANAGER": "Gestor de Prototipos",
+    "CREATE_TABLE": "Crear Prototipo de Objeto",
+    "CREATE_TABLE_SUBTITLE": "En esta sección puedes crear prototipos de objetos que serán representados como tablas de doble entrada, que estarán disponibles desde la barra de herramientas para clonarse por arrastre sobre la vista de árbol.",
+    "FIELDS_DESC": "Inserta nuevas filas a la tabla y agrúpalas en secciones.",
+    "PREVIEW_DESC": "Cuando un objeto de este tipo sea creado todos sus campos serán visibles, pero se pueden ocultar campos en particular por cada instancia, para ello acceder a la edición de propiedades y desactivar las filas de interés.",
 
     "NEW": "New",
     "ADD": "Añadir",
@@ -45,13 +46,22 @@
     "target" : "Destino",
     "source" : "Origen",
     "description": "Descripción",
-    "comments": "Commentarios",
+    "comments": "Comentarios",
 
     "title": "Título",
     "ref": "Referencia",
 
     "SAVE_CHANGES": "Guardar Cambios",
 
-    "UNTITLED": "Sin título",
-    "OBJECT": "Object"
+    "UNTITLED": "Sin Título",
+    "EMPTY_PARAGRAPH": "Párrafo vacío...",
+    "OBJECT": "Objeto",
+
+    "BASIC": "Básico",
+    "FIELDS": "Campos Personalizados",
+    "PREVIEW": "Previsualización",
+
+    "PROTOTYPE_NAME": "Nombre de Prototipo",
+    "PROTOTYPE_PREFIX": "Prefijo",
+    "PROTOTYPE_IMAGE": "Imagen"
 }

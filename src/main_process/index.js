@@ -38,8 +38,6 @@ app.on('ready', () => {
         saveAppLocale({language, code})
     })
 
-    BrowserWindow.addDevToolsExtension('C:\\Users\\pasta\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\fmkadmapgofadopljbjfkapdkoienihi\\3.2.3_0')
-
 })
 
 // Allows AppVeyor close the app right after it is opened

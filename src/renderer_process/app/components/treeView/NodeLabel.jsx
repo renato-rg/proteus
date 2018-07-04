@@ -8,6 +8,9 @@ import { connect } from 'react-redux'
 //Drag and Drop
 import addContextMenu from './addContextMenu'
 
+//i18n
+import { T } from '../../i18n'
+
 const SectionOpened = require('react-icons/lib/md/signal-cellular-4-bar')
 const SectionClosed = require('react-icons/lib/md/signal-cellular-null')
 
@@ -127,7 +130,7 @@ class NodeLabel extends Component {
                 <Arrow isContainer={((this.props.classes.details[node.type]||{}).acceptedChildren||[]).length>0}
                         isOpened={node.showChildren}/>
                 <img src={this.props.classes.details[node.type].image} style={{height: '16px', width:' 16px'}} draggable='false'/>
-                <div style={label}>{ brackets }{ node.title }</div>
+        <div style={label}>{ brackets }{ node.title }{ !node.title && <T>UNTITLED</T>}</div>
             </li>
         )
     }

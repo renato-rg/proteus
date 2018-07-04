@@ -19,6 +19,7 @@
         "lint": "eslint --ext .jsx,.js --ignore-path .gitignore src/ tests/",
         "coverage": "jest --coverage",
         "coverage:upload": "SET CODACY_PROJECT_TOKEN=%CODACY%&&minicat coverage/lcov.info | codacy-coverage",
+        "predist": "webpack -p",
         "dist": "build"
     },
     "author": "J. Renato Ramos González <renato.etc.etc.etc@gmail.com>",
@@ -86,8 +87,7 @@
             "src/renderer_process/index.html"
         ],
         "win": {
-            "target": "nsis",
-            "icon": "src/main_process/assets/icon.ico"
+            "target": "nsis"
         },
         "nsis": {
             "oneClick": false,

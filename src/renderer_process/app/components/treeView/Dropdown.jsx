@@ -75,7 +75,7 @@ class Dropdown extends React.Component {
                         onClick={() => this.changeDocument(index)}
                         deleteAction={this.props.deleteDocument}
                         setTreeViewTab={this.props.setTreeViewTab}
-                        placeholder={'<'+__('NEW')+'>'}
+                        placeholder={__('UNTITLED')}
                         pushTab={this.props.pushTab}/>)
                 }
                 <div className={newDoc} onClick={e => {e.stopPropagation(); createDocument()}}>

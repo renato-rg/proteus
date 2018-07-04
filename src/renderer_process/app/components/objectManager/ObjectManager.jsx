@@ -31,7 +31,6 @@ class ObjectManager extends React.Component {
             prefix: '',
             image: '',
             scheme: {
-                'Sample Section': ['Field A', 'Field B']
             },
             defaultInstance: {
                 ref: '',
@@ -42,8 +41,6 @@ class ObjectManager extends React.Component {
                 source: '',
                 target: '',
                 fields: {
-                    'Field A': '',
-                    'Field B': ''
                 }
             }
         }
@@ -126,31 +123,31 @@ class ObjectManager extends React.Component {
                     <Title text='CREATE_TABLE'/>
                     <Subtitle text='CREATE_TABLE_SUBTITLE'/>
 
-                    <Chapter name='Basic'/>
+                    <Chapter name='BASIC'/>
                     <div className={styles.rows}>
                         <div className={styles.field}>
-                            <div className={styles.label}>Table name</div>
+                            <div className={styles.label}><T>PROTOTYPE_NAME</T></div>
                             <input type={'text'}
                                     className={styles.input}
                                     value={this.state.type}
                                     onChange={this.setField('type')}/>
                         </div>
                         <div className={styles.field}>
-                            <div className={styles.label}><T>PREFIX</T></div>
+                            <div className={styles.label}><T>PROTOTYPE_PREFIX</T></div>
                             <input type={'text'}
                                     className={styles.input}
                                     value={this.state.prefix}
                                     onChange={this.setField('prefix')}/>
                         </div>
                         <div className={styles.field}>
-                            <div className={styles.label}>Image</div>
+                            <div className={styles.label}><T>PROTOTYPE_IMAGE</T></div>
                             <LoadImage className={styles.image}
                                         value={this.state.image}
                                         onChange={this.setField('image')}/>
                         </div>
                     </div>
-                    <Chapter name='Fields'/>
-                    <Subtitle text='CREATE_TABLE_FIELDS_DESC'/>
+                    <Chapter name='FIELDS'/>
+                    <Subtitle text='FIELDS_DESC'/>
                     <div className={styles.fields}>
                         <div className={styles.fieldsNames}>
                             {
@@ -185,14 +182,9 @@ class ObjectManager extends React.Component {
                             <input type='text' ref={i => this.newSection = i}/>
                         </div>
                     </div>
-                    <Chapter name='Preview'/>
+                    <Chapter name='PREVIEW'/>
                     
-                    <div style={{ textAlign: 'justify', marginBottom: '30px' }}>
-                            By default, when a table is created on a document all its rows will be displayed.
-                            Fortunately though you can hide the rows of your preference for a given table
-                            by editing its properties, hover the element in the document view or open a contextual menu in
-                            the tree view to access the option.
-                        </div>
+                    <Subtitle text='PREVIEW_DESC'/>
                     <div className={styles.preview}>
                         <div className={styles.previewTable}>
                             <SimpleTable {...{

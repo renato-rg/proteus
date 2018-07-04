@@ -13,10 +13,11 @@
     "EDIT_PROPERTIES": "Edit Properties...",
 
     "DOCUMENT_VIEWER": "Document Viewer",
-    "OBJECT_MANAGER": "Object Manager",
-    "CREATE_TABLE": "Create Table",
+    "OBJECT_MANAGER": "Prototype Manager",
+    "CREATE_TABLE": "Create Object Prototype",
     "CREATE_TABLE_SUBTITLE": "In this section you can create a custom 2x2 table object that will show up in the toolbar and be available to clone by dragging it into the tree view.",
-    "CREATE_TABLE_FIELDS_DESC": "Insert new rows to the table and group them in sections.",
+    "FIELDS_DESC": "Insert new rows to the table and group them in sections.",
+    "PREVIEW_DESC": "By default, when an object is created on a document all its rows will be displayed. Fortunately though you can hide the rows of your preference for a given table by editing its properties.",
 
     "NEW": "New",
     "ADD": "Add",
@@ -53,5 +54,14 @@
     "SAVE_CHANGES": "Save Changes",
 
     "UNTITLED": "Untitled",
-    "OBJECT": "Object"
+    "EMPTY_PARAGRAPH": "Empty paragraph...",
+    "OBJECT": "Object",
+
+    "BASIC": "Basic",
+    "FIELDS": "Custom Fields",
+    "PREVIEW": "Preview",
+
+    "PROTOTYPE_NAME": "Prototype Name",
+    "PROTOTYPE_PREFIX": "Prefix",
+    "PROTOTYPE_IMAGE": "Image"
 }
